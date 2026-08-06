@@ -10,7 +10,7 @@ window.APP_DATA.module = [
   kurz: 'Wozu die Optik gebaut wird, die Sie justieren — Auflösungsgrenze, Wellenlängengenerationen und warum Wellenfrontfehler im Pikometerbereich landen.',
   ziel: 'Sie können erklären, warum ein Objektivmodul so extrem eng spezifiziert ist — nämlich weil sein Wellenfrontfehler direkt in die Strukturtreue auf dem Wafer übersetzt — und wo Ihre Baugruppe im Gesamtsystem sitzt.',
   jobBezug: 'Die Rolle verlangt Systemverständnis im Umgang mit komplexen technischen Systemen. Praktisch heißt das: Sie müssen begründen können, warum eine Toleranz so eng ist, bevor Sie über ihre Aufweitung verhandeln — und warum ein scheinbar winziger Restfehler beim Kunden zum Ausfall der Integration führt.',
-  begriffe: ['Wellenfront', 'Strehl-Verhältnis', 'Maréchal-Kriterium'],
+  begriffe: ['Wellenfront', 'Strehl-Verhältnis', 'Maréchal-Kriterium', 'Numerische Apertur', 'Vielschichtspiegel', 'Ortsfrequenz', 'Streulicht'],
 
   abschnitte: [
     {
@@ -88,6 +88,50 @@ window.APP_DATA.module = [
     },
 
     {
+      h: 'Wie ein EUV-Spiegel entsteht',
+      p: [
+        'Bei DUV ist der Ausgangspunkt eine Linse aus Quarzglas oder Kalziumfluorid. Bei EUV gibt es keine Linsen — jedes optische Element ist ein Spiegel, und seine Herstellung ist ein eigener, monatelanger Prozess, der dem Justageablauf verblüffend ähnelt.'
+      ],
+      grafik: 'spiegelprozess',
+      grafikText: '<strong>Abb. 5 — Fertigungskette eines EUV-Spiegels.</strong> Der Kern ist dieselbe Regelschleife wie bei der Justage — messen, gezielt korrigieren, erneut messen. Nur wird hier Material abgetragen statt eine Lage verstellt, und ein Durchlauf dauert Stunden bis Tage statt Minuten.',
+      bullets: [
+        '<strong>Substrat.</strong> Eine Glaskeramik mit nahezu verschwindender Wärmeausdehnung. Nötig, weil sich der Spiegel im Betrieb durch die absorbierte Strahlung erwärmt — ein normales Glas würde sich dabei um ein Vielfaches der Toleranz verformen.',
+        '<strong>Grobform.</strong> Schleifen und Fräsen bringen die Asphäre oder Freiform auf wenige Mikrometer an die Sollform. Freiformflächen ohne jede Symmetrieachse sind bei EUV der Normalfall, weil die Strahlengänge sonst nicht faltbar wären.',
+        '<strong>Deterministische Korrektur.</strong> Der eigentliche Kern: Die Fläche wird interferometrisch gegen ein CGH-Normal vermessen, aus der Abweichungskarte berechnet die Software eine Abtragsverteilung, und ein Ionenstrahl oder ein magnetorheologisches Werkzeug trägt genau dort ab, wo Material zu viel ist. Das wiederholt sich, bis die Restabweichung im Pikometerbereich liegt.',
+        '<strong>Beschichten.</strong> Auf die fertige Fläche kommen 40 bis 50 Doppellagen aus Molybdän und Silizium mit rund 7 nm Periode. Die Schichtdicken müssen auf Bruchteile eines Atomdurchmessers stimmen, sonst interferieren die Teilreflexe nicht mehr konstruktiv — und weil der Einfallswinkel über die Fläche variiert, wird die Periode gezielt lateral abgestuft.',
+        '<strong>Endprüfung.</strong> Gemessen wird der Reflexionsgrad bei der Betriebswellenlänge und die Form <em>nach</em> dem Beschichten — denn der Schichtstapel bringt Eigenspannung ein und verändert die mühsam erzeugte Fläche.'
+      ],
+      callout: {
+        typ: 'job',
+        titel: 'Warum Sie das wissen sollten, obwohl Sie es nicht selbst tun',
+        text: 'Der Spiegel kommt als vorgelagertes Bauteil in Ihren Wertstrom. Wenn ein Modul die Wellenfrontspezifikation verfehlt und der Fehler rotationssymmetrisch oder nicht durch Lagejustage erzeugbar ist (Modul 1), landet er genau hier — und Ihre Aufgabe ist dann, das belegt zu übergeben, statt weiter zu justieren. Ein Bauteil zurück in die Korrekturschleife zu schicken, kostet Wochen.'
+      }
+    },
+
+    {
+      h: 'Die drei Ortsfrequenzbereiche',
+      p: [
+        'Hier liegt der Unterschied zwischen EUV-Optik und aller anderen Optikfertigung. Bei sichtbarem Licht genügt es, die Formabweichung zu spezifizieren. Bei 13,5 nm wirkt jede Abweichung — nur je nach ihrer räumlichen Größe völlig unterschiedlich. Deshalb wird eine EUV-Fläche in drei getrennten Ortsfrequenzbändern spezifiziert und auch getrennt gemessen.'
+      ],
+      grafik: 'ortsfrequenzen',
+      grafikText: '<strong>Abb. 6 — Dieselbe Fläche, drei Bewertungsmaßstäbe.</strong> Alle drei Bänder liegen als Restabweichung im Bereich von Pikometern bis zu einem Zehntel Nanometer. Ein Spiegel kann in einem Band die Spezifikation halten und in einem anderen versagen — deshalb genügt eine einzelne Kennzahl nicht.',
+      tabelle: {
+        kopf: ['Band', 'Räumliche Skala', 'Wirkung', 'Messverfahren'],
+        zeilen: [
+          ['Figur', 'größer als etwa 1 mm', 'Aberrationen — der Wellenfrontfehler aus Modul 1', 'Interferometrie mit CGH'],
+          ['Welligkeit (MSFR)', 'etwa 1 µm bis 1 mm', 'Streulicht, das den Bildkontrast flächig absenkt', 'Weißlichtinterferometrie'],
+          ['Rauheit (HSFR)', 'kleiner als etwa 1 µm', 'Reflexionsverlust — direkt weniger Durchsatz', 'Rasterkraftmikroskopie']
+        ],
+        fuss: 'MSFR = mid spatial frequency roughness, HSFR = high spatial frequency roughness. Die Grenzen sind Konvention, nicht Physik — sie orientieren sich daran, welches Messverfahren welchen Bereich erfasst.'
+      },
+      callout: {
+        typ: 'ok',
+        titel: 'Die Analogie zur Prozessarbeit',
+        text: 'Das ist derselbe Gedanke wie die Trennung von Lage und Streuung bei Cp und Cpk (Modul 3): Eine einzelne Kennzahl kann gut aussehen und trotzdem das falsche Problem verdecken. Wer nur den RMS-Wert der Figur betrachtet, sieht ein Streulichtproblem erst beim Kunden.'
+      }
+    },
+
+    {
       h: 'Was das für die Fertigung bedeutet',
       p: [
         'Aus dem Systemkontext folgen unmittelbar die Randbedingungen, unter denen die restlichen sechs Module stehen:'
@@ -151,6 +195,28 @@ window.APP_DATA.module = [
       ],
       richtig: 1,
       erklaerung: '1 mλ = λ/1000 = 13,5 nm / 1000 ≈ 13,5 pm. Zum Vergleich: Ein Siliziumatom hat einen Durchmesser von rund 200 pm. Genau diese Größenordnung erklärt den gesamten Aufwand für Messtechnik, Umgebungskonditionierung und Handhabung in den folgenden Modulen.'
+    },
+    {
+      frage: 'Ein EUV-Spiegel hält die Figurspezifikation ein, der gemessene Bildkontrast ist trotzdem zu niedrig. Wo suchen Sie?',
+      optionen: [
+        'Bei der Figur — die Messung muss fehlerhaft sein.',
+        'Im mittleren Ortsfrequenzband: Welligkeit erzeugt Streulicht, das den Kontrast flächig absenkt, ohne die Figur zu verletzen.',
+        'Bei der Justage des Moduls, da Kontrastverlust immer aus Dezentrierung folgt.',
+        'Beim Reflexionsgrad der Beschichtung.'
+      ],
+      richtig: 1,
+      erklaerung: 'Figur, Welligkeit und Rauheit werden getrennt spezifiziert, weil sie unterschiedlich wirken. Welligkeit im Bereich von Mikrometern bis Millimetern streut Licht in den Bildbereich und senkt den Kontrast, ohne dass der Figurwert auffällig wäre. Ein Reflexionsproblem würde sich als Durchsatzverlust zeigen, nicht als Kontrastverlust.'
+    },
+    {
+      frage: 'Warum wird die Form eines EUV-Spiegels nach dem Beschichten erneut gemessen?',
+      optionen: [
+        'Weil die Beschichtung Eigenspannung einbringt und die Fläche dadurch verformt.',
+        'Weil erst nach dem Beschichten überhaupt interferometrisch gemessen werden kann.',
+        'Als reine Dokumentationspflicht ohne technischen Grund.',
+        'Weil sich die Schichtdicke im Betrieb noch verändert.'
+      ],
+      richtig: 0,
+      erklaerung: 'Ein Stapel aus 40 bis 50 Doppellagen bringt Eigenspannung ein und verändert die zuvor mühsam korrigierte Fläche. Deshalb ist der Zustand nach dem Beschichten der maßgebliche — dasselbe Muster wie beim Setzverhalten nach dem Verkleben in der Montage (Modul 1 und Modul 5).'
     },
     {
       frage: 'Warum ist die klassische Prozessfähigkeitsrechnung in dieser Fertigung schwierig?',

@@ -26,7 +26,7 @@ unten in der Seitenleiste zurückgesetzt.
 
 | # | Modul | Tägliche Herausforderung | Simulation |
 |---|-------|--------------------------|------------|
-| · | Einordnung: das Lithografiesystem | Warum die Toleranzen so eng sind | Schemaskizze des Scanner-Strahlengangs, Rayleigh-Gleichung, Generationen |
+| · | Einordnung: das Lithografiesystem | Warum die Toleranzen so eng sind | Scanner-Strahlengang, Rayleigh-Gleichung, Generationen, EUV-Spiegelfertigung und Ortsfrequenzbänder |
 | 1 | Grundlagen der Justage | Welche Aberration verrät welche mechanische Ursache | Drei Schemaskizzen des realen Messplatzes plus Simulation Stellgrößen → Wellenfront |
 | 2 | Messtechnik & MSA | Taugt die Messung, bevor man Prozessentscheidungen darauf stützt | Gage R&R gegen Toleranz und Teilestreuung |
 | 3 | Prozessstabilität & Fähigkeit | Eingreifen oder nicht eingreifen | Regelkarte mit Drift, Sprung, Western-Electric-Regeln, Cp/Cpk |
@@ -44,7 +44,8 @@ index.html          Shell: Topbar, Seitenleiste, Content-Container
 css/base.css        Reset, Farbvariablen (Light/Dark), Layout
 css/components.css  Karten, Simulator-Layout, Quiz, Tabellen, Badges
 js/charts.js        SVG- und Mathe-Helfer (Plot, Skalen, seeded PRNG, Slider, Kennzahlkacheln)
-js/figures.js       Schemaskizzen: Scanner, Messplatz, Modulschnitt, Justagezyklus (window.FIGS)
+js/figures.js       Schemaskizzen: Scanner, Spiegelfertigung, Ortsfrequenzen,
+                    Messplatz, Modulschnitt, Justagezyklus (window.FIGS)
 js/sim-*.js         die sechs Simulatoren, registriert unter window.SIMS
 js/quiz.js          Multiple-Choice mit Auswertung
 js/render.js        Seitenaufbau aus den Datenobjekten

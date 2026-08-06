@@ -381,7 +381,7 @@
       'stroke-width': 1.4, 'marker-end': 'url(#fig-arrow)'
     }));
 
-    // Kennzahlen rechts oben
+    // Kennzahlen rechts oben  (Marker: scanner-kennzahlen)
     svg.appendChild(box(448, 40, 246, 116, { fill: 'var(--surface)' }));
     svg.appendChild(label(464, 62, 'Größenordnungen'));
     [
@@ -392,6 +392,131 @@
       'Objektiv         Hunderte kg, Stückzahl klein'
     ].forEach(function (z, i) {
       svg.appendChild(txt(464, 82 + i * 14, z, { 'font-size': 9, 'font-family': 'var(--mono)' }));
+    });
+
+    return svg;
+  };
+
+  /* ═══════════ Figur 5: Fertigungskette eines EUV-Spiegels ═══════════ */
+
+  FIGS.spiegelprozess = function () {
+    var svg = svgRoot(720, 430, 'Fertigungskette eines EUV-Spiegels vom Rohling bis zur Justage');
+
+    function schritt(x, y, w, h, titel, zeilen, opt) {
+      opt = opt || {};
+      svg.appendChild(box(x, y, w, h, { fill: opt.fill || 'var(--surface)', stroke: opt.stroke || 'var(--border)' }));
+      svg.appendChild(label(x + w / 2, y + 22, titel, { 'text-anchor': 'middle', fill: opt.titelFarbe || 'var(--text)' }));
+      zeilen.forEach(function (z, i) {
+        svg.appendChild(txt(x + w / 2, y + 38 + i * 12, z, { 'text-anchor': 'middle', 'font-size': 9 }));
+      });
+    }
+
+    /* obere Reihe */
+    schritt(16, 30, 164, 66, 'Substrat', ['Glaskeramik mit nahezu', 'null Wärmeausdehnung']);
+    schritt(206, 30, 164, 66, 'Schleifen & Fräsen', ['Grobform der Asphäre', 'oder Freifläche']);
+    schritt(396, 30, 164, 66, 'Vorpolitur', ['Bearbeitungsspuren', 'entfernen']);
+    svg.appendChild(arrow(180, 63, 202, 63, { stroke: 'var(--accent)', 'marker-end': 'url(#fig-arrow-accent)' }));
+    svg.appendChild(arrow(370, 63, 392, 63, { stroke: 'var(--accent)', 'marker-end': 'url(#fig-arrow-accent)' }));
+    svg.appendChild(S('path', {
+      d: 'M478 96 L478 118 L226 118 L226 142', fill: 'none', stroke: 'var(--accent)',
+      'stroke-width': 1.4, 'marker-end': 'url(#fig-arrow-accent)'
+    }));
+
+    /* Korrekturschleife */
+    svg.appendChild(S('rect', {
+      x: 116, y: 132, width: 430, height: 118, rx: 8,
+      fill: 'none', stroke: 'var(--text-mute)', 'stroke-width': 1, 'stroke-dasharray': '5 4', opacity: .8
+    }));
+    schritt(136, 146, 180, 62, 'Messen', ['Interferometrie gegen', 'ein CGH-Normal']);
+    schritt(346, 146, 180, 62, 'Korrigieren', ['Ionenstrahl oder MRF —', 'ortsaufgelöst abtragen']);
+    svg.appendChild(arrow(316, 166, 342, 166, { stroke: 'var(--ok)', 'marker-end': 'url(#fig-arrow)' }));
+    svg.appendChild(txt(329, 158, 'Fehlerkarte', { 'text-anchor': 'middle', 'font-size': 8.5, fill: 'var(--ok)' }));
+    svg.appendChild(S('path', {
+      d: 'M436 208 L436 226 L226 226 L226 210', fill: 'none', stroke: 'var(--ok)',
+      'stroke-width': 1.4, 'marker-end': 'url(#fig-arrow)'
+    }));
+    svg.appendChild(txt(331, 240, 'erneut messen — viele Durchläufe, bis die Formabweichung im Pikometerbereich liegt',
+      { 'text-anchor': 'middle', 'font-size': 9, fill: 'var(--ok)' }));
+
+    /* Vielschichtstapel als Einschub */
+    svg.appendChild(txt(636, 146, 'Mo/Si-Stapel', { 'text-anchor': 'middle', 'font-size': 9.5 }));
+    for (var i = 0; i < 11; i++) {
+      svg.appendChild(S('rect', {
+        x: 588, y: 154 + i * 8, width: 96, height: 3.4,
+        fill: 'var(--accent)', opacity: .85
+      }));
+      svg.appendChild(S('rect', {
+        x: 588, y: 158 + i * 8, width: 96, height: 4.2,
+        fill: 'var(--text-mute)', opacity: .45
+      }));
+    }
+    svg.appendChild(S('rect', { x: 588, y: 242, width: 96, height: 12, fill: 'var(--surface-2)', stroke: 'var(--border)' }));
+    svg.appendChild(txt(636, 251, 'Substrat', { 'text-anchor': 'middle', 'font-size': 8 }));
+    svg.appendChild(txt(636, 270, 'rund 7 nm Periode,', { 'text-anchor': 'middle', 'font-size': 9 }));
+    svg.appendChild(txt(636, 281, '40 bis 50 Doppellagen', { 'text-anchor': 'middle', 'font-size': 9 }));
+
+    /* untere Reihe */
+    svg.appendChild(S('path', {
+      d: 'M331 252 L331 274 L106 274 L106 302', fill: 'none', stroke: 'var(--accent)',
+      'stroke-width': 1.4, 'marker-end': 'url(#fig-arrow-accent)'
+    }));
+    schritt(16, 306, 180, 70, 'Beschichten', ['Mo/Si-Vielschicht,', 'Dicken auf Pikometer', 'genau geregelt']);
+    schritt(226, 306, 180, 70, 'Endprüfung', ['Reflexionsgrad bei 13,5 nm,', 'Form nach dem Beschichten', '(die Schicht verändert sie)']);
+    schritt(436, 306, 236, 70, 'Fassen & Justage', ['Ab hier beginnt Modul 1:', 'Montage, Justage und', 'Wellenfrontprüfung'],
+      { fill: 'var(--ok-sf)', stroke: 'var(--ok)', titelFarbe: 'var(--ok)' });
+    svg.appendChild(arrow(196, 341, 222, 341, { stroke: 'var(--accent)', 'marker-end': 'url(#fig-arrow-accent)' }));
+    svg.appendChild(arrow(406, 341, 432, 341, { stroke: 'var(--ok)', 'marker-end': 'url(#fig-arrow)' }));
+
+    svg.appendChild(txt(16, 404, 'Die Schleife in der Mitte ist derselbe Regelkreis wie bei der Justage: messen, gezielt korrigieren, erneut messen —',
+      { 'font-size': 9.5 }));
+    svg.appendChild(txt(16, 417, 'nur wird hier Material abgetragen statt eine Lage verstellt. Beides endet, wenn die Messung die Spezifikation bestätigt.',
+      { 'font-size': 9.5 }));
+
+    return svg;
+  };
+
+  /* ═══════════ Figur 6: die drei Ortsfrequenzbereiche ═══════════ */
+
+  FIGS.ortsfrequenzen = function () {
+    var svg = svgRoot(720, 330, 'Die drei Ortsfrequenzbereiche einer Spiegeloberfläche und ihre Wirkung');
+
+    var panels = [
+      { t: 'Figur', per: 150, amp: 17, skala: 'Skala größer 1 mm',
+        wirk: 'Aberration', folge: 'Wellenfrontfehler,', folge2: 'also Bildfehler', farbe: 'var(--accent)' },
+      { t: 'Welligkeit', per: 30, amp: 9, skala: 'Skala 1 µm bis 1 mm',
+        wirk: 'Streulicht (Flare)', folge: 'Kontrastverlust im', folge2: 'Bild, diffuser Untergrund', farbe: 'var(--warn)' },
+      { t: 'Rauheit', per: 7, amp: 5, skala: 'Skala kleiner 1 µm',
+        wirk: 'Reflexionsverlust', folge: 'weniger Licht,', folge2: 'geringerer Durchsatz', farbe: 'var(--bad)' }
+    ];
+
+    panels.forEach(function (p, i) {
+      var x = 16 + i * 234, w = 218;
+      svg.appendChild(box(x, 28, w, 274, { fill: 'var(--surface)' }));
+      svg.appendChild(label(x + w / 2, 52, p.t, { 'text-anchor': 'middle', fill: p.farbe }));
+      svg.appendChild(txt(x + w / 2, 66, p.skala, { 'text-anchor': 'middle', 'font-size': 9 }));
+
+      // Profilschnitt
+      var y0 = 118, x0 = x + 16, breite = w - 32;
+      svg.appendChild(S('line', { x1: x0, y1: y0, x2: x0 + breite, y2: y0, stroke: 'var(--text-mute)', 'stroke-width': .8, 'stroke-dasharray': '3 3' }));
+      var d = '';
+      for (var k = 0; k <= breite; k += 2) {
+        var yy = y0 - p.amp * Math.sin(2 * Math.PI * k / p.per);
+        d += (k ? 'L' : 'M') + (x0 + k).toFixed(1) + ' ' + yy.toFixed(1) + ' ';
+      }
+      svg.appendChild(S('path', { d: d, fill: 'none', stroke: p.farbe, 'stroke-width': 1.8 }));
+      svg.appendChild(txt(x + w / 2, 156, 'Sollfläche gestrichelt', { 'text-anchor': 'middle', 'font-size': 8.5 }));
+
+      // Wirkung
+      svg.appendChild(S('line', { x1: x + 16, y1: 176, x2: x + w - 16, y2: 176, stroke: 'var(--border)' }));
+      svg.appendChild(txt(x + w / 2, 196, 'wirkt als', { 'text-anchor': 'middle', 'font-size': 9 }));
+      svg.appendChild(label(x + w / 2, 214, p.wirk, { 'text-anchor': 'middle', fill: p.farbe, 'font-size': 11.5 }));
+      svg.appendChild(txt(x + w / 2, 234, p.folge, { 'text-anchor': 'middle', 'font-size': 9.5 }));
+      svg.appendChild(txt(x + w / 2, 246, p.folge2, { 'text-anchor': 'middle', 'font-size': 9.5 }));
+
+      svg.appendChild(S('line', { x1: x + 16, y1: 262, x2: x + w - 16, y2: 262, stroke: 'var(--border)' }));
+      svg.appendChild(txt(x + w / 2, 280, 'korrigierbar durch', { 'text-anchor': 'middle', 'font-size': 9 }));
+      svg.appendChild(txt(x + w / 2, 292, ['Ionenstrahl / MRF', 'feineres Polierwerkzeug', 'Politurchemie, Endpolitur'][i],
+        { 'text-anchor': 'middle', 'font-size': 9.5, fill: 'var(--text)' }));
     });
 
     return svg;
