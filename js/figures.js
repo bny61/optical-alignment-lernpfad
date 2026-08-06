@@ -303,4 +303,97 @@
 
     return svg;
   };
+
+  /* ═══════════ Figur 4: der Strahlengang im Scanner ═══════════ */
+
+  FIGS.scanner = function () {
+    var svg = svgRoot(720, 470, 'Strahlengang eines Lithografiescanners von der Lichtquelle bis zum Wafer');
+    var mitte = 250;
+
+    // Lichtquelle
+    svg.appendChild(box(28, 40, 118, 52, { fill: 'var(--surface)' }));
+    svg.appendChild(label(87, 62, 'Lichtquelle', { 'text-anchor': 'middle' }));
+    svg.appendChild(txt(87, 76, '193 nm oder 13,5 nm', { 'text-anchor': 'middle', 'font-size': 9 }));
+    svg.appendChild(arrow(146, 66, 172, 66, { stroke: 'var(--bad)' }));
+
+    // Beleuchtungsoptik
+    svg.appendChild(box(174, 40, 152, 52, { fill: 'var(--surface)' }));
+    svg.appendChild(label(mitte, 62, 'Beleuchtungsoptik', { 'text-anchor': 'middle' }));
+    svg.appendChild(txt(mitte, 76, 'formt Winkelverteilung', { 'text-anchor': 'middle', 'font-size': 9 }));
+    svg.appendChild(arrow(mitte, 92, mitte, 114, { stroke: 'var(--bad)' }));
+
+    // Retikel
+    svg.appendChild(S('rect', { x: 160, y: 118, width: 180, height: 14, fill: 'var(--surface-2)', stroke: 'var(--text)', 'stroke-width': 1.4 }));
+    [176, 196, 216, 240, 268, 296, 320].forEach(function (x) {
+      svg.appendChild(S('rect', { x: x, y: 121, width: 5, height: 8, fill: 'var(--text)', opacity: .55 }));
+    });
+    svg.appendChild(S('path', {
+      d: 'M132 125 l22 0 M132 125 l5 -4 M132 125 l5 4 M154 125 l-5 -4 M154 125 l-5 4',
+      stroke: 'var(--ok)', 'stroke-width': 1.3, fill: 'none'
+    }));
+    svg.appendChild(txt(128, 128, 'Retikelbühne', { 'font-size': 9, fill: 'var(--ok)', 'text-anchor': 'end' }));
+    svg.appendChild(txt(352, 129, 'Retikel (Maske)', { 'font-size': 10 }));
+
+    // Projektionsobjektiv
+    svg.appendChild(S('path', {
+      d: 'M166 156 L334 156 L306 340 L194 340 Z',
+      fill: 'var(--accent-sf)', stroke: 'var(--accent)', 'stroke-width': 2
+    }));
+    [[190, 78], [228, 68], [266, 56], [304, 44]].forEach(function (p) {
+      svg.appendChild(S('ellipse', { cx: mitte, cy: p[0], rx: p[1], ry: 7, fill: 'none', stroke: 'var(--accent)', 'stroke-width': 1.3, opacity: .85 }));
+    });
+    svg.appendChild(label(mitte, 148, 'Projektionsobjektiv', { 'text-anchor': 'middle' }));
+    svg.appendChild(txt(mitte, 326, '4:1 Verkleinerung', { 'text-anchor': 'middle', 'font-size': 9.5, fill: 'var(--accent)' }));
+
+    // Wafer
+    svg.appendChild(arrow(mitte, 342, mitte, 358, { stroke: 'var(--bad)' }));
+    svg.appendChild(S('rect', { x: 160, y: 362, width: 180, height: 12, rx: 2, fill: 'var(--surface-2)', stroke: 'var(--text)', 'stroke-width': 1.4 }));
+    svg.appendChild(S('rect', { x: 236, y: 356, width: 28, height: 6, fill: 'var(--warn)', opacity: .8 }));
+    svg.appendChild(txt(352, 368, 'Wafer, 300 mm', { 'font-size': 10 }));
+    svg.appendChild(S('path', {
+      d: 'M132 380 l22 0 M132 380 l5 -4 M132 380 l5 4 M154 380 l-5 -4 M154 380 l-5 4',
+      stroke: 'var(--ok)', 'stroke-width': 1.3, fill: 'none'
+    }));
+    svg.appendChild(txt(128, 383, 'Waferbühne', { 'font-size': 9, fill: 'var(--ok)', 'text-anchor': 'end' }));
+    svg.appendChild(txt(160, 400, 'Step & Scan: Retikel- und Waferbühne fahren gegenläufig,', { 'font-size': 9.5 }));
+    svg.appendChild(txt(160, 413, 'der Wafer 4× langsamer — Feld für Feld über den Wafer.', { 'font-size': 9.5 }));
+
+    // Hervorhebung: hier arbeitet die Rolle
+    svg.appendChild(S('rect', {
+      x: 420, y: 176, width: 274, height: 138, rx: 6,
+      fill: 'var(--ok-sf)', stroke: 'var(--ok)', 'stroke-width': 1.6
+    }));
+    svg.appendChild(label(436, 200, 'Hier arbeiten Sie', { fill: 'var(--ok)' }));
+    [
+      'Das Projektionsobjektiv ist die Baugruppe, in der',
+      'sich die Auflösung entscheidet. Es besteht aus',
+      'mehreren Modulen: bei DUV aus 20 bis 30 Linsen,',
+      'bei EUV aus rund sechs Spiegeln.',
+      '',
+      'Jedes Modul wird einzeln montiert, justiert und',
+      'geprüft — genau das ist der Wertstromabschnitt',
+      'aus Modul 4.'
+    ].forEach(function (z, i) {
+      if (z) svg.appendChild(txt(436, 220 + i * 12, z, { 'font-size': 9.5 }));
+    });
+    svg.appendChild(S('path', {
+      d: 'M418 244 L336 244', fill: 'none', stroke: 'var(--ok)',
+      'stroke-width': 1.4, 'marker-end': 'url(#fig-arrow)'
+    }));
+
+    // Kennzahlen rechts oben
+    svg.appendChild(box(448, 40, 246, 116, { fill: 'var(--surface)' }));
+    svg.appendChild(label(464, 62, 'Größenordnungen'));
+    [
+      'Belichtungsfeld  26 × 33 mm',
+      'Felder je Wafer  rund 100',
+      'Durchsatz        über 150 Wafer je Stunde',
+      'Overlay-Budget   wenige Nanometer',
+      'Objektiv         Hunderte kg, Stückzahl klein'
+    ].forEach(function (z, i) {
+      svg.appendChild(txt(464, 82 + i * 14, z, { 'font-size': 9, 'font-family': 'var(--mono)' }));
+    });
+
+    return svg;
+  };
 })(window);

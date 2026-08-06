@@ -64,7 +64,7 @@
     root.appendChild(CH.el('div', { class: 'eyebrow', text: 'Lernpfad · Optikmontage und Justage' }));
     root.appendChild(CH.el('h1', { text: 'Prozessingenieur Optische Justage — die tägliche Arbeit verstehen' }));
     root.appendChild(CH.el('p', { class: 'lead', html:
-      'Sechs Module entlang der täglichen Aufgaben dieser Rolle: von der Physik der Justage über Messtechnik und ' +
+      'Eine Einordnung in das Lithografiesystem und sechs Module entlang der täglichen Aufgaben dieser Rolle: von der Physik der Justage über Messtechnik und ' +
       'Prozessstabilität bis zu Wertstrom, Reklamationsbearbeitung und Serienanlauf. ' +
       'Jedes Modul hat einen Erklärteil, eine interaktive Simulation und ein Quiz.' }));
 
@@ -81,7 +81,7 @@
       var done = fortschritt[m.id];
       cards.appendChild(CH.el('a', { class: 'module-card', href: '#/modul/' + m.id }, [
         CH.el('div', { class: 'mc-head' }, [
-          CH.el('span', { class: 'mc-num', text: 'Modul ' + m.nr }),
+          CH.el('span', { class: 'mc-num', text: m.nr === 0 ? 'Einordnung' : 'Modul ' + m.nr }),
           done ? CH.el('span', { class: 'badge ok', text: done.score + '/' + done.total }) : null
         ]),
         CH.el('h3', { text: m.titel }),
@@ -92,6 +92,7 @@
 
     root.appendChild(CH.el('h2', { text: 'Empfohlene Reihenfolge' }));
     root.appendChild(CH.el('p', { html:
+      'Die Einordnung erklärt, wozu die Optik gebaut wird und warum die Toleranzen so eng sind — sie beantwortet das Warum hinter allem Folgenden. ' +
       'Module 1 und 2 legen die technische Basis — ohne Verständnis von Wellenfrontfehler und Messunsicherheit ' +
       'sind die Prozesskennzahlen in Modul 3 nicht interpretierbar. Modul 3 und 4 sind der Alltag der Rolle. ' +
       'Module 5 und 6 sind die beiden Ausnahmesituationen: Reklamation (rückwärts) und Anlauf (vorwärts). ' +
@@ -112,7 +113,9 @@
     var root = CH.el('div');
     var idx = ctx.module.indexOf(m);
 
-    root.appendChild(CH.el('div', { class: 'eyebrow', text: 'Modul ' + m.nr + ' von ' + ctx.module.length }));
+    root.appendChild(CH.el('div', { class: 'eyebrow', text: m.nr === 0
+      ? 'Einordnung · Grundlage für alle Module'
+      : 'Modul ' + m.nr + ' von ' + (ctx.module.length - 1) }));
     root.appendChild(CH.el('h1', { text: m.titel }));
     root.appendChild(CH.el('p', { class: 'lead', html: m.ziel }));
     root.appendChild(CH.el('div', { class: 'callout job', html:

@@ -2,8 +2,8 @@
 
 Lern-Webseite zu den täglichen Aufgaben eines Prozessingenieurs in der Optikmontage und Justage von
 Lithografieoptik: Prozessanalyse und -verbesserung, technische Verantwortung für einen Wertstromabschnitt,
-Serienanlauf gemeinsam mit der Entwicklung und die Bearbeitung von Kundenreklamationen. Sechs Module,
-jeweils mit Erklärteil, interaktiver Simulation und Selbsttest.
+Serienanlauf gemeinsam mit der Entwicklung und die Bearbeitung von Kundenreklamationen. Eine Einordnung in
+das Lithografiesystem plus sechs Module, jeweils mit Erklärteil, interaktiver Simulation und Selbsttest.
 
 Läuft ohne Build und ohne Server — `index.html` genügt.
 
@@ -26,6 +26,7 @@ unten in der Seitenleiste zurückgesetzt.
 
 | # | Modul | Tägliche Herausforderung | Simulation |
 |---|-------|--------------------------|------------|
+| · | Einordnung: das Lithografiesystem | Warum die Toleranzen so eng sind | Schemaskizze des Scanner-Strahlengangs, Rayleigh-Gleichung, Generationen |
 | 1 | Grundlagen der Justage | Welche Aberration verrät welche mechanische Ursache | Drei Schemaskizzen des realen Messplatzes plus Simulation Stellgrößen → Wellenfront |
 | 2 | Messtechnik & MSA | Taugt die Messung, bevor man Prozessentscheidungen darauf stützt | Gage R&R gegen Toleranz und Teilestreuung |
 | 3 | Prozessstabilität & Fähigkeit | Eingreifen oder nicht eingreifen | Regelkarte mit Drift, Sprung, Western-Electric-Regeln, Cp/Cpk |
@@ -33,7 +34,7 @@ unten in der Seitenleiste zurückgesetzt.
 | 5 | 8D, PDCA, Six Sigma | Reklamation methodisch führen | Geführter 8D-Durchlauf über Fall R-2417 |
 | 6 | Ramp-up & Schnittstelle R&D | Worst Case vs. RSS, Sonderfreigaben, Fähigkeit bei kleinen Stückzahlen | Monte-Carlo über die Toleranzkette |
 
-Empfohlene Reihenfolge: 1 → 2 → 3 → 4 → 5 → 6. Module 1 und 2 sind Voraussetzung für die Kennzahlen in Modul 3.
+Empfohlene Reihenfolge: Einordnung → 1 → 2 → 3 → 4 → 5 → 6. Module 1 und 2 sind Voraussetzung für die Kennzahlen in Modul 3.
 Rechnen Sie mit 30–45 Minuten je Modul, wenn Sie die Simulationen wirklich durchspielen.
 
 ## Projektstruktur
@@ -43,7 +44,7 @@ index.html          Shell: Topbar, Seitenleiste, Content-Container
 css/base.css        Reset, Farbvariablen (Light/Dark), Layout
 css/components.css  Karten, Simulator-Layout, Quiz, Tabellen, Badges
 js/charts.js        SVG- und Mathe-Helfer (Plot, Skalen, seeded PRNG, Slider, Kennzahlkacheln)
-js/figures.js       Schemaskizzen: Messplatz, Modulschnitt, Justagezyklus (window.FIGS)
+js/figures.js       Schemaskizzen: Scanner, Messplatz, Modulschnitt, Justagezyklus (window.FIGS)
 js/sim-*.js         die sechs Simulatoren, registriert unter window.SIMS
 js/quiz.js          Multiple-Choice mit Auswertung
 js/render.js        Seitenaufbau aus den Datenobjekten

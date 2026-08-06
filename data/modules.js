@@ -2,6 +2,170 @@
 window.APP_DATA = window.APP_DATA || {};
 window.APP_DATA.module = [
 
+/* ═══════════════════════ EINORDNUNG (Modul 0) ═══════════════════════ */
+{
+  id: 'system',
+  nr: 0,
+  titel: 'Einordnung: das Lithografiesystem',
+  kurz: 'Wozu die Optik gebaut wird, die Sie justieren — Auflösungsgrenze, Wellenlängengenerationen und warum Wellenfrontfehler im Pikometerbereich landen.',
+  ziel: 'Sie können erklären, warum ein Objektivmodul so extrem eng spezifiziert ist — nämlich weil sein Wellenfrontfehler direkt in die Strukturtreue auf dem Wafer übersetzt — und wo Ihre Baugruppe im Gesamtsystem sitzt.',
+  jobBezug: 'Die Rolle verlangt Systemverständnis im Umgang mit komplexen technischen Systemen. Praktisch heißt das: Sie müssen begründen können, warum eine Toleranz so eng ist, bevor Sie über ihre Aufweitung verhandeln — und warum ein scheinbar winziger Restfehler beim Kunden zum Ausfall der Integration führt.',
+  begriffe: ['Wellenfront', 'Strehl-Verhältnis', 'Maréchal-Kriterium'],
+
+  abschnitte: [
+    {
+      h: 'Was die Maschine tut',
+      p: [
+        'Ein Lithografiescanner überträgt die Struktur einer Maske — des <em>Retikels</em> — auf einen mit Fotolack beschichteten Siliziumwafer. Das Projektionsobjektiv bildet dabei verkleinert ab, üblicherweise im Verhältnis 4:1: Was auf dem Retikel 4 µm groß ist, wird auf dem Wafer 1 µm.',
+        'Belichtet wird nicht der ganze Wafer auf einmal, sondern Feld für Feld. Innerhalb eines Feldes fahren Retikel- und Waferbühne gegenläufig durch einen Beleuchtungsspalt — daher <em>Step &amp; Scan</em>. Auf einen 300-mm-Wafer passen so um die 100 Felder, und ein Wafer durchläuft im Lauf seiner Fertigung Dutzende solcher Belichtungen, deren Strukturen auf wenige Nanometer genau übereinanderliegen müssen.'
+      ],
+      grafik: 'scanner',
+      grafikText: '<strong>Abb. 1 — Strahlengang im Scanner.</strong> Alle Zahlen sind öffentlich bekannte Größenordnungen, keine Herstellerdaten. Entscheidend für diese Seite ist die grün markierte Stelle: Das Projektionsobjektiv wird aus einzeln montierten und justierten Modulen aufgebaut — dort spielt sich der gesamte Rest dieses Lernpfads ab.'
+    },
+
+    {
+      h: 'Die Gleichung, die die ganze Branche antreibt',
+      p: [
+        'Wie klein eine Struktur werden kann, beschreibt die Rayleigh-Gleichung. Sie hat nur drei Stellschrauben — und erklärt fast die gesamte Entwicklungsgeschichte der Halbleiterfertigung:'
+      ],
+      formel: 'CD  = k₁ · λ / NA          <span class="fx-note">kleinste auflösbare Strukturbreite</span>\n\nDOF = k₂ · λ / NA²         <span class="fx-note">Schärfentiefe — sinkt quadratisch mit NA</span>',
+      bullets: [
+        '<strong>λ verkleinern</strong> — der wirksamste Hebel, aber jeder Schritt erzwingt eine komplett neue Optikgeneration',
+        '<strong>NA vergrößern</strong> — mehr Licht aus größeren Winkeln; kostet Bauraum, Gewicht und Schärfentiefe',
+        '<strong>k₁ senken</strong> — über Beleuchtungstricks, Phasenmasken und Auflösungsverstärkung; physikalisch bei etwa 0,25 am Ende'
+      ],
+      callout: {
+        typ: 'warn',
+        titel: 'Der unbequeme zweite Teil',
+        text: 'Die Schärfentiefe DOF fällt mit dem <em>Quadrat</em> der numerischen Apertur. Jede Auflösungssteigerung über NA verkleinert also das Fenster, in dem der Wafer scharf abgebildet wird — bei heutigen Systemen sind das einige zehn Nanometer. Deshalb ist der Defokusanteil der Wellenfront (Z4 in Modul 1) keine akademische Größe, sondern eine der kritischsten überhaupt.'
+      }
+    },
+
+    {
+      h: 'Die Generationen',
+      tabelle: {
+        kopf: ['Generation', 'Wellenlänge', 'NA (typ.)', 'Optik', 'Auflösung, Größenordnung'],
+        zeilen: [
+          ['i-Line', '365 nm', '0,5–0,6', 'Linsen (Quarzglas)', 'einige hundert nm'],
+          ['KrF', '248 nm', '0,7–0,8', 'Linsen', 'rund 100 nm'],
+          ['ArF trocken', '193 nm', 'bis 0,93', 'Linsen (Quarz, CaF₂)', 'rund 65 nm'],
+          ['ArF Immersion', '193 nm', 'bis 1,35', 'Linsen + Wasserspalt', 'rund 38 nm (einfach belichtet)'],
+          ['EUV', '13,5 nm', '0,33', 'nur Spiegel, Vakuum', 'rund 13 nm'],
+          ['High-NA EUV', '13,5 nm', '0,55', 'Spiegel, anamorphotisch', 'unter 10 nm']
+        ],
+        fuss: 'Öffentlich bekannte Größenordnungen. Die Auflösungsangaben gelten für Einfachbelichtung; mit Mehrfachstrukturierung liegen die tatsächlich gefertigten Strukturen darunter.'
+      },
+      p: [
+        'Der Sprung von 193 nm auf 13,5 nm ist kein Zwischenschritt, sondern ein Bruch: Bei 13,5 nm gibt es kein Material mehr, das ausreichend transparent wäre. Linsen sind damit unmöglich — die gesamte Optik besteht aus Spiegeln, und weil EUV-Strahlung schon in Luft absorbiert wird, arbeitet die Maschine im Vakuum. Selbst die Maske wird nicht durchleuchtet, sondern reflektiv betrieben.'
+      ],
+      callout: {
+        typ: '',
+        titel: 'Warum EUV-Spiegel so schwierig sind',
+        text: 'Ein einzelner Spiegel reflektiert bei 13,5 nm nur über einen Mo/Si-Vielschichtstapel, und selbst dann liegt der Reflexionsgrad bei etwa 70 %. Bei sechs Spiegeln im Projektionsobjektiv bleibt davon rund 0,7⁶ ≈ 12 % übrig, vor der Beleuchtungsoptik gerechnet. Jedes Zehntelprozent Reflexionsverlust und jeder Nanometer Formfehler kostet also unmittelbar Durchsatz oder Auflösung.'
+      }
+    },
+
+    {
+      h: 'Von der Wellenfront zum Chip',
+      p: [
+        'Hier schließt sich der Kreis zu Modul 1. Ein Wellenfrontfehler bleibt nicht abstrakt — er wirkt sich in drei konkreten Größen aus, die der Kunde misst:'
+      ],
+      tabelle: {
+        kopf: ['Aberration', 'Wirkung auf dem Wafer', 'Konsequenz'],
+        zeilen: [
+          ['Defokus (Z4)', 'Strukturen unscharf, Kanten verwaschen', 'Strukturbreite driftet, Prozessfenster schrumpft'],
+          ['Koma (Z7/Z8)', 'Struktur wird seitlich versetzt abgebildet', 'Überlagerungsfehler zwischen Lagen (Overlay)'],
+          ['Astigmatismus (Z5/Z6)', 'horizontale und vertikale Linien unterschiedlich scharf', 'richtungsabhängige Strukturbreiten'],
+          ['Sphärisch (Z11)', 'Fokuslage hängt von der Strukturdichte ab', 'dichte und isolierte Strukturen driften auseinander']
+        ],
+        fuss: 'Deshalb wird nicht nur der RMS-Wert spezifiziert, sondern die Zernike-Koeffizienten einzeln — jeder hat eine eigene Wirkung im Bild.'
+      },
+      callout: {
+        typ: 'bad',
+        titel: 'Die Größenordnung, um die es geht',
+        text: 'Bei 193 nm entspricht ein RMS-Fehler von 1 mλ knapp 0,2 nm. Bei EUV mit 13,5 nm sind 1 mλ nur noch rund 13 <em>Pikometer</em> — ein Zehntel eines Atomdurchmessers. Die Formtreue der Spiegelflächen liegt in derselben Größenordnung. Der oft zitierte Vergleich: Wäre ein solcher Spiegel so groß wie Deutschland, dürfte die höchste Unebenheit keinen Bruchteil eines Millimeters überschreiten.'
+      }
+    },
+
+    {
+      h: 'Was das für die Fertigung bedeutet',
+      p: [
+        'Aus dem Systemkontext folgen unmittelbar die Randbedingungen, unter denen die restlichen sechs Module stehen:'
+      ],
+      bullets: [
+        '<strong>Kleinserie mit extremem Stückwert.</strong> Von diesen Systemen werden weltweit einige Dutzend pro Jahr gebaut. Ausschuss ist praktisch keine Option, Nacharbeit ist der Normalfall — die Kapazitätsrechnung in Modul 4 folgt direkt daraus.',
+        '<strong>Statistik ist knapp.</strong> Prozessfähigkeit nach klassischem Cpk lässt sich mit einstelligen Stückzahlen kaum belegen. Das ist die Kernschwierigkeit im Anlauf (Modul 6).',
+        '<strong>Der Kunde ist ein Systemintegrator.</strong> Das Modul wird nicht an einen Chiphersteller geliefert, sondern an den Scanner-Hersteller, der es in seine Maschine integriert. Er misst unter <em>seinen</em> Bedingungen — Aufspannung, Lage, Zeitpunkt — und genau daraus entsteht der Reklamationsfall in Modul 5.',
+        '<strong>Die Messtechnik ist selbst Hochtechnologie.</strong> Wer Pikometer spezifiziert, muss zuerst beweisen, dass er sie messen kann. Deshalb steht die Messsystemanalyse in Modul 2 vor jeder Prozessbewertung.',
+        '<strong>Jede Störgröße zählt.</strong> Temperaturgradienten, Vibration, Kontamination und sogar die Schwerkraftdurchbiegung der Fassung liegen in derselben Größenordnung wie die Toleranz — daher der Aufwand für Umgebung und Handhabung aus Modul 1.'
+      ],
+      callout: {
+        typ: 'job',
+        titel: 'Der Satz, der die Rolle zusammenfasst',
+        text: 'Zwischen der Physik oben in diesem Modul und den Kennzahlen in den folgenden Modulen steht genau eine Person: diejenige, die übersetzt, warum eine Toleranz so eng ist, was sie in der Fertigung kostet und welche der beiden Größen sich ändern lässt.'
+      }
+    }
+  ],
+
+  quiz: [
+    {
+      frage: 'Ein Hersteller verdoppelt die numerische Apertur bei gleicher Wellenlänge. Was passiert mit der Schärfentiefe?',
+      optionen: [
+        'Sie halbiert sich.',
+        'Sie sinkt auf ein Viertel, weil DOF mit 1/NA² geht.',
+        'Sie bleibt unverändert, DOF hängt nur von λ ab.',
+        'Sie verdoppelt sich.'
+      ],
+      richtig: 1,
+      erklaerung: 'DOF = k₂ · λ / NA². Bei doppelter NA bleibt ein Viertel der Schärfentiefe. Deshalb ist jede Auflösungssteigerung über die Apertur mit einem drastisch engeren Fokusfenster erkauft — und deshalb ist der Defokusanteil der Wellenfront so kritisch.'
+    },
+    {
+      frage: 'Warum besteht die Optik eines EUV-Systems ausschließlich aus Spiegeln?',
+      optionen: [
+        'Weil Spiegel billiger zu fertigen sind als Linsen dieser Größe.',
+        'Weil bei 13,5 nm kein Material ausreichend transparent ist — Linsen sind physikalisch ausgeschlossen.',
+        'Weil Spiegel keine chromatische Aberration zeigen.',
+        'Weil sich Spiegel leichter justieren lassen als Linsen.'
+      ],
+      richtig: 1,
+      erklaerung: 'Bei 13,5 nm absorbiert praktisch jedes Material, auch Luft — daher Vakuum, Reflexionsoptik und Mo/Si-Vielschichtspiegel. Spiegel sind hier keine Designwahl, sondern die einzige Möglichkeit. Fertigungstechnisch sind sie ungleich aufwendiger, nicht billiger.'
+    },
+    {
+      frage: 'Ein Modul zeigt erhöhte Koma. Welche Auswirkung meldet der Kunde am wahrscheinlichsten?',
+      optionen: [
+        'Unschärfe über das ganze Bildfeld.',
+        'Einen seitlichen Versatz der abgebildeten Struktur, also einen Overlay-Fehler zwischen den Lagen.',
+        'Unterschiedliche Schärfe für horizontale und vertikale Linien.',
+        'Einen Durchsatzverlust der Maschine.'
+      ],
+      richtig: 1,
+      erklaerung: 'Koma bildet die Struktur asymmetrisch und dadurch seitlich versetzt ab — das schlägt direkt auf das Overlay durch, also die Lagegenauigkeit zwischen aufeinanderfolgenden Belichtungsebenen. Richtungsabhängige Schärfe wäre Astigmatismus, feldweite Unschärfe Defokus.'
+    },
+    {
+      frage: 'Was bedeutet ein RMS-Wellenfrontfehler von 1 mλ physikalisch bei EUV (λ = 13,5 nm)?',
+      optionen: [
+        'Etwa 13 Nanometer.',
+        'Etwa 13 Pikometer — Bruchteile eines Atomdurchmessers.',
+        'Etwa 1,35 Nanometer.',
+        'Das lässt sich ohne Angabe der NA nicht umrechnen.'
+      ],
+      richtig: 1,
+      erklaerung: '1 mλ = λ/1000 = 13,5 nm / 1000 ≈ 13,5 pm. Zum Vergleich: Ein Siliziumatom hat einen Durchmesser von rund 200 pm. Genau diese Größenordnung erklärt den gesamten Aufwand für Messtechnik, Umgebungskonditionierung und Handhabung in den folgenden Modulen.'
+    },
+    {
+      frage: 'Warum ist die klassische Prozessfähigkeitsrechnung in dieser Fertigung schwierig?',
+      optionen: [
+        'Weil die Toleranzen zu eng für die verfügbaren Messmittel sind.',
+        'Weil bei einigen Dutzend Systemen pro Jahr die Stückzahlen für belastbare Statistik nicht ausreichen.',
+        'Weil Cpk für optische Merkmale nicht definiert ist.',
+        'Weil die Merkmale nicht normalverteilt sind.'
+      ],
+      richtig: 1,
+      erklaerung: 'Cpk ist eine statistische Kenngröße und braucht Stückzahlen. Bei einer Fertigung im zweistelligen Jahresbereich ist das Vertrauensintervall so breit, dass die Punktschätzung wenig aussagt — die zentrale Schwierigkeit im Anlauf, die Modul 6 behandelt.'
+    }
+  ]
+},
+
 /* ═══════════════════════════ MODUL 1 ═══════════════════════════ */
 {
   id: 'grundlagen',

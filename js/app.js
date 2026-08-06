@@ -48,7 +48,7 @@
       var done = ctx.fortschritt[m.id];
       navList.appendChild(CH.el('li', {}, [
         CH.el('a', { href: '#/modul/' + m.id, class: aktiv ? 'active' : '' }, [
-          CH.el('span', { class: 'nav-num', text: String(m.nr) }),
+          CH.el('span', { class: 'nav-num', text: m.nr === 0 ? '·' : String(m.nr) }),
           CH.el('span', { text: m.titel }),
           done ? CH.el('span', { class: 'nav-done', text: '✓' }) : null
         ])
