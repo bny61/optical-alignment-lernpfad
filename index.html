@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Optical Alignment — Lernpfad Prozessingenieur Justage</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Zum Inhalt springen</a>
+
+  <header class="topbar">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Navigation ein-/ausblenden" aria-expanded="false">☰</button>
+    <div class="topbar-title">
+      <strong>Optical Alignment</strong>
+      <span>Lernpfad Prozessingenieur Optische Justage</span>
+    </div>
+    <div class="topbar-progress">
+      <span id="progress-label">0 / 6</span>
+      <div class="progress-track" role="progressbar" aria-label="Gesamtfortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-outer">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar" aria-label="Modulnavigation">
+      <ul id="nav-list"></ul>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost btn-sm" id="reset-progress">Fortschritt zurücksetzen</button>
+      </div>
+    </nav>
+
+    <main class="content" id="content" tabindex="-1"></main>
+  </div>
+
+  <!-- Daten zuerst: reine window.APP_DATA-Zuweisungen, damit die Seite auch per file:// läuft -->
+  <script src="data/glossary.js"></script>
+  <script src="data/cases.js"></script>
+  <script src="data/modules.js"></script>
+
+  <!-- Helfer, Schemaskizzen (window.FIGS) und Simulatoren (window.SIMS) -->
+  <script src="js/charts.js"></script>
+  <script src="js/figures.js"></script>
+  <script src="js/sim-alignment.js"></script>
+  <script src="js/sim-msa.js"></script>
+  <script src="js/sim-spc.js"></script>
+  <script src="js/sim-valuestream.js"></script>
+  <script src="js/sim-8d.js"></script>
+  <script src="js/sim-tolerance.js"></script>
+
+  <script src="js/quiz.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
