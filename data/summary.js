@@ -1,28 +1,29 @@
 /* summary.js — Kompaktübersicht. Nutzt dieselbe Abschnittsstruktur wie die Module. */
 window.APP_DATA = window.APP_DATA || {};
 window.APP_DATA.kompakt = {
-  lead: 'Alles Wesentliche aus den sieben Modulen auf einer Seite — zum Wiederholen vor einem Gespräch, ' +
+  lead: 'Alles Wesentliche aus den acht Modulen auf einer Seite — zum Wiederholen vor einem Gespräch, ' +
         'als Nachschlagewerk im Alltag oder zum Ausdrucken. Jeder Punkt verweist auf das Modul, in dem er hergeleitet wird.',
 
   abschnitte: [
     {
-      h: 'Die zwölf Sätze, die das Feld tragen',
+      h: 'Die dreizehn Sätze, die das Feld tragen',
       p: [
-        'Wer diese zwölf Aussagen erklären und begründen kann, hat das Fachgebiet verstanden. Alles andere ist Detail.'
+        'Wer diese dreizehn Aussagen erklären und begründen kann, hat das Fachgebiet verstanden. Alles andere ist Detail.'
       ],
       bullets: [
         '<strong>1. Justage ist Kompensation, nicht Positionierung.</strong> Optimiert wird die Wellenfront des Systems, nicht die geometrische Lage eines Elements. Deshalb steht ein Element am Ende oft messbar außerhalb seiner Nennlage. <em>(Modul 1)</em>',
         '<strong>2. Koma zeigt auf Lage, Astigmatismus auf Spannung.</strong> Sphärische Aberration und Trefoil zeigen auf Bauteil und Fassung. Diese drei Sätze ersetzen einen großen Teil der Ursachensuche. <em>(Modul 1)</em>',
         '<strong>3. Was außerhalb des Stellbereichs liegt, wird durch Weiterjustieren nur teurer.</strong> Das rechtzeitig zu erkennen und belegt zu übergeben, ist die eigentliche Leistung an der Station. <em>(Modul 1)</em>',
-        '<strong>4. Ohne fähiges Messsystem ist jede Prozessaussage wertlos.</strong> Erst %GRR, dann Analyse. Ein Verbesserungsprojekt auf Messrauschen liefert Scheinerfolge, die nach Monaten zusammenbrechen. <em>(Modul 2)</em>',
-        '<strong>5. Eingriffsgrenzen und Spezifikationsgrenzen haben nichts miteinander zu tun.</strong> Die einen beschreiben, was der Prozess tut, die anderen, was der Kunde braucht. <em>(Modul 3)</em>',
-        '<strong>6. Ohne Signal nicht eingreifen.</strong> Nachstellen auf zufällige Streuung erhöht die Streuung nachweislich. <em>(Modul 3)</em>',
-        '<strong>7. Am Engpass zählt First Pass Yield mehr als Zykluszeit.</strong> Nacharbeit wirkt multiplikativ auf mehrere Stationen und kostet keine Investition, sie zu senken. <em>(Modul 4)</em>',
-        '<strong>8. Bestand ist Durchlaufzeit, hohe Auslastung ist teuer.</strong> Little koppelt beides fest; Kingman macht die letzten zehn Prozent Auslastung unbezahlbar. <em>(Modul 4)</em>',
-        '<strong>9. Grundursache heißt: Der Effekt lässt sich gezielt ein- und ausschalten.</strong> Alles andere ist eine Vermutung mit Aktenzeichen. <em>(Modul 5)</em>',
-        '<strong>10. Beobachtung findet Zusammenhänge, nur der Versuch findet Ursachen.</strong> Vermengte Einflussgrößen lassen sich aus Beobachtungsdaten mit keiner Stichprobengröße trennen. <em>(Modul 5)</em>',
-        '<strong>11. Eine Sofortmaßnahme ohne Enddatum wird zum heimlichen Dauerprozess.</strong> Der in der Praxis am häufigsten vergessene Schritt ist D8: das Containment wieder zurückzunehmen. <em>(Modul 5)</em>',
-        '<strong>12. Im Anlauf ist die Sonderfreigabequote die ehrlichste Kennzahl.</strong> Sie muss sichtbar fallen. Wiederholte Sonderfreigaben für dasselbe Merkmal sind eine verdeckte Spezifikationsänderung. <em>(Modul 6)</em>'
+        '<strong>4. Bei Reflexion verdoppelt sich der Kippwinkel.</strong> Ein um α verkippter Spiegel lenkt den Strahl um 2α ab. Deshalb ist ein Spiegelsystem von vornherein doppelt so winkelempfindlich wie ein refraktives — die Diagnoselogik bleibt aber dieselbe. <em>(Modul 2)</em>',
+        '<strong>5. Ohne fähiges Messsystem ist jede Prozessaussage wertlos.</strong> Erst %GRR, dann Analyse. Ein Verbesserungsprojekt auf Messrauschen liefert Scheinerfolge, die nach Monaten zusammenbrechen. <em>(Modul 3)</em>',
+        '<strong>6. Eingriffsgrenzen und Spezifikationsgrenzen haben nichts miteinander zu tun.</strong> Die einen beschreiben, was der Prozess tut, die anderen, was der Kunde braucht. <em>(Modul 4)</em>',
+        '<strong>7. Ohne Signal nicht eingreifen.</strong> Nachstellen auf zufällige Streuung erhöht die Streuung nachweislich. <em>(Modul 4)</em>',
+        '<strong>8. Am Engpass zählt First Pass Yield mehr als Zykluszeit.</strong> Nacharbeit wirkt multiplikativ auf mehrere Stationen und kostet keine Investition, sie zu senken. <em>(Modul 5)</em>',
+        '<strong>9. Bestand ist Durchlaufzeit, hohe Auslastung ist teuer.</strong> Little koppelt beides fest; Kingman macht die letzten zehn Prozent Auslastung unbezahlbar. <em>(Modul 5)</em>',
+        '<strong>10. Grundursache heißt: Der Effekt lässt sich gezielt ein- und ausschalten.</strong> Alles andere ist eine Vermutung mit Aktenzeichen. <em>(Modul 6)</em>',
+        '<strong>11. Beobachtung findet Zusammenhänge, nur der Versuch findet Ursachen.</strong> Vermengte Einflussgrößen lassen sich aus Beobachtungsdaten mit keiner Stichprobengröße trennen. <em>(Modul 6)</em>',
+        '<strong>12. Eine Sofortmaßnahme ohne Enddatum wird zum heimlichen Dauerprozess.</strong> Der in der Praxis am häufigsten vergessene Schritt ist D8: das Containment wieder zurückzunehmen. <em>(Modul 6)</em>',
+        '<strong>13. Im Anlauf ist die Sonderfreigabequote die ehrlichste Kennzahl.</strong> Sie muss sichtbar fallen. Wiederholte Sonderfreigaben für dasselbe Merkmal sind eine verdeckte Spezifikationsänderung. <em>(Modul 7)</em>'
       ]
     },
 
@@ -59,15 +60,16 @@ window.APP_DATA.kompakt = {
         zeilen: [
           ['RMS-Wellenfrontfehler', 'Abweichung von der Sollwellenfront', 'beugungsbegrenzt ab ≤ 0,071 λ; Lithografie im Milli-λ-Bereich', '1'],
           ['Strehl-Verhältnis', 'erreichte gegen ideale Spitzenintensität', '≥ 0,8 entspricht dem Maréchal-Kriterium', '1'],
-          ['%GRR (Toleranz)', 'Anteil der Messstreuung an der Toleranz', '&lt; 10 % fähig · 10–30 % bedingt · &gt; 30 % nicht fähig', '2'],
-          ['ndc', 'unterscheidbare Kategorien des Messsystems', '≥ 5', '2'],
-          ['Cp', 'Streuung gegen Toleranzbreite', '≥ 1,33', '3'],
-          ['Cpk', 'Streuung und Lage', '≥ 1,33; Cp ≫ Cpk heißt außermittig', '3'],
-          ['ARL₀', 'Stichproben bis zum Fehlalarm', '≈ 370 bei Regel 1 · ≈ 90 mit Western Electric 1–4', '3'],
-          ['First Pass Yield', 'Anteil ohne Nacharbeit', 'so hoch wie möglich — wirkt multiplikativ am Engpass', '4'],
-          ['Flusseffizienz', 'Bearbeitungszeit / Durchlaufzeit', 'in der Montage oft einstellig — der Rest ist Warten', '4'],
-          ['Auslastung am Engpass', 'Belegungsgrad', 'über 90 % explodiert die Wartezeit', '4'],
-          ['Sonderfreigabequote', 'Anteil befristet freigegebener Teile', 'muss über den Anlauf sichtbar fallen', '6']
+          ['%GRR (Toleranz)', 'Anteil der Messstreuung an der Toleranz', '&lt; 10 % fähig · 10–30 % bedingt · &gt; 30 % nicht fähig', '3'],
+          ['ndc', 'unterscheidbare Kategorien des Messsystems', '≥ 5', '3'],
+          ['Cp', 'Streuung gegen Toleranzbreite', '≥ 1,33', '4'],
+          ['Cpk', 'Streuung und Lage', '≥ 1,33; Cp ≫ Cpk heißt außermittig', '4'],
+          ['ARL₀', 'Stichproben bis zum Fehlalarm', '≈ 370 bei Regel 1 · ≈ 90 mit Western Electric 1–4', '4'],
+          ['First Pass Yield', 'Anteil ohne Nacharbeit', 'so hoch wie möglich — wirkt multiplikativ am Engpass', '5'],
+          ['Flusseffizienz', 'Bearbeitungszeit / Durchlaufzeit', 'in der Montage oft einstellig — der Rest ist Warten', '5'],
+          ['Auslastung am Engpass', 'Belegungsgrad', 'über 90 % explodiert die Wartezeit', '5'],
+          ['Budget je Spiegel', 'zulässiger Beitrag bei n Elementen', 'Systembudget / √n — nicht / n', '2'],
+          ['Sonderfreigabequote', 'Anteil befristet freigegebener Teile', 'muss über den Anlauf sichtbar fallen', '7']
         ]
       }
     },
@@ -85,6 +87,8 @@ window.APP_DATA.kompakt = {
           text: 'Worst Case ist immer sicher, aber oft unnötig teuer. RSS setzt unabhängige, zufällige, zentrierte Beiträge voraus — im Anlauf meist noch nicht belegt, weil alles aus einer Vorserienfertigung stammt. Angreifen sollte man ohnehin den Beitrag mit dem größten t·s, und Empfindlichkeit senken schlägt Toleranz verengen.' },
         { titel: 'Freigeben an der Toleranzgrenze?',
           text: 'Liegt der Messwert im Unsicherheitsband, ist weder Konformität noch Nichtkonformität belegt. „Innerhalb der Unsicherheit, also gut" ist genauso falsch wie „drüber, also Ausschuss". Der saubere Weg ist Absicherung oder eine bewusste, dokumentierte Sonderfreigabe.' },
+        { titel: 'Refraktiv oder reflektiv?',
+          text: 'Die Methodik ist identisch, die Physik nicht. Reflektiv gilt: Kippwinkel wirkt doppelt (2α), keine gemeinsame Achse und keine Rotationssymmetrie, Toleranzen in Pikometern statt Nanometern, Vakuum und Kontamination als zusätzliche Störgrößen. Was gleich bleibt: Spannung erzeugt Astigmatismus, Lagefehler erzeugen Koma, rotationssymmetrische Fehler sind durch Lagejustage nicht korrigierbar.' },
         { titel: 'Wo ansetzen im Wertstrom?',
           text: 'Nur der Engpass bestimmt den Durchsatz. Reihenfolge der Hebel: Nacharbeit senken, Verfügbarkeit erhöhen, Zykluszeit reduzieren, zuletzt Kapazität zukaufen. Verbesserung außerhalb des Engpasses erzeugt nur Bestand — und damit längere Durchlaufzeiten.' }
       ]

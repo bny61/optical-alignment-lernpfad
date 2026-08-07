@@ -372,7 +372,7 @@
       '',
       'Jedes Modul wird einzeln montiert, justiert und',
       'geprüft — genau das ist der Wertstromabschnitt',
-      'aus Modul 4.'
+      'aus Modul 5.'
     ].forEach(function (z, i) {
       if (z) svg.appendChild(txt(436, 220 + i * 12, z, { 'font-size': 9.5 }));
     });
@@ -645,6 +645,94 @@
     svg.appendChild(txt(36, 308, 'Flusseffizienz = Bearbeitungszeit / Durchlaufzeit = ' +
       (anteil * 100).toFixed(0) + ' %  (maßstäblich dargestellt, anders als die Zeitlinie oben)',
       { 'font-size': 10, fill: 'var(--bad)' }));
+
+    return svg;
+  };
+
+  /* ═══════════ Figur 9: gefalteter Strahlengang im EUV-Objektiv ═══════════ */
+
+  FIGS.euvpfad = function () {
+    var svg = svgRoot(720, 440, 'Gefalteter Strahlengang durch sechs Spiegel und die Verdopplung des Kippwinkels bei Reflexion');
+
+    /* ---- linke Hälfte: die gefaltete Anordnung ---- */
+    var links = 84, rechts = 372;
+    var spiegel = [
+      { n: 'M1', x: links,  y: 104, dreh: -28 },
+      { n: 'M2', x: rechts, y: 158, dreh: 28 },
+      { n: 'M3', x: links,  y: 216, dreh: -28 },
+      { n: 'M4', x: rechts, y: 272, dreh: 28 },
+      { n: 'M5', x: links,  y: 328, dreh: -28 },
+      { n: 'M6', x: rechts, y: 380, dreh: 28 }
+    ];
+
+    // Retikel und Wafer
+    svg.appendChild(S('rect', { x: 168, y: 40, width: 124, height: 11, fill: 'var(--surface-2)', stroke: 'var(--text)', 'stroke-width': 1.4 }));
+    svg.appendChild(txt(230, 34, 'Retikel (reflektiv)', { 'text-anchor': 'middle', 'font-size': 9.5 }));
+    svg.appendChild(S('rect', { x: 168, y: 410, width: 124, height: 11, rx: 2, fill: 'var(--surface-2)', stroke: 'var(--text)', 'stroke-width': 1.4 }));
+    svg.appendChild(txt(230, 434, 'Wafer', { 'text-anchor': 'middle', 'font-size': 9.5 }));
+
+    // Strahlengang
+    var punkte = [[230, 51]].concat(spiegel.map(function (m) { return [m.x, m.y]; })).concat([[230, 410]]);
+    var d = punkte.map(function (p, i) { return (i ? 'L' : 'M') + p[0] + ' ' + p[1]; }).join(' ');
+    svg.appendChild(S('path', { d: d, fill: 'none', stroke: 'var(--bad)', 'stroke-width': 1.6, opacity: .75 }));
+
+    // Spiegel als gekrümmte Segmente
+    spiegel.forEach(function (m) {
+      var g = S('g', { transform: 'rotate(' + m.dreh + ' ' + m.x + ' ' + m.y + ')' });
+      g.appendChild(S('path', {
+        d: 'M' + (m.x - 26) + ' ' + (m.y + 5) + ' Q' + m.x + ' ' + (m.y - 7) + ' ' + (m.x + 26) + ' ' + (m.y + 5),
+        fill: 'none', stroke: 'var(--accent)', 'stroke-width': 4.5, 'stroke-linecap': 'round'
+      }));
+      svg.appendChild(g);
+      svg.appendChild(label(m.x + (m.x === links ? -38 : 38), m.y + 4, m.n, { 'text-anchor': 'middle', 'font-size': 10.5 }));
+    });
+
+    svg.appendChild(S('rect', { x: 46, y: 60, width: 368, height: 344, rx: 8, fill: 'none',
+      stroke: 'var(--text-mute)', 'stroke-width': 1, 'stroke-dasharray': '5 4', opacity: .55 }));
+    svg.appendChild(txt(58, 368, 'Vakuum · außeraxiale Anordnung', { 'font-size': 9.5 }));
+    svg.appendChild(txt(58, 381, '6 Spiegel × 6 Freiheitsgrade = 36 Stellgrößen', { 'font-size': 9.5 }));
+
+    /* ---- rechte Hälfte: die 2α-Regel ---- */
+    svg.appendChild(box(452, 40, 244, 202, { fill: 'var(--surface)' }));
+    svg.appendChild(label(574, 62, 'Die Regel, die alles ändert', { 'text-anchor': 'middle' }));
+
+    var mx = 574, my = 186;
+    // Spiegel in Soll-Lage
+    svg.appendChild(S('line', { x1: mx - 54, y1: my, x2: mx + 54, y2: my, stroke: 'var(--accent)', 'stroke-width': 4, 'stroke-linecap': 'round' }));
+    // verkippter Spiegel
+    svg.appendChild(S('line', {
+      x1: mx - 54, y1: my + 9, x2: mx + 54, y2: my - 9,
+      stroke: 'var(--bad)', 'stroke-width': 2.2, 'stroke-dasharray': '5 3', 'stroke-linecap': 'round'
+    }));
+    // einfallender Strahl
+    svg.appendChild(S('line', { x1: mx - 52, y1: my - 62, x2: mx, y2: my, stroke: 'var(--text-mute)', 'stroke-width': 1.6, 'marker-end': 'url(#fig-arrow)' }));
+    // Soll-Reflex
+    svg.appendChild(S('line', { x1: mx, y1: my, x2: mx + 52, y2: my - 62, stroke: 'var(--text-mute)', 'stroke-width': 1.6 }));
+    // abgelenkter Reflex
+    svg.appendChild(S('line', { x1: mx, y1: my, x2: mx + 24, y2: my - 70, stroke: 'var(--bad)', 'stroke-width': 2 }));
+    svg.appendChild(S('path', { d: 'M' + (mx + 37) + ' ' + (my - 44) + ' A60 60 0 0 0 ' + (mx + 18) + ' ' + (my - 52),
+      fill: 'none', stroke: 'var(--bad)', 'stroke-width': 1.4 }));
+    svg.appendChild(txt(mx + 44, my - 34, '2α', { fill: 'var(--bad)', 'font-weight': 600, 'font-size': 12 }));
+    svg.appendChild(txt(mx - 42, my + 22, 'α', { fill: 'var(--bad)', 'font-weight': 600, 'font-size': 12 }));
+    svg.appendChild(txt(574, 86, 'Spiegel um α gekippt', { 'text-anchor': 'middle', 'font-size': 9.5 }));
+    svg.appendChild(txt(574, 98, '→ Strahl um 2α abgelenkt', { 'text-anchor': 'middle', 'font-size': 9.5, fill: 'var(--bad)' }));
+    svg.appendChild(txt(574, 230, 'Bei einer Linse wirkt die Verkippung einfach.', { 'text-anchor': 'middle', 'font-size': 9 }));
+
+    /* ---- rechte Hälfte unten: Folgen ---- */
+    svg.appendChild(box(452, 256, 244, 148, { fill: 'var(--ok-sf)', stroke: 'var(--ok)' }));
+    svg.appendChild(label(468, 278, 'Was daraus folgt', { fill: 'var(--ok)' }));
+    [
+      'Winkelempfindlichkeit doppelt so hoch',
+      'wie bei refraktiven Elementen.',
+      '',
+      'Kein Luftabstand, keine Glasdaten —',
+      'stattdessen Flächenform und Schicht.',
+      '',
+      'Toleranzen in Pikometern statt',
+      'Nanometern: 1 mλ = 13,5 pm.'
+    ].forEach(function (z, i) {
+      if (z) svg.appendChild(txt(468, 297 + i * 13, z, { 'font-size': 9.5 }));
+    });
 
     return svg;
   };

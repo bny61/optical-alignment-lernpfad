@@ -52,4 +52,8 @@ window.APP_DATA.glossar = [
   { de: 'Streulicht', en: 'flare / scattered light', def: 'Licht, das durch Welligkeit im mittleren Ortsfrequenzband aus dem Bild gestreut wird. Senkt den Kontrast flächig, ohne die Figurspezifikation zu verletzen.' },
   { de: 'Ionenstrahlfiguren', en: 'ion beam figuring (IBF)', def: 'Deterministisches Korrekturverfahren: Ein Ionenstrahl trägt ortsaufgelöst genau dort Material ab, wo die Messung einen Überstand zeigt. Zusammen mit MRF der Kern der EUV-Spiegelfertigung.' },
   { de: 'Magnetorheologisches Polieren', en: 'magnetorheological finishing (MRF)', def: 'Politur mit einer Flüssigkeit, deren Viskosität ein Magnetfeld steuert. Erzeugt ein exakt geformtes, ortsaufgelöst dosierbares Werkzeug.' },
+  { de: 'Freiformfläche', en: 'freeform surface', def: 'Optische Fläche ohne Symmetrieachse. In EUV-Objektiven der Regelfall; erschwert Fertigung, Prüfung und Justage, weil keine Symmetrie zur Ausrichtung genutzt werden kann.' },
+  { de: 'Anamorphotische Abbildung', en: 'anamorphic imaging', def: 'Unterschiedliche Verkleinerung in x und y (bei High-NA 4×/8×). Nötig, weil bei großen Einfallswinkeln der Kontrast in einer Richtung einbricht — halbiert das Belichtungsfeld.' },
+  { de: 'Fehlerbudget', en: 'error budget', def: 'Aufteilung eines Systemgrenzwerts auf die Einzelbeiträge. Bei unabhängigen Beiträgen quadratisch: Bei n gleichen Beiträgen darf jeder Budget/√n groß sein, nicht Budget/n.' },
+  { de: 'Beugungsbegrenzt', en: 'diffraction limited', def: 'Ein System, dessen Abbildungsleistung nur noch durch Beugung und nicht mehr durch Aberrationen begrenzt ist — nach Maréchal ab RMS ≤ λ/14. Für Lithografie bei weitem nicht ausreichend.' }
 ];

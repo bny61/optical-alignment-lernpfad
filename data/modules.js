@@ -127,7 +127,7 @@ window.APP_DATA.module = [
       callout: {
         typ: 'ok',
         titel: 'Die Analogie zur Prozessarbeit',
-        text: 'Das ist derselbe Gedanke wie die Trennung von Lage und Streuung bei Cp und Cpk (Modul 3): Eine einzelne Kennzahl kann gut aussehen und trotzdem das falsche Problem verdecken. Wer nur den RMS-Wert der Figur betrachtet, sieht ein Streulichtproblem erst beim Kunden.'
+        text: 'Das ist derselbe Gedanke wie die Trennung von Lage und Streuung bei Cp und Cpk (Modul 4): Eine einzelne Kennzahl kann gut aussehen und trotzdem das falsche Problem verdecken. Wer nur den RMS-Wert der Figur betrachtet, sieht ein Streulichtproblem erst beim Kunden.'
       }
     },
 
@@ -137,10 +137,10 @@ window.APP_DATA.module = [
         'Aus dem Systemkontext folgen unmittelbar die Randbedingungen, unter denen die restlichen sechs Module stehen:'
       ],
       bullets: [
-        '<strong>Kleinserie mit extremem Stückwert.</strong> Von diesen Systemen werden weltweit einige Dutzend pro Jahr gebaut. Ausschuss ist praktisch keine Option, Nacharbeit ist der Normalfall — die Kapazitätsrechnung in Modul 4 folgt direkt daraus.',
-        '<strong>Statistik ist knapp.</strong> Prozessfähigkeit nach klassischem Cpk lässt sich mit einstelligen Stückzahlen kaum belegen. Das ist die Kernschwierigkeit im Anlauf (Modul 6).',
-        '<strong>Der Kunde ist ein Systemintegrator.</strong> Das Modul wird nicht an einen Chiphersteller geliefert, sondern an den Scanner-Hersteller, der es in seine Maschine integriert. Er misst unter <em>seinen</em> Bedingungen — Aufspannung, Lage, Zeitpunkt — und genau daraus entsteht der Reklamationsfall in Modul 5.',
-        '<strong>Die Messtechnik ist selbst Hochtechnologie.</strong> Wer Pikometer spezifiziert, muss zuerst beweisen, dass er sie messen kann. Deshalb steht die Messsystemanalyse in Modul 2 vor jeder Prozessbewertung.',
+        '<strong>Kleinserie mit extremem Stückwert.</strong> Von diesen Systemen werden weltweit einige Dutzend pro Jahr gebaut. Ausschuss ist praktisch keine Option, Nacharbeit ist der Normalfall — die Kapazitätsrechnung in Modul 5 folgt direkt daraus.',
+        '<strong>Statistik ist knapp.</strong> Prozessfähigkeit nach klassischem Cpk lässt sich mit einstelligen Stückzahlen kaum belegen. Das ist die Kernschwierigkeit im Anlauf (Modul 7).',
+        '<strong>Der Kunde ist ein Systemintegrator.</strong> Das Modul wird nicht an einen Chiphersteller geliefert, sondern an den Scanner-Hersteller, der es in seine Maschine integriert. Er misst unter <em>seinen</em> Bedingungen — Aufspannung, Lage, Zeitpunkt — und genau daraus entsteht der Reklamationsfall in Modul 6.',
+        '<strong>Die Messtechnik ist selbst Hochtechnologie.</strong> Wer Pikometer spezifiziert, muss zuerst beweisen, dass er sie messen kann. Deshalb steht die Messsystemanalyse in Modul 3 vor jeder Prozessbewertung.',
         '<strong>Jede Störgröße zählt.</strong> Temperaturgradienten, Vibration, Kontamination und sogar die Schwerkraftdurchbiegung der Fassung liegen in derselben Größenordnung wie die Toleranz — daher der Aufwand für Umgebung und Handhabung aus Modul 1.'
       ],
       callout: {
@@ -216,7 +216,7 @@ window.APP_DATA.module = [
         'Weil sich die Schichtdicke im Betrieb noch verändert.'
       ],
       richtig: 0,
-      erklaerung: 'Ein Stapel aus 40 bis 50 Doppellagen bringt Eigenspannung ein und verändert die zuvor mühsam korrigierte Fläche. Deshalb ist der Zustand nach dem Beschichten der maßgebliche — dasselbe Muster wie beim Setzverhalten nach dem Verkleben in der Montage (Modul 1 und Modul 5).'
+      erklaerung: 'Ein Stapel aus 40 bis 50 Doppellagen bringt Eigenspannung ein und verändert die zuvor mühsam korrigierte Fläche. Deshalb ist der Zustand nach dem Beschichten der maßgebliche — dasselbe Muster wie beim Setzverhalten nach dem Verkleben in der Montage (Modul 1 und Modul 6).'
     },
     {
       frage: 'Warum ist die klassische Prozessfähigkeitsrechnung in dieser Fertigung schwierig?',
@@ -227,7 +227,7 @@ window.APP_DATA.module = [
         'Weil die Merkmale nicht normalverteilt sind.'
       ],
       richtig: 1,
-      erklaerung: 'Cpk ist eine statistische Kenngröße und braucht Stückzahlen. Bei einer Fertigung im zweistelligen Jahresbereich ist das Vertrauensintervall so breit, dass die Punktschätzung wenig aussagt — die zentrale Schwierigkeit im Anlauf, die Modul 6 behandelt.'
+      erklaerung: 'Cpk ist eine statistische Kenngröße und braucht Stückzahlen. Bei einer Fertigung im zweistelligen Jahresbereich ist das Vertrauensintervall so breit, dass die Punktschätzung wenig aussagt — die zentrale Schwierigkeit im Anlauf, die Modul 7 behandelt.'
     }
   ]
 },
@@ -261,7 +261,7 @@ window.APP_DATA.module = [
       callout: {
         typ: 'job',
         titel: 'Warum das für die Rolle zählt',
-        text: 'Die Justage ist in der Regel der Engpass des Wertstromabschnitts (Modul 4) und der Ort, an dem Prozessstreuung entsteht (Modul 3). Wer die physikalische Kopplung nicht versteht, optimiert an der falschen Station.'
+        text: 'Die Justage ist in der Regel der Engpass des Wertstromabschnitts (Modul 5) und der Ort, an dem Prozessstreuung entsteht (Modul 4). Wer die physikalische Kopplung nicht versteht, optimiert an der falschen Station.'
       }
     },
 
@@ -273,9 +273,9 @@ window.APP_DATA.module = [
       grafik: 'messplatz',
       grafikText: '<strong>Abb. 1 — Der Messplatz.</strong> Der Laserstrahl läuft durch die Referenzfläche, durch das Modul auf den Planspiegel und denselben Weg zurück (Doppelpass). Die Interferenz zwischen Referenz- und Prüfwelle ergibt das Interferogramm. Alles steht auf einem luftgelagerten Tisch in temperierter Umgebung — bei Messgrößen im Nanometerbereich sind Trittschall, ein Temperaturgradient über dem Tisch oder eine offene Tür bereits Störgrößen.',
       bullets: [
-        '<strong>Eine Messung dauert.</strong> Es wird über viele Interferogramme gemittelt, um Luftturbulenz herauszurechnen. Dazu kommt die Einschwingzeit nach jeder Verstellung. Ein Justagedurchlauf ist eine Sache von Minuten bis Stunden, nicht von Sekunden — deshalb ist die Justage im Wertstrom typischerweise der Engpass (Modul 4).',
+        '<strong>Eine Messung dauert.</strong> Es wird über viele Interferogramme gemittelt, um Luftturbulenz herauszurechnen. Dazu kommt die Einschwingzeit nach jeder Verstellung. Ein Justagedurchlauf ist eine Sache von Minuten bis Stunden, nicht von Sekunden — deshalb ist die Justage im Wertstrom typischerweise der Engpass (Modul 5).',
         '<strong>Der Mensch bedient, der Rechner entscheidet die Richtung.</strong> Aus der gemessenen Zernike-Zerlegung berechnet die Software über die Empfindlichkeitsmatrix, welche Stellgröße wie weit fahren muss. Ohne diese Rechnung würde man in einem gekoppelten System endlos im Kreis justieren.',
-        '<strong>Am Ende wird fixiert — und das verändert das Ergebnis.</strong> Verkleben, Verschrauben oder Verspannen bringt Kräfte in die Fassung ein. Deshalb wird nach dem Aushärten erneut gemessen; genau dieses Setzverhalten ist die Ursache im Reklamationsfall in Modul 5.',
+        '<strong>Am Ende wird fixiert — und das verändert das Ergebnis.</strong> Verkleben, Verschrauben oder Verspannen bringt Kräfte in die Fassung ein. Deshalb wird nach dem Aushärten erneut gemessen; genau dieses Setzverhalten ist die Ursache im Reklamationsfall in Modul 6.',
         '<strong>Handhabung ist Risiko.</strong> Jedes Umspannen und jeder zusätzliche Prüfschritt bedeutet Kontaminations- und Beschädigungsrisiko an Bauteilen mit hohem Wert. „Nochmal messen" ist nie kostenlos.'
       ]
     },
@@ -415,10 +415,199 @@ window.APP_DATA.module = [
   ]
 },
 
-/* ═══════════════════════════ MODUL 2 ═══════════════════════════ */
+/* ═══════════════════════ MODUL 2 (EUV) ═══════════════════════ */
+{
+  id: 'euv',
+  nr: 2,
+  titel: 'Justage im EUV-System',
+  kurz: 'Was sich ändert, wenn Spiegel an die Stelle von Linsen treten: doppelte Winkelempfindlichkeit, gefaltete Geometrie, Pikometer statt Milli-λ — und ein Fehlerbudget über sechs Elemente.',
+  ziel: 'Sie können begründen, warum ein reflektives System andere Justageanforderungen stellt als ein refraktives, und ein Wellenfrontbudget über mehrere Spiegel aufteilen.',
+  jobBezug: 'Ob eine Rolle an DUV- oder EUV-Optik arbeitet, ist oft nicht vorab festgelegt — beide Technologien laufen parallel. Die Methodik der Module 3 bis 7 gilt für beide unverändert; was sich unterscheidet, ist die Physik der Baugruppe. Wer die Unterschiede benennen kann, zeigt Systemverständnis über die eigene Baureihe hinaus.',
+  sim: 'budget',
+  simTitel: 'Simulation: Fehlerbudget über sechs Spiegel',
+  simIntro: 'Verteilen Sie ein Systembudget von 250 pm auf die Beiträge. Beobachten Sie zuerst, was ein zusätzlicher Spiegel bewirkt — und versuchen Sie dann, das Budget einzuhalten, indem Sie den <em>kleinsten</em> Beitrag verbessern. Es gelingt nicht: Bei quadratischer Addition zählt nur der größte.',
+  begriffe: ['Vielschichtspiegel', 'Freiformfläche', 'Anamorphotische Abbildung', 'Numerische Apertur', 'RSS-Methode'],
+
+  abschnitte: [
+    {
+      h: 'Warum Spiegel alles ändern',
+      p: [
+        'Modul 1 hat die Justage am refraktiven Fall entwickelt: Linsen in einem Tubus, Dezentrierung, Verkippung, Luftabstand. Die Denkweise überträgt sich vollständig auf ein Spiegelsystem — die Zahlen und die Geometrie tun es nicht.',
+        'Der wichtigste Unterschied steckt in einer einzigen geometrischen Tatsache: Wird ein Spiegel um den Winkel α verkippt, ändert sich die Richtung des reflektierten Strahls um <strong>2α</strong>. Bei einer Linse wirkt dieselbe Verkippung nur einfach. Die Winkelempfindlichkeit ist im reflektiven System also von vornherein doppelt so hoch.'
+      ],
+      grafik: 'euvpfad',
+      grafikText: '<strong>Abb. 1 — Gefalteter Strahlengang und die 2α-Regel.</strong> Links die typische Anordnung: Das Licht läuft vom reflektiven Retikel über sechs Spiegel zum Wafer, alles im Vakuum. Rechts die Regel, aus der die verschärften Anforderungen folgen. Schematisch — reale Anordnungen sind außeraxial und dreidimensional gefaltet.',
+      tabelle: {
+        kopf: ['', 'Refraktiv (DUV, 193 nm)', 'Reflektiv (EUV, 13,5 nm)'],
+        zeilen: [
+          ['Element', 'Linse aus Quarzglas oder CaF₂', 'Spiegel mit Mo/Si-Vielschicht'],
+          ['Wirkung einer Verkippung α', 'einfach', '<strong>doppelt (2α)</strong>'],
+          ['Bauteilkennwerte', 'Radius, Mittendicke, Brechzahl', 'Flächenform, Schichtdickenprofil'],
+          ['Anordnung', 'gestapelt im Tubus, eine Achse', 'gefaltet, außeraxial, keine gemeinsame Achse'],
+          ['Axiale Stellgröße', 'Luftabstand zwischen Elementen', 'Position im Raum, sechs gekoppelte Freiheitsgrade'],
+          ['Halterung', 'Fassung mit Klebespalt', 'spannungsarme Festkörpergelenke'],
+          ['1 mλ entspricht', '0,19 nm', '13,5 pm'],
+          ['Umgebung', 'Reinraum, temperiert', 'Vakuum, zusätzlich Kontaminationskontrolle']
+        ],
+        fuss: 'Was gleich bleibt: Montagespannung erzeugt Astigmatismus, Lagefehler erzeugen Koma, und rotationssymmetrische Fehler lassen sich durch Lagejustage nicht kompensieren. Die Diagnoselogik aus Modul 1 gilt unverändert.'
+      }
+    },
+
+    {
+      h: 'Die Geometrie: gefaltet statt gestapelt',
+      p: [
+        'Ein refraktives Objektiv hat eine optische Achse, entlang derer alle Elemente sitzen. Das macht die Justage überschaubar: Dezentrierung und Verkippung sind auf diese Achse bezogen, und die Rotationssymmetrie reduziert die Zahl der wirksamen Freiheitsgrade.',
+        'Ein EUV-Objektiv hat diese Achse nicht. Sechs Spiegel stehen außeraxial im Raum, jeder mit sechs Freiheitsgraden — 36 Stellgrößen, die alle auf dieselbe Wellenfront wirken. Hinzu kommt, dass die Flächen Freiformen sind: Sie besitzen keine Symmetrieachse, an der man ausrichten könnte.'
+      ],
+      bullets: [
+        '<strong>Die Empfindlichkeitsmatrix wird groß.</strong> Aus Modul 1 kennen Sie a = S·x + a₀. Hier hat x 36 Einträge, und viele Stellgrößen wirken ähnlich — die Matrix ist schlecht konditioniert. Praktisch heißt das: Es gibt mehrere Kombinationen, die fast dasselbe Ergebnis liefern, und die Korrekturrechnung muss zusätzlich Nebenbedingungen berücksichtigen.',
+        '<strong>Rotation um die eigene Achse wird relevant.</strong> Bei einer rotationssymmetrischen Linse ist sie bedeutungslos, bei einer Freiform nicht.',
+        '<strong>Referenzflächen ersetzen die Achse.</strong> Ausgerichtet wird gegen mechanische und optische Referenzen am Spiegel, die bei der Fertigung mit der Fläche zusammen vermessen wurden.',
+        '<strong>Schwerkraft wird zur Störgröße.</strong> Große, schwere Spiegel verformen sich unter dem eigenen Gewicht messbar — und im Betrieb liegt die Baugruppe anders als bei der Messung.'
+      ]
+    },
+
+    {
+      h: 'Das Fehlerbudget über mehrere Spiegel',
+      p: [
+        'Die praktisch wichtigste Rechnung dieses Moduls. Jeder Spiegel trägt zum Wellenfrontfehler des Systems bei: über seine Flächenform, seine Lage und seine thermische Verformung. Diese Beiträge sind weitgehend unabhängig und addieren sich deshalb quadratisch — dieselbe RSS-Logik wie bei der Toleranzkette in Modul 7.'
+      ],
+      formel: 'je Spiegel:   σᵢ = √( Form² + (Kippung · s_kipp)² + (Dezentrierung · s_dez)² )\n\nSystem:       σ_ges = √( n · σᵢ² + Drift² )\n\nUmkehrung:    erlaubt je Spiegel = √( (Budget² − Drift²) / n )\n\n<span class="fx-note">Bei n Spiegeln wird das Budget durch √n geteilt, nicht durch n.</span>',
+      callout: {
+        typ: 'bad',
+        titel: 'Warum ein zusätzlicher Spiegel so teuer ist',
+        text: 'Der Schritt von sechs auf sieben Spiegel verschärft die Anforderung an <em>jeden einzelnen</em> um den Faktor √(7/6) ≈ 1,08. Bei einem Restformfehler von 50 pm bedeutet das rund 4 pm weniger — in einem Bereich, in dem jedes Pikometer zusätzliche Korrekturschleifen kostet. Deshalb ist die Zahl der Spiegel eine der teuersten Designentscheidungen überhaupt, und deshalb wird sie mit jedem Reflexionsverlust doppelt bezahlt: weniger Licht <em>und</em> engere Toleranzen.'
+      }
+    },
+
+    {
+      h: 'Umgebung: Vakuum, Wärme, Kontamination',
+      p: [
+        'Die Betriebsbedingungen verschärfen die Aufgabe zusätzlich, und zwar in einer für die Fertigung unangenehmen Richtung: Alle drei Punkte betreffen die Frage, ob der Zustand bei der Messung dem Zustand im Betrieb entspricht.'
+      ],
+      karten: [
+        { titel: 'Vakuum',
+          text: 'Gut für die Messung — keine Luftturbulenz, kein Brechzahlgradient. Schlecht für die Wärme: Ohne Luft gibt es keine Konvektion, die Spiegel geben ihre Wärme praktisch nur über Strahlung und die Halterung ab. Und der Übergang zwischen Luft und Vakuum verändert die Baugruppe messbar.' },
+        { titel: 'Thermische Verformung',
+          text: 'Jeder Spiegel absorbiert etwa 30 % der auftreffenden Leistung. Bei einem Substrat mit nahezu verschwindender Wärmeausdehnung bleibt trotzdem eine Restverformung — und sie ist ortsabhängig, weil das Beleuchtungsfeld nicht die ganze Fläche trifft. Deshalb gehört die thermische Drift als eigener Posten ins Budget.' },
+        { titel: 'Kontamination',
+          text: 'EUV-Strahlung spaltet Kohlenwasserstoffreste auf der Oberfläche auf; es wächst eine Kohlenstoffschicht, die den Reflexionsgrad senkt. Auch oxidiert die oberste Schicht. Beides zwingt zu Sauberkeitsanforderungen weit über dem üblichen Reinraum — jeder zusätzliche Handhabungsschritt in der Montage ist damit nicht nur ein Beschädigungs-, sondern ein Degradationsrisiko.' },
+        { titel: 'Zustand bei Messung ≠ Zustand im Betrieb',
+          text: 'Andere Lage im Schwerefeld, andere Temperatur, anderer Druck. Das ist derselbe Mechanismus wie das Setzverhalten aus dem Reklamationsfall in Modul 6 — nur systematisch statt zufällig. Die Konsequenz ist dieselbe: Der Prüfzustand muss dem Einsatzzustand nachweisbar entsprechen, sonst misst man etwas anderes als der Kunde.' }
+      ]
+    },
+
+    {
+      h: 'Messtechnik: warum überwiegend im Sichtbaren gemessen wird',
+      p: [
+        'Naheliegend wäre, bei der Betriebswellenlänge zu messen. Praktisch ist das aufwendig: Eine EUV-Quelle mit ausreichender Stabilität für Interferometrie ist keine Werkstattausrüstung, und die Messung müsste im Vakuum stattfinden.',
+        'Deshalb läuft die Fertigungsmesstechnik überwiegend mit sichtbarem Licht — interferometrisch gegen computergenerierte Hologramme, die die Freiformwellenfront als Referenz erzeugen. Prüfungen bei Betriebswellenlänge kommen ergänzend hinzu, vor allem für Reflexionsgrad und Schichtqualität.'
+      ],
+      callout: {
+        typ: 'warn',
+        titel: 'Die Lücke, die daraus entsteht',
+        text: 'Wer bei 633 nm misst und bei 13,5 nm betreibt, erfasst nicht alles. Insbesondere die Rauheit im hohen Ortsfrequenzbereich (Einordnungsmodul) wirkt bei 13,5 nm auf den Reflexionsgrad, ist im Sichtbaren aber praktisch unsichtbar. Deshalb die getrennten Spezifikationen für die drei Ortsfrequenzbänder — und deshalb ist die Frage „misst unser Verfahren überhaupt, was der Kunde später sieht?" hier keine Formalie, sondern die zentrale Frage der Messsystemanalyse aus Modul 3.'
+      }
+    },
+
+    {
+      h: 'High-NA im Besonderen',
+      p: [
+        'Der Schritt von NA 0,33 auf 0,55 ist keine bloße Vergrößerung. Er zieht eine Reihe von Änderungen nach sich, die sich unmittelbar in der Montage niederschlagen:'
+      ],
+      tabelle: {
+        kopf: ['Änderung', 'Grund', 'Folge für die Montage'],
+        zeilen: [
+          ['Anamorphotische Abbildung 4× / 8×', 'bei großen Winkeln sinkt der Kontrast in einer Richtung stark', 'Das System ist in x und y unterschiedlich — Symmetrieannahmen der Justage entfallen'],
+          ['Halbiertes Belichtungsfeld', 'Folge der 8×-Verkleinerung in einer Richtung', 'mehr Belichtungen je Wafer, Durchsatz wird noch kritischer'],
+          ['Deutlich größere Spiegel', 'größere Apertur bei gleicher Baulänge', 'Schwerkraftdurchbiegung, Handhabung, Fertigungsdauer der Flächen'],
+          ['Steilere Einfallswinkel', 'größerer Winkelbereich am Spiegel', 'Schichtperiode muss stärker lateral abgestuft werden'],
+          ['Kleinere Schärfentiefe', 'DOF sinkt mit 1/NA²', 'Fokuslage und Defokusanteil werden noch enger toleriert']
+        ],
+        fuss: 'Öffentlich bekannte Eckdaten. Die Grundphysik ist dieselbe wie bei NA 0,33 — nur wird jede Toleranz enger und jede Störgröße relevanter.'
+      },
+      callout: {
+        typ: 'job',
+        titel: 'Was das für die Rolle bedeutet',
+        text: 'Die Methodik der folgenden Module ändert sich durch all das nicht. Messsystemanalyse, Regelkarte, Wertstrom, 8D und Toleranzkette funktionieren identisch — nur die Zahlen und die Empfindlichkeiten sind andere. Genau das ist die übertragbare Kompetenz: Wer die Methodik beherrscht und die Physik der jeweiligen Baugruppe versteht, kann zwischen den Technologien wechseln.'
+      }
+    }
+  ],
+
+  quiz: [
+    {
+      frage: 'Ein Spiegel wird um 100 nrad verkippt. Um welchen Winkel ändert sich die Richtung des reflektierten Strahls?',
+      optionen: [
+        'Um 100 nrad — die Verkippung überträgt sich unverändert.',
+        'Um 200 nrad, weil sich bei Reflexion der Winkel verdoppelt.',
+        'Um 50 nrad, da sich die Wirkung auf Einfalls- und Ausfallswinkel aufteilt.',
+        'Das hängt vom Einfallswinkel ab und lässt sich nicht allgemein angeben.'
+      ],
+      richtig: 1,
+      erklaerung: 'Bei Reflexion an einer um α gekippten Fläche ändert sich die Strahlrichtung um 2α — unabhängig vom Einfallswinkel. Deshalb ist die Winkelempfindlichkeit eines Spiegelsystems von vornherein doppelt so hoch wie die eines refraktiven Systems, und Justagerestfehler in der Verkippung wiegen entsprechend schwerer.'
+    },
+    {
+      frage: 'Ein System hat sechs Spiegel und ein Wellenfrontbudget von 240 pm. Thermische Drift belegt davon 0. Wie viel darf ein einzelner Spiegel beitragen?',
+      optionen: [
+        '40 pm — das Budget geteilt durch sechs.',
+        'Rund 98 pm — das Budget geteilt durch √6.',
+        '240 pm, da das Budget für jeden Spiegel einzeln gilt.',
+        '120 pm — das Budget geteilt durch zwei.'
+      ],
+      richtig: 1,
+      erklaerung: 'Unabhängige Beiträge addieren sich quadratisch: σ_ges = σᵢ·√n. Umgestellt ergibt sich σᵢ = 240/√6 ≈ 98 pm. Durch n zu teilen wäre die Worst-Case-Rechnung und deutlich zu konservativ — genau die Unterscheidung aus der Toleranzkette in Modul 7.'
+    },
+    {
+      frage: 'Warum wird die Flächenform eines EUV-Spiegels in der Fertigung überwiegend mit sichtbarem Licht gemessen und nicht bei 13,5 nm?',
+      optionen: [
+        'Weil sichtbares Licht genauere Ergebnisse liefert.',
+        'Weil eine ausreichend stabile EUV-Quelle samt Vakuummessplatz sehr aufwendig ist; Prüfungen bei Betriebswellenlänge kommen nur ergänzend hinzu.',
+        'Weil bei 13,5 nm keine Interferenz auftritt.',
+        'Weil die Vielschicht bei 13,5 nm undurchsichtig ist.'
+      ],
+      richtig: 1,
+      erklaerung: 'Interferometrie bei 13,5 nm erfordert eine stabile EUV-Quelle und einen Vakuummessplatz — technisch möglich, aber für die laufende Fertigung unwirtschaftlich. Deshalb wird gegen CGH-Normale im Sichtbaren gemessen und bei Betriebswellenlänge vor allem der Reflexionsgrad geprüft. Die Lücke betrifft besonders die Rauheit im hohen Ortsfrequenzbereich.'
+    },
+    {
+      frage: 'Was ist der wesentliche geometrische Unterschied zur refraktiven Justage?',
+      optionen: [
+        'Es gibt mehr Elemente.',
+        'Es gibt keine gemeinsame optische Achse: Die Spiegel stehen außeraxial im Raum, die Flächen sind Freiformen ohne Symmetrieachse.',
+        'Die Elemente sind schwerer.',
+        'Die Justage erfolgt manuell statt rechnergestützt.'
+      ],
+      richtig: 1,
+      erklaerung: 'Die fehlende gemeinsame Achse und die fehlende Rotationssymmetrie der Freiformflächen sind der Kern. Dadurch wirken alle sechs Freiheitsgrade jedes Spiegels, die Rotation um die eigene Achse wird relevant, und die Empfindlichkeitsmatrix wird groß und schlecht konditioniert.'
+    },
+    {
+      frage: 'Warum verschärft ein zusätzlicher Spiegel im Design die Anforderungen doppelt?',
+      optionen: [
+        'Weil er zusätzlich justiert werden muss und damit Zeit kostet.',
+        'Weil er einerseits Reflexionsverlust bringt und andererseits das Budget je Spiegel um den Faktor √(n+1)/√n verengt.',
+        'Weil er die Baulänge vergrößert.',
+        'Weil er zusätzliche Kontaminationsfläche schafft.'
+      ],
+      richtig: 1,
+      erklaerung: 'Bei rund 70 % Reflexionsgrad je Spiegel kostet jeder zusätzliche Spiegel unmittelbar Licht und damit Durchsatz. Gleichzeitig verteilt sich das Wellenfrontbudget über mehr Elemente — die Anforderung an jeden einzelnen steigt. Beides zusammen macht die Zahl der Spiegel zu einer der teuersten Designentscheidungen.'
+    },
+    {
+      frage: 'Welche Aussage über den Zusammenhang zur übrigen Prozessarbeit trifft zu?',
+      optionen: [
+        'Für EUV-Systeme gelten eigene Regeln für SPC und Messsystemanalyse.',
+        'Die Methodik der Module 3 bis 7 gilt unverändert; nur die Physik der Baugruppe und die Zahlenwerte unterscheiden sich.',
+        'Regelkarten sind bei EUV nicht anwendbar.',
+        'Toleranzketten spielen bei Spiegelsystemen keine Rolle.'
+      ],
+      richtig: 1,
+      erklaerung: 'Messsystemanalyse, statistische Prozesslenkung, Wertstrombetrachtung, 8D und Toleranzrechnung sind technologieunabhängig. Genau darin liegt die Übertragbarkeit: Wer die Methodik beherrscht und die Physik der jeweiligen Baugruppe versteht, kann zwischen refraktiven und reflektiven Systemen wechseln.'
+    }
+  ]
+},
+
+/* ═══════════════════════════ MODUL 3 ═══════════════════════════ */
 {
   id: 'messtechnik',
-  nr: 2,
+  nr: 3,
   titel: 'Messtechnik & Messsystemanalyse',
   kurz: 'Wie in der Optikmontage gemessen wird — und wie man beweist, dass die Messung überhaupt taugt, bevor man Prozessentscheidungen darauf stützt.',
   ziel: 'Sie können beurteilen, ob ein Messsystem für eine gegebene Toleranz geeignet ist, und erkennen, wann eine vermeintliche Prozessstreuung in Wahrheit Messrauschen ist.',
@@ -442,7 +631,7 @@ window.APP_DATA.module = [
         { titel: 'Autokollimation',
           text: 'Winkelmessung über das zurückreflektierte Bild eines Fadenkreuzes. Robust, schnell, im Aufbau der Justagestation für die Grobausrichtung eingesetzt. <em>Typischer Fehlerfall:</em> Verwechslung von Reflexen an verschiedenen Flächen.' },
         { titel: 'Taktile und optische Koordinatenmesstechnik',
-          text: 'Liefert geometrische Lage und Form der Fassungsteile. Bindeglied zwischen Mechanikfertigung und optischem Ergebnis — hier entstehen die Eingangsgrößen der Toleranzkette aus Modul 6.' }
+          text: 'Liefert geometrische Lage und Form der Fassungsteile. Bindeglied zwischen Mechanikfertigung und optischem Ergebnis — hier entstehen die Eingangsgrößen der Toleranzkette aus Modul 7.' }
       ]
     },
 
@@ -476,7 +665,7 @@ window.APP_DATA.module = [
       bullets: [
         '<strong>Wiederholbarkeit (EV)</strong> dominiert → das Messmittel selbst ist die Grenze. Maßnahmen: Umgebung stabilisieren (Temperatur, Vibration, Luftströmung), Mittelung über mehr Einzelmessungen, besseres Gerät.',
         '<strong>Vergleichbarkeit (AV)</strong> dominiert → Menschen und Aufspannungen streuen. Maßnahmen: Standardarbeit, eindeutige Aufnahmen, Poka Yoke, Schulung. Deutlich günstiger und meist schneller wirksam.',
-        '<strong>Beides klein, Prozess trotzdem streuend</strong> → gut, dann ist die Streuung echt und Modul 3 ist der richtige nächste Schritt.'
+        '<strong>Beides klein, Prozess trotzdem streuend</strong> → gut, dann ist die Streuung echt und Modul 4 ist der richtige nächste Schritt.'
       ],
       callout: {
         typ: 'ok',
@@ -489,7 +678,7 @@ window.APP_DATA.module = [
       h: 'Messunsicherheit gegen Toleranz',
       p: [
         'Bei der Gut/Schlecht-Entscheidung an der Toleranzgrenze entstehen zwei Fehlerarten: Gutteile werden verworfen (Pseudoausschuss) oder Schlechtteile freigegeben (Durchschlupf). Beide skalieren direkt mit der Messunsicherheit.',
-        'Deshalb definiert die Normung (z. B. ISO 14253-1) das Prinzip der <em>Konformitätszone</em>: Die Annahmegrenze wird um die erweiterte Messunsicherheit nach innen versetzt. Wer das nicht tut, gibt systematisch Teile frei, deren Konformität nicht belegt ist — im Reklamationsfall (Modul 5) eine schwer zu verteidigende Position.'
+        'Deshalb definiert die Normung (z. B. ISO 14253-1) das Prinzip der <em>Konformitätszone</em>: Die Annahmegrenze wird um die erweiterte Messunsicherheit nach innen versetzt. Wer das nicht tut, gibt systematisch Teile frei, deren Konformität nicht belegt ist — im Reklamationsfall (Modul 6) eine schwer zu verteidigende Position.'
       ],
       callout: {
         typ: 'job',
@@ -561,7 +750,7 @@ window.APP_DATA.module = [
 /* ═══════════════════════════ MODUL 3 ═══════════════════════════ */
 {
   id: 'spc',
-  nr: 3,
+  nr: 4,
   titel: 'Prozessstabilität & Fähigkeit',
   kurz: 'Regelkarten, Cp/Cpk und die schwierigste Disziplin der Frontline-Arbeit: erkennen, wann man eingreifen muss — und wann gerade nicht.',
   ziel: 'Sie können eine Regelkarte lesen, zwischen zufälliger und besonderer Ursache unterscheiden und begründen, warum Nachstellen ohne Signal die Streuung erhöht.',
@@ -647,7 +836,7 @@ window.APP_DATA.module = [
       callout: {
         typ: 'job',
         titel: 'Praktische Anwendung',
-        text: 'Im Reklamationsfall aus Modul 5 lief die Justage auf zwei Vorrichtungen. Hätte man beide in dieselbe Untergruppe gemischt, wäre der Vorrichtungsunterschied in der Streuung verschwunden — und die Ist/Ist-nicht-Abgrenzung hätte nie auf V2 geführt.'
+        text: 'Im Reklamationsfall aus Modul 6 lief die Justage auf zwei Vorrichtungen. Hätte man beide in dieselbe Untergruppe gemischt, wäre der Vorrichtungsunterschied in der Streuung verschwunden — und die Ist/Ist-nicht-Abgrenzung hätte nie auf V2 geführt.'
       }
     },
 
@@ -696,9 +885,9 @@ window.APP_DATA.module = [
         'Bei jeder Abweichung an der Station läuft dieselbe Prüfkette — und sie beginnt bewusst nicht beim Prozess:'
       ],
       bullets: [
-        '<strong>1. Ist die Messung in Ordnung?</strong> Wiederholmessung, Normal prüfen, Aufspannung kontrollieren (Modul 2).',
+        '<strong>1. Ist die Messung in Ordnung?</strong> Wiederholmessung, Normal prüfen, Aufspannung kontrollieren (Modul 3).',
         '<strong>2. Gibt es überhaupt ein Signal?</strong> Ohne Regelverletzung ist die Abweichung zufällige Streuung — nicht eingreifen.',
-        '<strong>3. Was hat sich geändert?</strong> Charge, Schicht, Werkzeug, Vorrichtung, Umgebung. Die Ist/Ist-nicht-Frage aus dem 8D (Modul 5).',
+        '<strong>3. Was hat sich geändert?</strong> Charge, Schicht, Werkzeug, Vorrichtung, Umgebung. Die Ist/Ist-nicht-Frage aus dem 8D (Modul 6).',
         '<strong>4. Erst dann eingreifen</strong> — und die Wirkung dokumentiert nachhalten, sonst ist der Eingriff selbst eine neue, unbekannte Ursache.'
       ],
       callout: {
@@ -804,7 +993,7 @@ window.APP_DATA.module = [
 /* ═══════════════════════════ MODUL 4 ═══════════════════════════ */
 {
   id: 'wertstrom',
-  nr: 4,
+  nr: 5,
   titel: 'Wertstrom & Lean in der Optikmontage',
   kurz: 'Technische Verantwortung für einen Wertstromabschnitt: Takt, Engpass, Nacharbeit, Durchlaufzeit — und warum Nacharbeit an der Justage doppelt zählt.',
   ziel: 'Sie können einen Montageabschnitt quantitativ bewerten, den Engpass benennen und die Hebel in der wirtschaftlich richtigen Reihenfolge ansetzen.',
@@ -922,7 +1111,7 @@ window.APP_DATA.module = [
       tabelle: {
         kopf: ['Besonderheit', 'Konsequenz für die Prozessarbeit'],
         zeilen: [
-          ['Sehr kleine Stückzahlen', 'Statistik ist knapp — Prozessfähigkeit nach klassischem Cpk oft erst spät belegbar (siehe Modul 6)'],
+          ['Sehr kleine Stückzahlen', 'Statistik ist knapp — Prozessfähigkeit nach klassischem Cpk oft erst spät belegbar (siehe Modul 7)'],
           ['Extrem hoher Teilewert', 'Ausschuss ist praktisch keine Option; Nacharbeit ist der Normalfall, nicht die Ausnahme'],
           ['Lange, umgebungsempfindliche Prüfzyklen', 'Prüfung ist selbst eine Engpassressource; Warten auf Messmittel ist ein realer Kapazitätsverlust'],
           ['Hoher Anteil manueller Präzisionsarbeit', 'Vergleichbarkeit zwischen Werkern ist eine Hauptstreuquelle — Standardarbeit wirkt hier stärker als Automatisierung'],
@@ -1017,7 +1206,7 @@ window.APP_DATA.module = [
 /* ═══════════════════════════ MODUL 5 ═══════════════════════════ */
 {
   id: 'achtd',
-  nr: 5,
+  nr: 6,
   titel: 'Problemlösung: 8D, PDCA, Six Sigma',
   kurz: 'Die Reklamation als strukturierter Prozess — welche Methode wann passt und woran ein 8D in der Praxis scheitert.',
   ziel: 'Sie können einen Reklamationsfall methodisch sauber führen: Kunden absichern, Ursache belegen statt vermuten, Wirksamkeit nachweisen und den Fall vollständig schließen.',
@@ -1039,7 +1228,7 @@ window.APP_DATA.module = [
           ['Kundenreklamation, externer Fehler, Nachweis gefordert', '8D — mit Containment und formalem Abschluss', 'Wochen'],
           ['Ursache unbekannt, viele Einflussgrößen, Daten vorhanden', 'Six Sigma / DMAIC — mit statistischer Analyse und DoE', 'Monate'],
           ['Kleine Verbesserung, Ursache im Wesentlichen klar', 'PDCA — schnelle Schleife', 'Tage'],
-          ['Risiko vor dem Auftreten bewerten (Anlauf)', 'FMEA — vorausschauend statt reaktiv (Modul 6)', 'projektbegleitend']
+          ['Risiko vor dem Auftreten bewerten (Anlauf)', 'FMEA — vorausschauend statt reaktiv (Modul 7)', 'projektbegleitend']
         ]
       },
       callout: {
@@ -1088,7 +1277,7 @@ window.APP_DATA.module = [
     {
       h: 'Define — der Projektauftrag',
       p: [
-        'Ab hier läuft ein vollständiges Beispiel durch alle fünf Phasen. Ausgangslage: An der Justagestation streut der Rest-Wellenfrontfehler so stark, dass rund jedes fünfte Modul in die Nacharbeit geht — an genau der Station, die laut Modul 4 der Engpass des Abschnitts ist.'
+        'Ab hier läuft ein vollständiges Beispiel durch alle fünf Phasen. Ausgangslage: An der Justagestation streut der Rest-Wellenfrontfehler so stark, dass rund jedes fünfte Modul in die Nacharbeit geht — an genau der Station, die laut Modul 5 der Engpass des Abschnitts ist.'
       ],
       tabelle: {
         kopf: ['Feld', 'Inhalt'],
@@ -1097,7 +1286,7 @@ window.APP_DATA.module = [
           ['Zielgröße (CTQ)', 'Rest-Wellenfrontfehler RMS nach der Justage, in mλ'],
           ['Ausgangslage', 'Mittelwert 5,6 mλ, Standardabweichung 1,1 mλ, Nacharbeitsquote rund 20 % (entspricht FPY 80 %), Cpk gegen die Kundengrenze von 8,0 mλ: 0,73'],
           ['Ziel', 'Nacharbeitsquote unter 5 %, Streuung mindestens halbiert — nachgewiesen über 20 aufeinanderfolgende Module'],
-          ['Nutzen', 'Die Nacharbeit belastet Justage und Prüfung doppelt. Jeder Punkt FPY entlastet den Engpass unmittelbar (siehe Modul 4).'],
+          ['Nutzen', 'Die Nacharbeit belastet Justage und Prüfung doppelt. Jeder Punkt FPY entlastet den Engpass unmittelbar (siehe Modul 5).'],
           ['Abgrenzung', 'Nur der Justageprozess. Bauteiltoleranzen und Fassungskonstruktion sind ausdrücklich <em>nicht</em> Gegenstand — das wäre ein eigenes Projekt mit R&D.'],
           ['Team, Dauer', 'Prozessingenieur, zwei Justagewerker, Messtechniker, Qualitätsingenieur; rund vier Monate']
         ],
@@ -1106,14 +1295,14 @@ window.APP_DATA.module = [
       callout: {
         typ: 'warn',
         titel: 'Warum die interne Schwelle unter der Kundengrenze liegt',
-        text: 'Der Kunde spezifiziert 8,0 mλ, die Nacharbeit beginnt aber schon bei 6,5. Der Abstand deckt zwei Dinge ab: das Setzverhalten nach dem Verkleben und die Messunsicherheit aus Modul 2. Diese Schwelle ist damit selbst eine Entscheidung — und im Projekt eine legitime Frage, ob sie richtig gewählt ist.'
+        text: 'Der Kunde spezifiziert 8,0 mλ, die Nacharbeit beginnt aber schon bei 6,5. Der Abstand deckt zwei Dinge ab: das Setzverhalten nach dem Verkleben und die Messunsicherheit aus Modul 3. Diese Schwelle ist damit selbst eine Entscheidung — und im Projekt eine legitime Frage, ob sie richtig gewählt ist.'
       }
     },
 
     {
       h: 'Measure — erst das Messsystem, dann der Prozess',
       p: [
-        'Vor jeder Analyse steht die Frage, ob die Zahlen überhaupt tragen. Die Messsystemanalyse aus Modul 2 ergibt hier %GRR = 24 % gegen die Toleranz — bedingt fähig. Für die Varianzbetrachtung heißt das:'
+        'Vor jeder Analyse steht die Frage, ob die Zahlen überhaupt tragen. Die Messsystemanalyse aus Modul 3 ergibt hier %GRR = 24 % gegen die Toleranz — bedingt fähig. Für die Varianzbetrachtung heißt das:'
       ],
       formel: 'σ²_beobachtet = σ²_Prozess + σ²_Messung\n\n1,10² = σ²_Prozess + 0,33²   →   σ_Prozess = 1,05 mλ\n\n<span class="fx-note">Messrauschen erklärt nur etwa 9 % der beobachteten Varianz — die Streuung ist real.</span>',
       bullets: [
@@ -1182,17 +1371,17 @@ window.APP_DATA.module = [
       tabelle: {
         kopf: ['Maßnahme', 'Konkret', 'Verweis'],
         zeilen: [
-          ['Regelkarte', 'I-MR-Karte auf den Rest-RMS, weil bei Stückzahlen dieser Größe keine Untergruppen gebildet werden können', 'Modul 3'],
-          ['Standardarbeit', 'Aufspannkraft als geprüfte Vorgabe mit Drehmomentschlüssel; Einschwingzeit im Arbeitsplan verankert', 'Modul 4'],
-          ['Reaktionsplan', 'Wer bei einem Kartensignal was tut — schriftlich, sonst wird beim ersten Signal doch wieder nachgestellt', 'Modul 3'],
-          ['Vorrichtungsfreigabe', 'Spannkraft nach jeder Instandsetzung prüfen und freigeben', 'Modul 5, D7'],
-          ['Nutzen nachhalten', 'FPY und Engpassbelastung über sechs Monate mitschreiben — nicht die Präsentation, sondern diese Kurve schließt das Projekt ab', 'Modul 4']
+          ['Regelkarte', 'I-MR-Karte auf den Rest-RMS, weil bei Stückzahlen dieser Größe keine Untergruppen gebildet werden können', 'Modul 4'],
+          ['Standardarbeit', 'Aufspannkraft als geprüfte Vorgabe mit Drehmomentschlüssel; Einschwingzeit im Arbeitsplan verankert', 'Modul 5'],
+          ['Reaktionsplan', 'Wer bei einem Kartensignal was tut — schriftlich, sonst wird beim ersten Signal doch wieder nachgestellt', 'Modul 4'],
+          ['Vorrichtungsfreigabe', 'Spannkraft nach jeder Instandsetzung prüfen und freigeben', 'Modul 6, D7'],
+          ['Nutzen nachhalten', 'FPY und Engpassbelastung über sechs Monate mitschreiben — nicht die Präsentation, sondern diese Kurve schließt das Projekt ab', 'Modul 5']
         ]
       },
       callout: {
         typ: 'ok',
         titel: 'Bilanz des Beispielprojekts',
-        text: 'Rest-RMS im Mittel von 5,6 auf 4,7 mλ, Standardabweichung von 1,1 auf 0,8 mλ, Cpk von 0,73 auf 1,38. Nacharbeitsquote von rund 20 % auf unter 2 %, FPY damit von 80 auf 98 %. Über die Rechnung aus Modul 4 sinkt die Belastung der Justagestation von 213 auf 174 Minuten je Stück — rund 18 % mehr Durchsatz am Engpass, ohne eine einzige Investition.'
+        text: 'Rest-RMS im Mittel von 5,6 auf 4,7 mλ, Standardabweichung von 1,1 auf 0,8 mλ, Cpk von 0,73 auf 1,38. Nacharbeitsquote von rund 20 % auf unter 2 %, FPY damit von 80 auf 98 %. Über die Rechnung aus Modul 5 sinkt die Belastung der Justagestation von 213 auf 174 Minuten je Stück — rund 18 % mehr Durchsatz am Engpass, ohne eine einzige Investition.'
       }
     },
 
@@ -1333,7 +1522,7 @@ window.APP_DATA.module = [
 /* ═══════════════════════════ MODUL 6 ═══════════════════════════ */
 {
   id: 'rampup',
-  nr: 6,
+  nr: 7,
   titel: 'Ramp-up & Schnittstelle zu R&D',
   kurz: 'Vom Entwicklungsergebnis zur beherrschten Serie: Toleranzketten, FMEA, Sonderfreigaben und Prozessfähigkeit bei kleinen Stückzahlen.',
   ziel: 'Sie können eine Toleranzkette bewerten, den Unterschied zwischen Worst-Case- und statistischer Auslegung begründen und den Anlauf so führen, dass aus Sonderfreigaben kein Dauerzustand wird.',
@@ -1395,7 +1584,7 @@ window.APP_DATA.module = [
       callout: {
         typ: 'ok',
         titel: 'Der dritte Weg: aktiv kompensieren',
-        text: 'Statt Toleranzen zu verengen, kann man eine Justageoperation vorsehen, die den Stapelfehler aktiv ausgleicht (Modul 1). Das verlagert Aufwand von der Bauteilfertigung in die Montage — sinnvoll, solange die Justage nicht bereits der Engpass ist (Modul 4). Diese Abwägung ist typisch für die Rolle: Sie hat immer eine optische, eine fertigungstechnische und eine wirtschaftliche Seite.'
+        text: 'Statt Toleranzen zu verengen, kann man eine Justageoperation vorsehen, die den Stapelfehler aktiv ausgleicht (Modul 1). Das verlagert Aufwand von der Bauteilfertigung in die Montage — sinnvoll, solange die Justage nicht bereits der Engpass ist (Modul 5). Diese Abwägung ist typisch für die Rolle: Sie hat immer eine optische, eine fertigungstechnische und eine wirtschaftliche Seite.'
       }
     },
 
