@@ -177,3 +177,8 @@ table.data td.num { font-family: var(--mono); text-align: right; white-space: no
 .module-card p { font-size: .86rem; color: var(--text-mute); margin-top: .35rem; }
 
 .pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--border); }
+
+/* ---------- Kompaktübersicht ---------- */
+.kompakt ul.bullets li { margin-top: .55rem; }
+.kompakt .card { margin-top: .7rem; }
+.kompakt table.data td { font-size: .86rem; }

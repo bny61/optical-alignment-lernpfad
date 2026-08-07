@@ -152,3 +152,24 @@ code { font: .875em var(--mono); background: var(--surface-2); padding: .1em .35
   font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
   color: var(--text-mute); font-weight: 600;
 }
+
+/* ---------- Druckansicht ---------- */
+@media print {
+  :root {
+    --bg: #fff; --surface: #fff; --surface-2: #f4f5f7; --border: #bbb;
+    --text: #000; --text-mute: #444; --accent: #14458c; --accent-sf: #eef3fb;
+    --ok: #0f5c47; --ok-sf: #eef7f4; --warn: #7a4600; --warn-sf: #fbf3e8;
+    --bad: #8f1f18; --bad-sf: #fbeeed; --shadow: none;
+  }
+  .topbar, .sidebar, .no-print, .pager, .skip-link { display: none !important; }
+  .layout { padding-top: 0; }
+  .content { margin-left: 0; max-width: none; padding: 0; }
+  body { font-size: 10.5pt; }
+  .content h1 { font-size: 18pt; }
+  .content h2 { font-size: 13pt; margin-top: 16pt; }
+  .card, .callout, .figure-canvas, table.data { break-inside: avoid; }
+  .content h2, .content h3 { break-after: avoid; }
+  table.data { font-size: 9pt; }
+  .formula { font-size: 9pt; }
+  a { color: inherit; text-decoration: none; }
+}

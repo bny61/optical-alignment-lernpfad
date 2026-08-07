@@ -34,7 +34,10 @@ unten in der Seitenleiste zurückgesetzt.
 | 5 | 8D, PDCA, Six Sigma | Reklamation und Verbesserungsprojekt führen | Geführter 8D-Durchlauf · vollständiges DMAIC-Beispiel mit 2³-Versuchsplan |
 | 6 | Ramp-up & Schnittstelle R&D | Worst Case vs. RSS, Sonderfreigaben, Fähigkeit bei kleinen Stückzahlen | Monte-Carlo über die Toleranzkette |
 
-Empfohlene Reihenfolge: Einordnung → 1 → 2 → 3 → 4 → 5 → 6. Module 1 und 2 sind Voraussetzung für die Kennzahlen in Modul 3.
+Dazu zwei Referenzseiten: eine **Kompaktübersicht** (zwölf Kernsätze, Diagnosetabelle, Formelsammlung,
+Kennzahlen mit Grenzwerten, häufige Fehlschlüsse, Selbsttestfragen — mit Druckansicht) und ein Glossar.
+
+Empfohlene Reihenfolge: Einordnung → 1 → 2 → 3 → 4 → 5 → 6 → Kompaktübersicht zum Wiederholen. Module 1 und 2 sind Voraussetzung für die Kennzahlen in Modul 3.
 Rechnen Sie mit 30–45 Minuten je Modul, wenn Sie die Simulationen wirklich durchspielen.
 
 ## Projektstruktur
@@ -49,11 +52,12 @@ js/figures.js       Schemaskizzen: Scanner, Spiegelfertigung, Ortsfrequenzen,
 js/sim-*.js         die neun Simulatoren, registriert unter window.SIMS
 js/quiz.js          Multiple-Choice mit Auswertung
 js/render.js        Seitenaufbau aus den Datenobjekten
-js/router.js        Hash-Router (#/, #/modul/<id>, #/glossar?t=<begriff>)
+js/router.js        Hash-Router (#/, #/modul/<id>, #/kompakt, #/glossar?t=<begriff>)
 js/app.js           Bootstrap, Navigation, Fortschritt
 data/modules.js     alle Lerninhalte und Quizfragen
 data/glossary.js    Fachbegriffe DE/EN
 data/cases.js       Fallbeispiel für den 8D-Durchlauf
+data/summary.js     Inhalte der Kompaktübersicht
 ```
 
 ### Cache-Buster

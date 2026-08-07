@@ -109,6 +109,12 @@
       'Module 5 und 6 sind die beiden Ausnahmesituationen: Reklamation (rückwärts) und Anlauf (vorwärts). ' +
       'Rechnen Sie mit 30–45 Minuten je Modul, wenn Sie die Simulationen wirklich durchspielen.' }));
 
+    root.appendChild(CH.el('div', { class: 'callout ok', html:
+      '<strong>Wenig Zeit?</strong>' +
+      'Die <a href="#/kompakt">Kompaktübersicht</a> fasst alles auf einer Seite zusammen: die zwölf tragenden Sätze, ' +
+      'eine Diagnosetabelle von der Messung zur Ursache, alle Formeln, die Kennzahlen mit ihren Grenzwerten, ' +
+      'die häufigsten Fehlschlüsse — und Fragen zum Selbsttest. Auch zum Ausdrucken geeignet.' }));
+
     root.appendChild(CH.el('div', { class: 'callout warn', html:
       '<strong>Was diese Seite nicht ist</strong>' +
       'Alle Zahlen, Fälle und Kopplungsfaktoren sind didaktisch konstruiert und größenordnungsplausibel gewählt. ' +
@@ -221,5 +227,29 @@
     return root;
   }
 
-  global.Views = { home: home, modul: modul, glossar: glossar };
+  /* ---------- Kompaktübersicht ---------- */
+
+  function kompakt(ctx) {
+    var daten = ctx.kompakt;
+    var root = CH.el('div', { class: 'kompakt' });
+    root.appendChild(CH.el('div', { class: 'eyebrow', text: 'Referenz · zum Wiederholen und Ausdrucken' }));
+    root.appendChild(CH.el('h1', { text: 'Kompaktübersicht Optical Alignment' }));
+    if (!daten) {
+      root.appendChild(CH.el('p', { class: 'lead', text: 'Inhalte konnten nicht geladen werden.' }));
+      return root;
+    }
+    root.appendChild(CH.el('p', { class: 'lead', html: daten.lead }));
+    root.appendChild(CH.el('button', {
+      class: 'btn btn-sm no-print', style: 'margin-top:1rem',
+      text: 'Diese Seite drucken', onclick: function () { global.print(); }
+    }));
+    daten.abschnitte.forEach(function (a) { root.appendChild(abschnitt(a)); });
+    root.appendChild(CH.el('div', { class: 'pager no-print' }, [
+      CH.el('a', { class: 'btn', href: '#/glossar', text: '← Glossar' }),
+      CH.el('a', { class: 'btn btn-primary', href: '#/', text: 'Zur Übersicht →' })
+    ]));
+    return root;
+  }
+
+  global.Views = { home: home, modul: modul, glossar: glossar, kompakt: kompakt };
 })(window);

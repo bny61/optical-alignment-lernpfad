@@ -10,6 +10,7 @@
   var ctx = {
     module: module,
     glossar: glossarDaten,
+    kompakt: (global.APP_DATA && global.APP_DATA.kompakt) || null,
     fortschritt: laden(),
     speichern: speichern
   };
@@ -57,6 +58,12 @@
 
     navList.appendChild(CH.el('li', { class: 'nav-sep', text: 'Referenz' }));
     navList.appendChild(CH.el('li', {}, [
+      CH.el('a', { href: '#/kompakt', class: route.view === 'kompakt' ? 'active' : '' }, [
+        CH.el('span', { class: 'nav-num', text: '★' }),
+        CH.el('span', { text: 'Kompaktübersicht' })
+      ])
+    ]));
+    navList.appendChild(CH.el('li', {}, [
       CH.el('a', { href: '#/glossar', class: route.view === 'glossar' ? 'active' : '' }, [
         CH.el('span', { class: 'nav-num', text: '§' }),
         CH.el('span', { text: 'Glossar' })
@@ -84,6 +91,9 @@
         CH.el('p', {}, [CH.el('a', { href: '#/', text: 'Zurück zur Übersicht' })])
       ]);
       document.title = (m ? m.titel : 'Nicht gefunden') + ' — Optical Alignment';
+    } else if (r.view === 'kompakt') {
+      view = global.Views.kompakt(ctx);
+      document.title = 'Kompaktübersicht — Optical Alignment';
     } else if (r.view === 'glossar') {
       view = global.Views.glossar(ctx, r.query.t || '');
       document.title = 'Glossar — Optical Alignment';

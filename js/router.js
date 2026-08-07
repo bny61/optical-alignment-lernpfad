@@ -14,6 +14,7 @@
     if (!pfad.length) return { view: 'home', query: query };
     if (pfad[0] === 'modul' && pfad[1]) return { view: 'modul', id: pfad[1], query: query };
     if (pfad[0] === 'glossar') return { view: 'glossar', query: query };
+    if (pfad[0] === 'kompakt') return { view: 'kompakt', query: query };
     return { view: 'home', query: query };
   }
 
