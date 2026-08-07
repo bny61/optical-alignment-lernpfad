@@ -426,7 +426,7 @@ window.APP_DATA.module = [
   sim: 'budget',
   simTitel: 'Simulation: Fehlerbudget über sechs Spiegel',
   simIntro: 'Verteilen Sie ein Systembudget von 250 pm auf die Beiträge. Beobachten Sie zuerst, was ein zusätzlicher Spiegel bewirkt — und versuchen Sie dann, das Budget einzuhalten, indem Sie den <em>kleinsten</em> Beitrag verbessern. Es gelingt nicht: Bei quadratischer Addition zählt nur der größte.',
-  begriffe: ['Vielschichtspiegel', 'Freiformfläche', 'Anamorphotische Abbildung', 'Numerische Apertur', 'RSS-Methode'],
+  begriffe: ['Vielschichtspiegel', 'Freiformfläche', 'Anamorphotische Abbildung', 'Numerische Apertur', 'RSS-Methode', 'Pupillenapodisation', 'Streulicht', 'Maskeneffekte'],
 
   abschnitte: [
     {
@@ -450,6 +450,45 @@ window.APP_DATA.module = [
           ['Umgebung', 'Reinraum, temperiert', 'Vakuum, zusätzlich Kontaminationskontrolle']
         ],
         fuss: 'Was gleich bleibt: Montagespannung erzeugt Astigmatismus, Lagefehler erzeugen Koma, und rotationssymmetrische Fehler lassen sich durch Lagejustage nicht kompensieren. Die Diagnoselogik aus Modul 1 gilt unverändert.'
+      }
+    },
+
+    {
+      h: 'Bleibt die Wellenfront die maßgebliche Größe?',
+      p: [
+        'Kurz: ja — der Wellenfrontfehler ist auch bei EUV die zentrale Spezifikationsgröße, mit derselben Zernike-Zerlegung und derselben Strehl-Beziehung wie in Modul 1. Nur reicht er allein nicht mehr aus.',
+        'Bei 193 nm beschreibt die Phase der Pupille das Abbildungsverhalten in guter Näherung vollständig: Die Pupille ist gleichmäßig hell, und was stört, ist der Phasenfehler. Bei 13,5 nm gilt das nicht mehr. Zwei weitere Größen treten als eigenständige Fehlerarten hinzu — und eine dritte entsteht außerhalb der Optik.'
+      ],
+      grafik: 'pupille',
+      grafikText: '<strong>Abb. 2 — Drei Wirkungen, die auseinandergehalten werden müssen.</strong> Nur die erste lässt sich durch Justage beeinflussen. Die zweite kommt aus der Beschichtung, die dritte aus der Oberflächenwelligkeit — beide sind in der Montage nicht mehr zu retten, sondern Anforderungen an die vorgelagerte Bauteilfertigung.',
+      tabelle: {
+        kopf: ['Größe', 'Was sie ist', 'Bei DUV', 'Bei EUV / High-NA', 'Justierbar?'],
+        zeilen: [
+          ['Wellenfront (Phase)', 'Phasenfehler über die Pupille', 'die dominante Größe, Toleranz im Nanometerbereich', 'weiterhin dominant, Toleranz im Pikometerbereich', 'ja'],
+          ['Apodisation (Amplitude)', 'Pupille ist ungleichmäßig hell', 'praktisch vernachlässigbar', 'relevant: Der Reflexionsgrad der Vielschicht hängt vom Einfallswinkel ab, und der variiert über die Pupille — bei High-NA stärker', 'nein'],
+          ['Streulicht (Flare)', 'diffuser Untergrund im Bild', 'gering', 'deutlich stärker, weil Streuung mit kürzerer Wellenlänge stark zunimmt', 'nein'],
+          ['Maskeneffekte (Mask 3D)', 'Schatten und Phasenversatz am Retikel', 'entfällt (transmissive Maske)', 'strukturabhängig, wirkt wie eine Aberration, ist aber keine', 'nein']
+        ],
+        fuss: 'Die rechte Spalte ist für die Rolle die entscheidende: Drei der vier Größen kommen nicht aus der Montage — und lassen sich dort auch nicht kompensieren.'
+      }
+    },
+
+    {
+      h: 'Was sich bei High-NA zusätzlich verschiebt',
+      p: [
+        'Der Sprung auf NA 0,55 verstärkt genau die Effekte, die schon bei NA 0,33 neu waren:'
+      ],
+      bullets: [
+        '<strong>Größerer Winkelbereich in der Pupille.</strong> Die Randstrahlen treffen die Spiegel unter deutlich anderen Winkeln als die achsnahen. Weil der Reflexionsgrad der Vielschicht winkelabhängig ist, wird die Apodisation stärker — die Schichtperiode wird deshalb lateral abgestuft, was das Beschichten schwieriger macht.',
+        '<strong>Die Schärfentiefe schrumpft mit 1/NA².</strong> Von 0,33 auf 0,55 bedeutet das etwa ein Drittel der bisherigen Schärfentiefe. Der Defokusanteil Z4 und die Fokuslage werden damit noch enger toleriert als ohnehin.',
+        '<strong>Anamorphotische Abbildung.</strong> Weil die Winkel am Retikel sonst zu groß würden, wird in einer Richtung 8-fach statt 4-fach verkleinert. Das System ist in x und y nicht mehr gleich — Symmetrieannahmen, die man aus der refraktiven Welt mitbringt, gelten nicht.',
+        '<strong>Feldabhängigkeit wird wichtiger.</strong> Die Wellenfront wird nicht an einem Punkt spezifiziert, sondern über das Belichtungsfeld. Mit Freiformflächen und außeraxialer Anordnung variiert sie stärker über das Feld als bei einem rotationssymmetrischen Objektiv.',
+        '<strong>Der Wellenfrontfehler ist nicht statisch.</strong> Absorbierte Strahlung erwärmt die Spiegel während der Belichtung; die Wellenfront driftet im Betrieb. Deshalb enthalten solche Systeme Stellglieder, die niedrige Ordnungen im laufenden Betrieb nachkorrigieren — die Fertigung liefert also einen Ausgangszustand, keinen Endzustand.'
+      ],
+      callout: {
+        typ: 'job',
+        titel: 'Was das für die Abnahme bedeutet',
+        text: 'Ein einzelner RMS-Wert auf der Achse ist bei EUV noch weniger aussagekräftig als bei DUV. Ein belastbares Abnahmeprotokoll enthält die Zernike-Koeffizienten über mehrere Feldpunkte, dazu Reflexionsgrad und Streulicht als getrennte Merkmale — genau die Prüfkaskade aus Modul 3. Und es hält fest, in welchem Zustand gemessen wurde, weil ein Teil des Fehlers im Betrieb ohnehin nachgeregelt wird.'
       }
     },
 
@@ -567,6 +606,39 @@ window.APP_DATA.module = [
       ],
       richtig: 1,
       erklaerung: 'Interferometrie bei 13,5 nm erfordert eine stabile EUV-Quelle und einen Vakuummessplatz — technisch möglich, aber für die laufende Fertigung unwirtschaftlich. Deshalb wird gegen CGH-Normale im Sichtbaren gemessen und bei Betriebswellenlänge vor allem der Reflexionsgrad geprüft. Die Lücke betrifft besonders die Rauheit im hohen Ortsfrequenzbereich.'
+    },
+    {
+      frage: 'Bei DUV beschreibt der Wellenfrontfehler das Abbildungsverhalten fast vollständig. Was kommt bei EUV hinzu?',
+      optionen: [
+        'Nichts Grundsätzliches — die Toleranzen sind nur enger.',
+        'Amplitudeneffekte: die Pupille ist ungleichmäßig hell (Apodisation), dazu Streulicht als Untergrund — beides Fehlerarten neben der Phase.',
+        'Die Wellenfront wird durch die Modulationsübertragungsfunktion ersetzt.',
+        'Der Wellenfrontfehler verliert an Bedeutung gegenüber der Geometrie.'
+      ],
+      richtig: 1,
+      erklaerung: 'Die Wellenfront bleibt die zentrale Größe, aber die Pupille trägt bei EUV auch eine Amplitudenverteilung: Der Reflexionsgrad der Vielschicht hängt vom Einfallswinkel ab, der über die Pupille variiert. Dazu kommt Streulicht aus der Oberflächenwelligkeit. Beides sind eigenständige Fehlerarten, die sich durch Justage nicht beheben lassen.'
+    },
+    {
+      frage: 'Welche der folgenden Größen lässt sich in der Montage <em>nicht</em> mehr korrigieren?',
+      optionen: [
+        'Koma durch Dezentrierung eines Spiegels.',
+        'Defokus durch die axiale Position.',
+        'Die Pupillenapodisation aus der winkelabhängigen Reflexion der Vielschicht.',
+        'Astigmatismus aus einer zu hohen Haltekraft.'
+      ],
+      richtig: 2,
+      erklaerung: 'Apodisation ist ein Amplitudeneffekt der Beschichtung, kein Lagefehler. Keine Kombination von Stellgrößen kann sie erzeugen oder aufheben — sie ist eine Anforderung an die Beschichtung, nicht an die Justage. Die drei anderen sind klassische Lage- beziehungsweise Spannungsfehler und in der Montage adressierbar.'
+    },
+    {
+      frage: 'Warum ist ein einzelner RMS-Wert auf der optischen Achse als Abnahmenachweis bei High-NA besonders unzureichend?',
+      optionen: [
+        'Weil RMS grundsätzlich weniger aussagekräftig ist als Peak-to-Valley.',
+        'Weil die Wellenfront mit Freiformflächen und außeraxialer Anordnung stark über das Feld variiert und Amplitude sowie Streulicht gar nicht enthalten sind.',
+        'Weil die Messunsicherheit bei EUV größer ist als der Messwert.',
+        'Weil bei High-NA nur die Fokuslage zählt.'
+      ],
+      richtig: 1,
+      erklaerung: 'Ein achsnaher Einzelwert erfasst weder die Feldabhängigkeit noch die Amplitudeneffekte. Ein belastbares Protokoll enthält Zernike-Koeffizienten über mehrere Feldpunkte plus Reflexionsgrad und Streulicht als getrennte Merkmale — die Prüfkaskade aus Modul 3.'
     },
     {
       frage: 'Was ist der wesentliche geometrische Unterschied zur refraktiven Justage?',

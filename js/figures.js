@@ -790,4 +790,117 @@
 
     return svg;
   };
+
+  /* ═══════════ Figur 11: Phase, Amplitude, Untergrund ═══════════ */
+
+  FIGS.pupille = function () {
+    var svg = svgRoot(720, 384, 'Wellenfront, Pupillenapodisation und Streulicht als drei getrennte Wirkungen');
+
+    /** Pupillenscheibe aus einer Funktion f(x,y) → Farbe rendern. */
+    var clipZaehler = 0;
+    function scheibe(cx, cy, r, zellen, farbe) {
+      // Kreisförmiger Beschnitt, damit der Rand nicht als Treppe erscheint
+      var id = 'pup-clip-' + (++clipZaehler);
+      var g = S('g');
+      g.appendChild(S('defs', {}, [
+        S('clipPath', { id: id }, [S('circle', { cx: cx, cy: cy, r: r })])
+      ]));
+      var zellen_g = S('g', { 'clip-path': 'url(#' + id + ')' });
+      g.appendChild(zellen_g);
+      var schritt = (2 * r) / zellen;
+      for (var i = 0; i < zellen; i++) {
+        for (var j = 0; j < zellen; j++) {
+          var x = (i + 0.5) / zellen * 2 - 1, y = (j + 0.5) / zellen * 2 - 1;
+          if (x * x + y * y > 1.1) continue;
+          zellen_g.appendChild(S('rect', {
+            x: (cx - r + i * schritt).toFixed(1), y: (cy - r + j * schritt).toFixed(1),
+            width: (schritt + 0.6).toFixed(1), height: (schritt + 0.6).toFixed(1),
+            fill: farbe(x, y)
+          }));
+        }
+      }
+      g.appendChild(S('circle', { cx: cx, cy: cy, r: r, fill: 'none', stroke: 'var(--border)', 'stroke-width': 1 }));
+      return g;
+    }
+
+    function mische(a, b, t) {
+      t = Math.max(0, Math.min(1, t));
+      return 'rgb(' + a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); }).join(',') + ')';
+    }
+
+    var panelB = 224, y0 = 34;
+
+    /* Panel 1: Phase — Wellenfrontfehler (Koma-artig) */
+    svg.appendChild(box(14, y0, panelB, 250, { fill: 'var(--surface)' }));
+    svg.appendChild(label(14 + panelB / 2, y0 + 22, 'Phase', { 'text-anchor': 'middle' }));
+    svg.appendChild(txt(14 + panelB / 2, y0 + 36, 'Wellenfrontfehler', { 'text-anchor': 'middle', 'font-size': 9.5 }));
+    svg.appendChild(scheibe(14 + panelB / 2, y0 + 108, 54, 34, function (x, y) {
+      var r = Math.sqrt(x * x + y * y), th = Math.atan2(y, x);
+      var w = (3 * r * r - 2) * r * Math.cos(th);
+      return w < 0 ? mische([236, 238, 242], [41, 92, 160], -w) : mische([236, 238, 242], [199, 106, 33], w);
+    }));
+    svg.appendChild(txt(28, y0 + 190, 'Die Größe aus Modul 1: Zernike-', { 'font-size': 9.5 }));
+    svg.appendChild(txt(28, y0 + 202, 'Zerlegung, RMS, Strehl.', { 'font-size': 9.5 }));
+    svg.appendChild(S('rect', { x: 28, y: y0 + 214, width: panelB - 28, height: 22, rx: 4, fill: 'var(--ok-sf)' }));
+    svg.appendChild(S('text', { x: 36, y: y0 + 229, 'font-size': 9.5, 'font-weight': 600, fill: 'var(--ok)',
+      'font-family': 'var(--sans)', text: 'durch Justage korrigierbar' }));
+
+    /* Panel 2: Amplitude — Apodisation */
+    svg.appendChild(box(248, y0, panelB, 250, { fill: 'var(--surface)' }));
+    svg.appendChild(label(248 + panelB / 2, y0 + 22, 'Amplitude', { 'text-anchor': 'middle' }));
+    svg.appendChild(txt(248 + panelB / 2, y0 + 36, 'Pupillenapodisation', { 'text-anchor': 'middle', 'font-size': 9.5 }));
+    svg.appendChild(scheibe(248 + panelB / 2, y0 + 108, 54, 34, function (x, y) {
+      var r = Math.sqrt(x * x + y * y);
+      var hell = 1 - 0.55 * r * r - 0.12 * x; // Reflexionsgrad sinkt zum Rand und asymmetrisch
+      return mische([120, 120, 128], [252, 252, 254], hell);
+    }));
+    svg.appendChild(txt(262, y0 + 190, 'Der Reflexionsgrad der Vielschicht', { 'font-size': 9.5 }));
+    svg.appendChild(txt(262, y0 + 202, 'hängt vom Einfallswinkel ab.', { 'font-size': 9.5 }));
+    svg.appendChild(S('rect', { x: 262, y: y0 + 214, width: panelB - 28, height: 22, rx: 4, fill: 'var(--bad-sf)' }));
+    svg.appendChild(S('text', { x: 270, y: y0 + 229, 'font-size': 9.5, 'font-weight': 600, fill: 'var(--bad)',
+      'font-family': 'var(--sans)', text: 'nicht durch Justage korrigierbar' }));
+
+    /* Panel 3: Untergrund — Streulicht */
+    svg.appendChild(box(482, y0, panelB, 250, { fill: 'var(--surface)' }));
+    svg.appendChild(label(482 + panelB / 2, y0 + 22, 'Untergrund', { 'text-anchor': 'middle' }));
+    svg.appendChild(txt(482 + panelB / 2, y0 + 36, 'Streulicht (Flare)', { 'text-anchor': 'middle', 'font-size': 9.5 }));
+
+    var px = 502, pb = 184, pyBasis = y0 + 160, ph = 96;
+    svg.appendChild(S('line', { x1: px, y1: pyBasis, x2: px + pb, y2: pyBasis, stroke: 'var(--border)' }));
+    function profil(sockel, farbe, breite, strich) {
+      var d = '';
+      for (var k = 0; k <= pb; k += 2) {
+        var u = (k / pb) * 2 - 1;
+        var v = Math.exp(-Math.pow(u / 0.22, 2)) * (1 - sockel) + sockel;
+        d += (k ? 'L' : 'M') + (px + k).toFixed(1) + ' ' + (pyBasis - v * ph).toFixed(1) + ' ';
+      }
+      return S('path', { d: d, fill: 'none', stroke: farbe, 'stroke-width': breite, 'stroke-dasharray': strich || null });
+    }
+    svg.appendChild(profil(0, 'var(--text-mute)', 1.4, '4 3'));
+    svg.appendChild(profil(0.28, 'var(--bad)', 2.2));
+    svg.appendChild(S('line', { x1: px, y1: pyBasis - 0.28 * ph, x2: px + pb, y2: pyBasis - 0.28 * ph,
+      stroke: 'var(--bad)', 'stroke-width': 1, 'stroke-dasharray': '3 3', opacity: .6 }));
+    svg.appendChild(txt(px + pb + 2, pyBasis - 0.28 * ph + 3, 'Sockel', { 'font-size': 8.5, fill: 'var(--bad)' }));
+    svg.appendChild(txt(px, y0 + 176, 'Intensitätsschnitt im Bild', { 'font-size': 8.5 }));
+
+    svg.appendChild(txt(496, y0 + 190, 'Aus Welligkeit gestreutes Licht;', { 'font-size': 9.5 }));
+    svg.appendChild(txt(496, y0 + 202, 'wächst stark mit kürzerer Wellenlänge.', { 'font-size': 9.5 }));
+    svg.appendChild(S('rect', { x: 496, y: y0 + 214, width: panelB - 28, height: 22, rx: 4, fill: 'var(--bad-sf)' }));
+    svg.appendChild(S('text', { x: 504, y: y0 + 229, 'font-size': 9.5, 'font-weight': 600, fill: 'var(--bad)',
+      'font-family': 'var(--sans)', text: 'nicht durch Justage korrigierbar' }));
+
+    /* Fußzeile: was außerhalb der Optik entsteht */
+    svg.appendChild(S('rect', { x: 14, y: 300, width: 692, height: 64, rx: 6,
+      fill: 'var(--warn-sf)', stroke: 'var(--warn)', 'stroke-width': 1.2 }));
+    svg.appendChild(S('text', { x: 30, y: 320, 'font-size': 10.5, 'font-weight': 600, fill: 'var(--warn)',
+      'font-family': 'var(--sans)', text: 'Und eine vierte Größe entsteht gar nicht in Ihrer Baugruppe: Maskeneffekte (Mask 3D)' }));
+    svg.appendChild(txt(30, 336, 'Das reflektive Retikel wird schräg beleuchtet; der Absorber hat eine endliche Dicke und wirft dadurch Schatten,',
+      { 'font-size': 9.5 }));
+    svg.appendChild(txt(30, 350, 'zusätzlich verschiebt er die Phase. Die Wirkung hängt von der Struktur ab und ist durch keine Optikkorrektur behebbar.',
+      { 'font-size': 9.5 }));
+
+    svg.appendChild(txt(14, 22, 'Die Pupille trägt nicht nur Phase: bei EUV kommen Amplitude und Untergrund als eigene Fehlerarten hinzu.', { 'font-size': 10 }));
+
+    return svg;
+  };
 })(window);
