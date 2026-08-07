@@ -736,4 +736,58 @@
 
     return svg;
   };
+
+  /* ═══════════ Figur 10: Prüfkaskade Bauteil → Modul → System ═══════════ */
+
+  FIGS.pruefkaskade = function () {
+    var svg = svgRoot(720, 330, 'Prüfstufen vom Einzelbauteil über das Modul bis zur Integration beim Kunden');
+
+    var stufen = [
+      { n: 'Bauteil', wer: 'Fertigung der Optik',
+        pruef: ['Flächenform', 'Rauheit', 'Radius, Dicke', 'Beschichtung'],
+        kosten: '1×', farbe: 'var(--ok)' },
+      { n: 'Modul', wer: 'Montage und Justage',
+        pruef: ['Wellenfront über', 'das Feld', 'Transmission', 'Sauberkeit'],
+        kosten: '10×', farbe: 'var(--warn)' },
+      { n: 'System', wer: 'Integration beim Kunden',
+        pruef: ['Wellenfront im', 'eingebauten Zustand', 'Abbildung auf', 'dem Wafer'],
+        kosten: '100×', farbe: 'var(--bad)' }
+    ];
+
+    var breite = 200, luecke = 40;
+    stufen.forEach(function (st, i) {
+      var x = 24 + i * (breite + luecke);
+      svg.appendChild(box(x, 44, breite, 178, { fill: 'var(--surface)', stroke: st.farbe }));
+      svg.appendChild(S('rect', { x: x, y: 44, width: breite, height: 5, rx: 2, fill: st.farbe }));
+      svg.appendChild(label(x + breite / 2, 74, st.n, { 'text-anchor': 'middle', 'font-size': 13 }));
+      svg.appendChild(txt(x + breite / 2, 90, st.wer, { 'text-anchor': 'middle', 'font-size': 9.5 }));
+      svg.appendChild(S('line', { x1: x + 18, y1: 104, x2: x + breite - 18, y2: 104, stroke: 'var(--border)' }));
+      st.pruef.forEach(function (p, j) {
+        svg.appendChild(txt(x + 22, 124 + j * 15, p, { 'font-size': 9.5 }));
+      });
+      svg.appendChild(S('rect', { x: x + 18, y: 188, width: breite - 36, height: 22, rx: 4,
+        fill: st.farbe, opacity: .15 }));
+      svg.appendChild(S('text', { x: x + breite / 2, y: 203, 'text-anchor': 'middle', 'font-size': 11,
+        'font-weight': 600, fill: st.farbe, 'font-family': 'var(--sans)',
+        text: 'Fehlerkosten ' + st.kosten }));
+      if (i < 2) {
+        svg.appendChild(arrow(x + breite + 4, 132, x + breite + luecke - 6, 132,
+          { stroke: 'var(--accent)', 'marker-end': 'url(#fig-arrow-accent)' }));
+      }
+    });
+
+    // Rückläufe
+    svg.appendChild(S('path', {
+      d: 'M504 232 L504 258 L124 258 L124 232', fill: 'none', stroke: 'var(--bad)',
+      'stroke-width': 1.4, 'stroke-dasharray': '5 3', 'marker-end': 'url(#fig-arrow)'
+    }));
+    svg.appendChild(txt(314, 272, 'Was hier durchrutscht, kommt als Reklamation zurück — und kostet ein Vielfaches',
+      { 'text-anchor': 'middle', 'font-size': 9.5, fill: 'var(--bad)' }));
+    svg.appendChild(txt(24, 300, 'Die Zehnerregel ist eine Faustregel, keine Naturkonstante — die Größenordnung stimmt aber:',
+      { 'font-size': 9.5 }));
+    svg.appendChild(txt(24, 313, 'Ein Fehler, der erst beim Kunden auffällt, bindet Logistik, Analyse, Nacharbeit und Vertrauen.',
+      { 'font-size': 9.5 }));
+
+    return svg;
+  };
 })(window);

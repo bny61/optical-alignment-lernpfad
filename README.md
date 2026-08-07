@@ -29,7 +29,7 @@ unten in der Seitenleiste zurückgesetzt.
 | · | Einordnung: das Lithografiesystem | Warum die Toleranzen so eng sind | Scanner-Strahlengang, Rayleigh-Gleichung, Generationen, EUV-Spiegelfertigung und Ortsfrequenzbänder |
 | 1 | Grundlagen der Justage | Welche Aberration verrät welche mechanische Ursache | Drei Schemaskizzen des realen Messplatzes plus Simulation Stellgrößen → Wellenfront |
 | 2 | Justage im EUV-System | Was sich beim Spiegelsystem ändert | Gefalteter Strahlengang und 2α-Regel · Fehlerbudget über sechs Spiegel |
-| 3 | Messtechnik & MSA | Taugt die Messung, bevor man Prozessentscheidungen darauf stützt | Gage R&R gegen Toleranz und Teilestreuung |
+| 3 | Messtechnik, MSA & Abnahme | Taugt die Messung — und wie wird das Modul abgenommen | Prüfkaskade · Gage R&R · Annahmegrenze zwischen Pseudoausschuss und Durchschlupf |
 | 4 | Prozessstabilität & Fähigkeit | Eingreifen oder nicht eingreifen | Regelkarte mit Drift und Western-Electric-Regeln · mittlere Lauflänge (ARL) |
 | 5 | Wertstrom & Lean | Takt, Engpass, Nacharbeit, Durchlaufzeit | Wertstromkarte · Belastungsdiagramm · Wartezeit über der Auslastung (Kingman) |
 | 6 | 8D, PDCA, Six Sigma | Reklamation und Verbesserungsprojekt führen | Geführter 8D-Durchlauf · vollständiges DMAIC-Beispiel mit 2³-Versuchsplan |
@@ -52,7 +52,7 @@ css/components.css  Karten, Simulator-Layout, Quiz, Tabellen, Badges
 js/charts.js        SVG- und Mathe-Helfer (Plot, Skalen, seeded PRNG, Slider, Kennzahlkacheln)
 js/figures.js       Schemaskizzen: Scanner, Spiegelfertigung, Ortsfrequenzen,
                     Messplatz, Modulschnitt, Justagezyklus (window.FIGS)
-js/sim-*.js         die zehn Simulatoren, registriert unter window.SIMS
+js/sim-*.js         die elf Simulatoren, registriert unter window.SIMS
 js/quiz.js          Multiple-Choice mit Auswertung
 js/render.js        Seitenaufbau aus den Datenobjekten
 js/router.js        Hash-Router (#/, #/modul/<id>, #/kompakt, #/glossar?t=<begriff>)

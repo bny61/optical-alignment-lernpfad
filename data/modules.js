@@ -615,7 +615,7 @@ window.APP_DATA.module = [
   sim: 'msa',
   simTitel: 'Simulation: Gage R&R',
   simIntro: 'Verschieben Sie die Streuungsanteile und beobachten Sie, wie sich %GRR und die Anzahl unterscheidbarer Kategorien verändern. Interessant ist besonders der Fall, bei dem die Teilestreuung groß und das Messsystem trotzdem nicht fähig ist — dann sieht der Prozess in der Regelkarte instabil aus, obwohl er es nicht ist.',
-  begriffe: ['Interferometrie', 'Computergeneriertes Hologramm', 'Autokollimation', 'Messsystemanalyse', 'Gage R&amp;R', 'Wiederholbarkeit', 'Vergleichbarkeit', 'Messunsicherheit'],
+  begriffe: ['Interferometrie', 'Computergeneriertes Hologramm', 'Autokollimation', 'Messsystemanalyse', 'Gage R&amp;R', 'Wiederholbarkeit', 'Vergleichbarkeit', 'Messunsicherheit', 'Annahmegrenze', 'Pseudoausschuss', 'Durchschlupf'],
 
   abschnitte: [
     {
@@ -671,6 +671,81 @@ window.APP_DATA.module = [
         typ: 'ok',
         titel: 'Praxisregel für die Frontline',
         text: 'Wenn ein Werker sagt „das Teil misst sich jedes Mal anders", ist das eine Aussage über die Wiederholbarkeit — nicht über das Teil. Diese Sätze sind wertvolle Hinweise und gehören dokumentiert, nicht wegdiskutiert.'
+      }
+    },
+
+    {
+      h: 'Die Prüfkaskade: Bauteil, Modul, System',
+      p: [
+        'Ein Objektivmodul wird nicht einmal geprüft, sondern auf drei Stufen — und auf jeder Stufe ist etwas anderes überhaupt prüfbar.'
+      ],
+      grafik: 'pruefkaskade',
+      grafikText: '<strong>Abb. 1 — Die drei Prüfstufen.</strong> Je später ein Fehler auffällt, desto teurer wird er. Entscheidend ist die Frage, welche Merkmale auf welcher Stufe <em>überhaupt</em> messbar sind: Was am Einzelbauteil noch zugänglich ist, verschwindet im montierten Modul hinter anderen Elementen.',
+      bullets: [
+        '<strong>Bauteilprüfung.</strong> Flächenform, Rauheit, Radien, Mittendicke, Beschichtung. Nach der Montage sind diese Größen nicht mehr einzeln zugänglich — was hier durchrutscht, ist später nur noch als Summenwirkung sichtbar.',
+        '<strong>Modulprüfung.</strong> Die Wellenfront des zusammengebauten Moduls, und zwar über das Feld, nicht nur auf der Achse. Dazu Transmission beziehungsweise Reflexionsgrad, Sauberkeit und die Lage der mechanischen Referenzen.',
+        '<strong>Systemintegration beim Kunden.</strong> Erst hier wirkt das Modul im Verbund mit den anderen. Was jetzt auffällt, betrifft eine bereits ausgelieferte Menge — der Reklamationsfall aus Modul 6 beginnt genau an dieser Stelle.'
+      ],
+      callout: {
+        typ: 'job',
+        titel: 'Die Frage, die die Prüfplanung entscheidet',
+        text: 'Nicht „was können wir messen?", sondern „welcher Fehler würde beim Kunden auffallen, und auf welcher Stufe können wir ihn zuerst sehen?". Merkmale, die nur beim Kunden sichtbar werden, sind eine Lücke im Prüfkonzept — unabhängig davon, wie vollständig das eigene Prüfprotokoll aussieht.'
+      }
+    },
+
+    {
+      h: 'Was am fertigen Modul geprüft wird',
+      tabelle: {
+        kopf: ['Merkmal', 'Verfahren', 'Warum es geprüft wird'],
+        zeilen: [
+          ['Wellenfront über das Feld', 'Interferometrie gegen CGH, mehrere Feldpunkte', 'Ein achsnah gutes Modul kann am Feldrand versagen — Koma und Astigmatismus sind feldabhängig'],
+          ['Zernike-Koeffizienten einzeln', 'aus derselben Messung', 'Jeder Term hat eine eigene Wirkung auf dem Wafer; der RMS-Summenwert allein verdeckt sie'],
+          ['Transmission oder Reflexionsgrad', 'Photometrie, bei EUV Reflektometrie', 'Bestimmt den Durchsatz der Maschine; Verluste sind nicht nachträglich korrigierbar'],
+          ['Streulicht', 'Streulichtmessung', 'Senkt den Bildkontrast, ohne die Wellenfront zu verletzen (siehe Ortsfrequenzen in der Einordnung)'],
+          ['Lage der mechanischen Referenzen', 'Koordinatenmesstechnik', 'Der Kunde baut gegen diese Referenzen ein — sie definieren die Schnittstelle'],
+          ['Sauberkeit, Partikel, Kosmetik', 'Hellfeld-/Dunkelfeldinspektion', 'Partikel streuen Licht und können unter Bestrahlung einbrennen'],
+          ['Verhalten nach dem Fügen', 'Wiederholmessung nach Aushärtung und Ruhezeit', 'Setzverhalten verändert die Wellenfront über Stunden bis Tage'],
+          ['Verhalten unter Transport und Temperatur', 'Vibrations- und Temperaturzyklen mit Vorher-Nachher-Messung', 'Der Kunde misst nach dem Transport, nicht in Ihrer Justagezelle']
+        ],
+        fuss: 'Die letzten beiden Zeilen sind die, die in Prüfplänen am häufigsten fehlen — und die im Reklamationsfall am häufigsten die Ursache sind.'
+      }
+    },
+
+    {
+      h: 'Prüfzustand gegen Einsatzzustand',
+      p: [
+        'Der wichtigste systematische Fehler bei der Abnahme ist kein Rechenfehler, sondern eine stillschweigende Annahme: dass der Zustand während der Prüfung dem Zustand beim Kunden entspricht. Vier Dinge unterscheiden sich fast immer.'
+      ],
+      karten: [
+        { titel: 'Aufspannung',
+          text: 'Ihre Prüfaufnahme ist nicht die Kundenaufnahme. Andere Auflagepunkte bedeuten andere Verformung — und Fassungsspannung erzeugt Astigmatismus (Modul 1). Deshalb sollte die Prüfaufnahme die Einbausituation nachbilden, nicht die bequemste Handhabung.' },
+        { titel: 'Lage im Schwerefeld',
+          text: 'Ein Modul, das liegend justiert und stehend eingebaut wird, verformt sich unterschiedlich. Bei großen, schweren Baugruppen ist das kein Randeffekt, sondern ein Hauptbeitrag zum Fehlerbudget.' },
+        { titel: 'Zeit',
+          text: 'Setzverhalten nach dem Verkleben, Spannungsabbau in der Fassung, Relaxation im Klebstoff. Wer direkt nach der Justage misst, misst einen Zustand, den das Modul beim Kunden nicht mehr hat. Genau das ist die Ursache im Fall aus Modul 6.' },
+        { titel: 'Umgebung',
+          text: 'Temperatur, Luftdruck, bei EUV zusätzlich der Übergang zwischen Luft und Vakuum. Jede dieser Größen verschiebt die Wellenfront — und keine davon steht im Prüfprotokoll, wenn man nicht daran gedacht hat.' }
+      ],
+      callout: {
+        typ: 'bad',
+        titel: 'Der Test für jeden Prüfplan',
+        text: 'Wenn der Kunde am selben Modul einen anderen Wert misst als Sie — welche der vier Größen erklärt die Differenz? Wenn Sie diese Frage nicht beantworten können, ohne neu zu messen, ist der Prüfplan unvollständig. Und das merkt man immer erst im Reklamationsfall, wenn 48 Stunden für eine Stellungnahme bleiben.'
+      }
+    },
+
+    {
+      h: 'Vom Messwert zur Freigabe',
+      p: [
+        'Die Prüfung liefert Zahlen, die Abnahme braucht eine Entscheidung. Dazwischen liegt die Messunsicherheit — und die Frage, wo die Annahmegrenze gesetzt wird.',
+        'Nach ISO 14253-1 wird die Annahmegrenze um die erweiterte Messunsicherheit nach innen versetzt. Erst dann ist Konformität belegt. Dieser Sicherheitsabstand ist aber nicht kostenlos: Je weiter er nach innen wandert, desto mehr eigentlich gute Teile werden abgelehnt.'
+      ],
+      sim: 'abnahme',
+      simTitel: 'Simulation: Annahmegrenze festlegen',
+      simIntro: 'Links sehen Sie jedes Teil doppelt: wahrer Wert waagerecht, Messwert senkrecht. Die orangen Punkte sind gute Teile, die abgelehnt werden, die roten sind schlechte Teile, die durchrutschen. Beginnen Sie mit Abstand 0 und schieben Sie ihn dann hoch — die rechte Kurve zeigt, was Sie dabei eintauschen. Erhöhen Sie danach die Messunsicherheit und beobachten Sie, wie beide Fehlerarten gleichzeitig wachsen: Ein schlechtes Messsystem kostet immer doppelt.',
+      callout: {
+        typ: 'ok',
+        titel: 'Wie man das im Gespräch vertritt',
+        text: 'Die Wahl des Sicherheitsabstands ist keine messtechnische, sondern eine Geschäftsentscheidung — und genau so sollte sie begründet werden: „Bei 2u Abstand liegt der Durchschlupf unter 10 ppm, der Pseudoausschuss bei 3 %. Das kostet uns X Stunden Nacharbeit am Engpass. Bei 1u wären es 0,4 % Durchschlupf bei 1 % Pseudoausschuss." Damit ist die Entscheidung dokumentiert und verhandelbar, statt implizit im Prüfplan zu verschwinden.'
       }
     },
 
@@ -732,6 +807,39 @@ window.APP_DATA.module = [
       ],
       richtig: 1,
       erklaerung: 'ndc = 1,41 · σ_PV / σ_GRR beschreibt, in wie viele unterscheidbare Klassen das Messsystem die vorhandene Teilestreuung auflösen kann. Unter 5 taugt es allenfalls für Gut/Schlecht-Sortierung, nicht für Regelkarten oder Prozessverbesserung.'
+    },
+    {
+      frage: 'Ein Modul ist auf der optischen Achse einwandfrei, der Kunde reklamiert trotzdem. Was haben Sie vermutlich nicht geprüft?',
+      optionen: [
+        'Die Transmission des Moduls.',
+        'Die Wellenfront über das Feld — Koma und Astigmatismus sind feldabhängig und können am Feldrand die Grenze verletzen.',
+        'Die Sauberkeit der Oberflächen.',
+        'Die Lage der mechanischen Referenzen.'
+      ],
+      richtig: 1,
+      erklaerung: 'Ein Lithografieobjektiv muss über das gesamte Belichtungsfeld spezifiziert sein. Feldabhängige Aberrationen — vor allem Koma und Astigmatismus — können achsnah unauffällig sein und am Feldrand deutlich über der Grenze liegen. Eine Einpunktmessung auf der Achse ist deshalb kein Abnahmenachweis.'
+    },
+    {
+      frage: 'Sie erhöhen den Sicherheitsabstand zur Spezifikationsgrenze von 0 auf 2u. Was passiert?',
+      optionen: [
+        'Durchschlupf und Pseudoausschuss sinken beide.',
+        'Der Durchschlupf sinkt praktisch auf null, der Pseudoausschuss steigt — gute Teile gehen in die Nacharbeit.',
+        'Beide bleiben gleich, nur die Dokumentation ändert sich.',
+        'Der Pseudoausschuss sinkt, weil die Grenze klarer definiert ist.'
+      ],
+      richtig: 1,
+      erklaerung: 'Der Sicherheitsabstand verschiebt das Risiko vom Kunden zu Ihnen: Weniger schlechte Teile rutschen durch, dafür werden mehr gute abgelehnt. Beide Fehlerarten wachsen zusätzlich mit der Messunsicherheit — ein schlechtes Messsystem kostet also doppelt. Die Wahl des Abstands ist eine begründungspflichtige Geschäftsentscheidung.'
+    },
+    {
+      frage: 'Der Kunde misst am selben Modul einen anderen Wert als Sie. Welche Ursache prüfen Sie zuerst?',
+      optionen: [
+        'Einen Rechenfehler in der Auswertesoftware.',
+        'Den Unterschied im Prüfzustand: Aufspannung, Lage im Schwerefeld, verstrichene Zeit, Umgebungsbedingungen.',
+        'Eine Verwechslung der Seriennummer.',
+        'Die Kalibrierung des Kundeninterferometers.'
+      ],
+      richtig: 1,
+      erklaerung: 'Systematische Differenzen zwischen zwei Messungen desselben Teils gehen meist auf den Zustand zurück, nicht auf die Messung selbst. Andere Aufspannung heißt andere Verformung, andere Lage im Schwerefeld ebenso, und Setzverhalten wirkt über Stunden. Genau diese Kette ist die Ursache im Reklamationsfall aus Modul 6.'
     },
     {
       frage: 'Ein Modul misst 8,1 mλ, die Spezifikationsgrenze liegt bei 8,0 mλ, die erweiterte Messunsicherheit bei ±0,4 mλ. Wie entscheiden Sie?',
