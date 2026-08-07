@@ -110,11 +110,11 @@
         var offen = status.filter(function (x) { return x === 'ok'; }).length;
         body.appendChild(CH.el('div', { class: 'step-nav' }, [
           CH.el('button', { class: 'btn btn-sm', text: '← ' + (aktiv > 0 ? fall.schritte[aktiv - 1].id : 'Anfang'),
-            disabled: aktiv === 0, onclick: function () { aktiv--; render(); } }),
+            disabled: aktiv === 0, onclick: function () { aktiv = Math.max(0, aktiv - 1); render(); } }),
           CH.el('button', { class: 'btn btn-sm btn-primary',
             text: aktiv < fall.schritte.length - 1 ? fall.schritte[aktiv + 1].id + ' →' : 'Abgeschlossen',
             disabled: aktiv === fall.schritte.length - 1,
-            onclick: function () { aktiv++; render(); } }),
+            onclick: function () { aktiv = Math.min(fall.schritte.length - 1, aktiv + 1); render(); } }),
           CH.el('span', { class: 'badge' + (offen === fall.schritte.length ? ' ok' : ''),
             style: 'align-self:center;margin-left:auto',
             text: offen + ' / ' + fall.schritte.length + ' Schritte korrekt' })

@@ -26,6 +26,17 @@
       box.appendChild(fig);
     }
     if (a.tabelle) box.appendChild(tabelle(a.tabelle));
+    if (a.sim && global.SIMS[a.sim]) {
+      if (a.simTitel) box.appendChild(CH.el('h3', { text: a.simTitel }));
+      if (a.simIntro) box.appendChild(CH.el('p', { html: a.simIntro }));
+      var inline = CH.el('div');
+      try {
+        global.SIMS[a.sim](inline);
+      } catch (e) {
+        inline.appendChild(CH.el('div', { class: 'callout warn', text: 'Simulation konnte nicht geladen werden: ' + e.message }));
+      }
+      box.appendChild(inline);
+    }
     if (a.callout) {
       box.appendChild(CH.el('div', { class: 'callout ' + (a.callout.typ || ''), html:
         (a.callout.titel ? '<strong>' + a.callout.titel + '</strong>' : '') + a.callout.text }));

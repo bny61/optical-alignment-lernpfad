@@ -521,4 +521,131 @@
 
     return svg;
   };
+
+  /* ═══════════ Figur 7: DMAIC mit Werkzeugen je Phase ═══════════ */
+
+  FIGS.dmaic = function () {
+    var svg = svgRoot(720, 300, 'Der DMAIC-Zyklus mit den Werkzeugen der einzelnen Phasen');
+
+    var phasen = [
+      { k: 'D', n: 'Define', frage: 'Welches Problem, welcher Nutzen?', wz: ['Projektauftrag', 'SIPOC', 'CTQ-Baum'] },
+      { k: 'M', n: 'Measure', frage: 'Wie gut ist der Prozess heute?', wz: ['Messsystemanalyse', 'Datenerhebungsplan', 'Ausgangsfähigkeit'] },
+      { k: 'A', n: 'Analyze', frage: 'Welche Größen wirken wirklich?', wz: ['Stratifikation', 'Hypothesentest', 'Regression'] },
+      { k: 'I', n: 'Improve', frage: 'Welche Einstellung ist die beste?', wz: ['Versuchsplan (DoE)', 'Wechselwirkungen', 'Bestätigungslauf'] },
+      { k: 'C', n: 'Control', frage: 'Wie halten wir das Ergebnis?', wz: ['Regelkarte', 'Standardarbeit', 'Reaktionsplan'] }
+    ];
+
+    var breite = 132, luecke = 14;
+    phasen.forEach(function (p, i) {
+      var x = 12 + i * (breite + luecke);
+      svg.appendChild(box(x, 44, breite, 210, { fill: 'var(--surface)' }));
+      svg.appendChild(S('circle', { cx: x + breite / 2, cy: 74, r: 17, fill: 'var(--accent-sf)', stroke: 'var(--accent)', 'stroke-width': 1.6 }));
+      svg.appendChild(S('text', {
+        x: x + breite / 2, y: 80, 'text-anchor': 'middle', 'font-size': 17, 'font-weight': 700,
+        fill: 'var(--accent)', 'font-family': 'var(--sans)', text: p.k
+      }));
+      svg.appendChild(label(x + breite / 2, 108, p.n, { 'text-anchor': 'middle' }));
+      svg.appendChild(txt(x + breite / 2, 126, p.frage.slice(0, 22), { 'text-anchor': 'middle', 'font-size': 8.5 }));
+      if (p.frage.length > 22) {
+        svg.appendChild(txt(x + breite / 2, 137, p.frage.slice(22), { 'text-anchor': 'middle', 'font-size': 8.5 }));
+      }
+      svg.appendChild(S('line', { x1: x + 14, y1: 150, x2: x + breite - 14, y2: 150, stroke: 'var(--border)' }));
+      p.wz.forEach(function (w, j) {
+        svg.appendChild(S('circle', { cx: x + 20, cy: 168 + j * 20, r: 2.5, fill: 'var(--text-mute)' }));
+        svg.appendChild(txt(x + 28, 171 + j * 20, w, { 'font-size': 9 }));
+      });
+      if (i < phasen.length - 1) {
+        svg.appendChild(arrow(x + breite + 1, 74, x + breite + luecke - 2, 74,
+          { stroke: 'var(--accent)', 'marker-end': 'url(#fig-arrow-accent)' }));
+      }
+    });
+
+    svg.appendChild(txt(12, 24, 'Ein Werkzeug je Phase entscheidet über den Erfolg — die Reihenfolge ist nicht verhandelbar', { 'font-size': 10 }));
+    svg.appendChild(S('path', {
+      d: 'M690 264 L690 280 L26 280 L26 266', fill: 'none', stroke: 'var(--text-mute)',
+      'stroke-width': 1.2, 'stroke-dasharray': '4 3', 'marker-end': 'url(#fig-arrow)'
+    }));
+    svg.appendChild(txt(358, 293, 'Ergebnis bestätigt den Nutzen nicht — dann zurück in Analyze', { 'text-anchor': 'middle', 'font-size': 9 }));
+
+    return svg;
+  };
+
+  /* ═══════════ Figur 8: Wertstromkarte mit Zeitlinie ═══════════ */
+
+  FIGS.wertstromkarte = function () {
+    var svg = svgRoot(720, 340, 'Wertstromkarte eines Montageabschnitts mit Zeitlinie und Flusseffizienz');
+
+    var stationen = [
+      { n: 'Reinigung', ct: 45, wip: 3 },
+      { n: 'Vormontage', ct: 90, wip: 5 },
+      { n: 'Justage', ct: 150, wip: 6 },
+      { n: 'Prüfung', ct: 70, wip: 4 },
+      { n: 'Verkleben', ct: 60, wip: 0 }
+    ];
+
+    var x0 = 20, breite = 108, luecke = 30;
+    stationen.forEach(function (s, i) {
+      var x = x0 + i * (breite + luecke);
+      // Prozesskasten
+      svg.appendChild(box(x, 40, breite, 34, { fill: 'var(--surface)' }));
+      svg.appendChild(label(x + breite / 2, 62, s.n, { 'text-anchor': 'middle', 'font-size': 10.5 }));
+      // Datenkasten
+      svg.appendChild(box(x, 78, breite, 42, { fill: 'var(--surface-2)' }));
+      svg.appendChild(txt(x + 8, 94, 'ZZ ' + s.ct + ' min', { 'font-size': 9, 'font-family': 'var(--mono)' }));
+      svg.appendChild(txt(x + 8, 106, 'FPY ' + [98, 95, 82, 99, 97][i] + ' %', { 'font-size': 9, 'font-family': 'var(--mono)' }));
+      svg.appendChild(txt(x + 8, 117, 'Verf ' + [95, 92, 88, 97, 99][i] + ' %', { 'font-size': 9, 'font-family': 'var(--mono)' }));
+      // Bestandsdreieck
+      if (s.wip) {
+        var xd = x + breite + luecke / 2;
+        svg.appendChild(S('path', { d: 'M' + xd + ' 44 L' + (xd + 13) + ' 66 L' + (xd - 13) + ' 66 Z',
+          fill: 'var(--warn-sf)', stroke: 'var(--warn)', 'stroke-width': 1.3 }));
+        svg.appendChild(S('text', { x: xd, y: 62, 'text-anchor': 'middle', 'font-size': 9,
+          'font-family': 'var(--mono)', fill: 'var(--warn)', text: String(s.wip) }));
+      }
+    });
+
+    // Zeitlinie: oben Liegezeit, unten Bearbeitungszeit
+    var yOben = 170, yUnten = 200;
+    var d = 'M' + x0 + ' ' + yOben;
+    var gesamtBearb = 0, gesamtLiege = 0;
+    stationen.forEach(function (s, i) {
+      var x = x0 + i * (breite + luecke);
+      d += ' L' + x + ' ' + yUnten + ' L' + (x + breite) + ' ' + yUnten + ' L' + (x + breite) + ' ' + yOben;
+      gesamtBearb += s.ct;
+      var liege = s.wip * 150; // Bestand mal Engpasstakt
+      gesamtLiege += liege;
+      if (i < stationen.length - 1) d += ' L' + (x + breite + luecke) + ' ' + yOben;
+      // Beschriftungen
+      svg.appendChild(txt(x + breite / 2, yUnten + 14, s.ct + ' min', { 'text-anchor': 'middle', 'font-size': 9,
+        'font-family': 'var(--mono)', fill: 'var(--ok)' }));
+      if (s.wip) {
+        svg.appendChild(txt(x + breite + luecke / 2, yOben - 6, (liege / 60).toFixed(0) + ' h',
+          { 'text-anchor': 'middle', 'font-size': 9, 'font-family': 'var(--mono)', fill: 'var(--warn)' }));
+      }
+    });
+    svg.appendChild(S('path', { d: d, fill: 'none', stroke: 'var(--text-mute)', 'stroke-width': 1.6 }));
+    svg.appendChild(txt(x0, yOben - 22, 'Liegezeit (bezahlt der Kunde nicht)', { 'font-size': 9.5, fill: 'var(--warn)' }));
+    svg.appendChild(txt(x0, yUnten + 32, 'Bearbeitungszeit (wertschöpfend)', { 'font-size': 9.5, fill: 'var(--ok)' }));
+
+    // Auswertung mit maßstäblichem Balken — die Zeitlinie oben ist wie bei echten
+    // Wertstromkarten nicht proportional, deshalb hier die Verhältnisse als Balken
+    var dlz = gesamtBearb + gesamtLiege;
+    svg.appendChild(box(20, 240, 680, 76, { fill: 'var(--surface)' }));
+    svg.appendChild(label(36, 260, 'Auswertung der Zeitlinie'));
+    svg.appendChild(txt(300, 260, 'Bearbeitung ' + (gesamtBearb / 60).toFixed(1) + ' h   ·   Warten ' +
+      (gesamtLiege / 60).toFixed(1) + ' h   ·   Durchlaufzeit ' + (dlz / 60).toFixed(1) + ' h', { 'font-size': 10 }));
+
+    var balkenB = 648, xB = 36, anteil = gesamtBearb / dlz;
+    svg.appendChild(S('rect', { x: xB, y: 270, width: Math.max(2, balkenB * anteil), height: 20,
+      fill: 'var(--ok)', opacity: .9, rx: 2 }));
+    svg.appendChild(S('rect', { x: xB + balkenB * anteil, y: 270, width: balkenB * (1 - anteil), height: 20,
+      fill: 'var(--warn)', opacity: .55, rx: 2 }));
+    svg.appendChild(S('text', { x: xB + balkenB * anteil + 8, y: 284, 'font-size': 10,
+      fill: 'var(--text)', 'font-family': 'var(--sans)', text: 'Warten — ' + ((1 - anteil) * 100).toFixed(0) + ' % der Durchlaufzeit' }));
+    svg.appendChild(txt(36, 308, 'Flusseffizienz = Bearbeitungszeit / Durchlaufzeit = ' +
+      (anteil * 100).toFixed(0) + ' %  (maßstäblich dargestellt, anders als die Zeitlinie oben)',
+      { 'font-size': 10, fill: 'var(--bad)' }));
+
+    return svg;
+  };
 })(window);

@@ -612,6 +612,62 @@ window.APP_DATA.module = [
     },
 
     {
+      h: 'Welche Karte für welches Merkmal',
+      p: [
+        'Die Mittelwertkarte aus der Simulation ist nur eine von mehreren Bauarten. Die Wahl ist keine Geschmacksfrage: Eine falsch gewählte Karte signalisiert entweder ständig oder nie.'
+      ],
+      tabelle: {
+        kopf: ['Karte', 'Wann', 'Besonderheit in der Optikmontage'],
+        zeilen: [
+          ['x̄ / R oder x̄ / s', 'messbares Merkmal, Untergruppen ab n = 2', 'Setzt voraus, dass man mehrere vergleichbare Teile kurz hintereinander fertigt'],
+          ['Einzelwert / gleitende Spannweite (I-MR)', 'jedes Teil ist ein Unikat, n = 1', '<strong>Der Regelfall hier.</strong> Bei Stückzahlen im einstelligen Bereich je Woche gibt es keine natürlichen Untergruppen'],
+          ['p- oder np-Karte', 'Anteil fehlerhafter Einheiten', 'Braucht große Stückzahlen — in dieser Fertigung praktisch unbrauchbar'],
+          ['EWMA oder CUSUM', 'kleine Verschiebungen früh erkennen', 'Deutlich empfindlicher für Drift als die Shewhart-Karte; lohnt sich, wo eine späte Entdeckung teuer ist']
+        ],
+        fuss: 'I-MR = individuals and moving range. EWMA = exponentiell gewichteter gleitender Mittelwert, CUSUM = kumulierte Summe.'
+      },
+      callout: {
+        typ: 'warn',
+        titel: 'Die Falle bei n = 1',
+        text: 'Die I-MR-Karte schätzt die Streuung aus der Differenz aufeinanderfolgender Werte. Enthält diese Differenz bereits eine Drift, werden die Eingriffsgrenzen zu weit — und die Karte signalisiert nie. Genau deshalb ist bei Einzelwerten die Prüfung auf Muster (Regel 4) wichtiger als die Grenzverletzung.'
+      }
+    },
+
+    {
+      h: 'Rationale Untergruppen',
+      p: [
+        'Eine Untergruppe soll nur zufällige Streuung enthalten — alles andere gehört zwischen die Untergruppen. Diese Regel klingt akademisch und ist der häufigste Konstruktionsfehler realer Regelkarten.',
+        'Beispiel: Werden für eine Untergruppe vier Module aus <em>verschiedenen</em> Schichten zusammengefasst, steckt der Schichtunterschied in der Untergruppenstreuung. Die Eingriffsgrenzen werden dadurch breiter, und die Karte kann den Schichtunterschied nie mehr als Signal zeigen — sie hat ihn zur Normalität erklärt.'
+      ],
+      bullets: [
+        '<strong>Innerhalb der Untergruppe</strong> soll nur wirken, was ohnehin immer wirkt: kurzfristige Streuung unter gleichen Bedingungen',
+        '<strong>Zwischen den Untergruppen</strong> soll alles liegen, was Sie entdecken wollen: Schicht, Charge, Vorrichtung, Werker, Tageszeit',
+        '<strong>Prüffrage:</strong> „Welche Veränderung soll diese Karte finden?" Wenn die Antwort ein Faktor ist, der innerhalb einer Untergruppe variiert, ist die Untergruppierung falsch'
+      ],
+      callout: {
+        typ: 'job',
+        titel: 'Praktische Anwendung',
+        text: 'Im Reklamationsfall aus Modul 5 lief die Justage auf zwei Vorrichtungen. Hätte man beide in dieselbe Untergruppe gemischt, wäre der Vorrichtungsunterschied in der Streuung verschwunden — und die Ist/Ist-nicht-Abgrenzung hätte nie auf V2 geführt.'
+      }
+    },
+
+    {
+      h: 'Wie schnell schlägt die Karte an?',
+      p: [
+        'Eine Regelkarte entdeckt eine Verschiebung nicht sofort, sondern im Mittel nach einer bestimmten Anzahl Stichproben — der <em>mittleren Lauflänge</em> (ARL, average run length). Diese Zahl entscheidet darüber, wie viele Teile bereits falsch gefertigt sind, wenn das Signal kommt.',
+        'Zwei Werte spannen den Rahmen auf. Ohne Verschiebung soll die ARL groß sein, sonst ertrinkt man in Fehlalarmen: bei reiner 3σ-Regel liegt sie bei etwa 370 Stichproben, mit dem vollen Western-Electric-Satz nur noch bei rund 90. Bei tatsächlicher Verschiebung soll sie klein sein — und genau hier zeigt sich, warum kleine Drifts so gefährlich sind.'
+      ],
+      sim: 'arl',
+      simTitel: 'Simulation: mittlere Lauflänge',
+      simIntro: 'Stellen Sie eine Verschiebung von 0,5 σ ein und lesen Sie ab, nach wie vielen <em>Teilen</em> die Karte anschlägt. Vergleichen Sie das mit 2 σ. Wechseln Sie dann den Regelsatz und beobachten Sie den Zielkonflikt: Die Western-Electric-Regeln finden kleine Verschiebungen deutlich früher, erkaufen das aber mit einer vervierfachten Fehlalarmrate.',
+      callout: {
+        typ: 'bad',
+        titel: 'Was das in dieser Fertigung heißt',
+        text: 'Bei n = 1 und einer Verschiebung von 0,5 σ liegt die ARL im Bereich mehrerer Dutzend Teile. Bei einer Wochenproduktion im einstelligen Bereich sind das Monate. Die Regelkarte ist hier also kein Frühwarnsystem — Prozessveränderungen müssen über die Ursachenseite erkannt werden: Änderungsmanagement, Rückverfolgbarkeit, Vorrichtungsfreigabe. Das ist der Grund, warum in der Kleinserie die Disziplin bei Änderungen wichtiger ist als jede Karte.'
+      }
+    },
+
+    {
       h: 'Fähigkeit: Cp und Cpk',
       p: [
         'Stabilität ist die Voraussetzung, Fähigkeit die Anforderung. Ein Prozess kann perfekt beherrscht und trotzdem unfähig sein — dann streut er zwar vorhersagbar, aber zu breit oder an der falschen Stelle.'
@@ -626,6 +682,11 @@ window.APP_DATA.module = [
           ['Beide gut', 'Zielzustand', 'Überwachen, nicht nachstellen']
         ],
         fuss: 'Übliche Forderung: Cpk ≥ 1,33. Achtung — Cp und Cpk sind nur bei einem beherrschten Prozess sinnvoll interpretierbar; bei Signalen auf der Karte beschreiben sie eine Verteilung, die es so gar nicht gibt.'
+      },
+      callout: {
+        typ: '',
+        titel: 'Cp/Cpk gegen Pp/Ppk — und woher „Six Sigma" kommt',
+        text: 'Cp und Cpk werden aus der <em>Kurzzeitstreuung</em> innerhalb der Untergruppen gerechnet, Pp und Ppk aus der Gesamtstreuung aller Werte über die Zeit. Die Differenz ist ein Maß dafür, wie viel Drift der Prozess über den Beobachtungszeitraum aufweist — sind beide gleich, ist er stabil. Der Name Six Sigma kommt aus derselben Rechnung: Ein Prozess mit sechs Standardabweichungen zwischen Mittelwert und nächster Grenze entspricht Cp = 2. Die berühmten 3,4 ppm ergeben sich erst, wenn man dem Prozess zusätzlich eine Langzeitdrift von 1,5 σ zugesteht — eine Konvention, keine Naturkonstante.'
       }
     },
 
@@ -649,6 +710,39 @@ window.APP_DATA.module = [
   ],
 
   quiz: [
+    {
+      frage: 'In der Optikmontage entstehen wenige Module pro Woche, jedes ist ein Einzelstück. Welche Regelkarte passt?',
+      optionen: [
+        'x̄/R-Karte mit Untergruppen von n = 5.',
+        'Einzelwertkarte mit gleitender Spannweite (I-MR).',
+        'p-Karte auf den Anteil nacharbeitspflichtiger Module.',
+        'Gar keine — bei diesen Stückzahlen ist SPC nicht anwendbar.'
+      ],
+      richtig: 1,
+      erklaerung: 'Ohne mehrere vergleichbare Teile in kurzem Abstand lassen sich keine sinnvollen Untergruppen bilden — die x̄/R-Karte scheidet aus. Die I-MR-Karte schätzt die Streuung aus den Differenzen aufeinanderfolgender Werte und ist damit der Regelfall in der Kleinserie. Die p-Karte bräuchte große Stückzahlen.'
+    },
+    {
+      frage: 'Für eine Untergruppe werden vier Module aus zwei verschiedenen Schichten zusammengefasst. Welche Folge hat das?',
+      optionen: [
+        'Die Karte wird empfindlicher, weil mehr Variationsquellen abgedeckt sind.',
+        'Der Schichtunterschied steckt in der Untergruppenstreuung, die Eingriffsgrenzen werden zu weit — und die Karte kann ihn nie als Signal zeigen.',
+        'Die Untergruppengröße muss dann auf n = 8 erhöht werden.',
+        'Keine, solange beide Schichten gleich viele Teile beisteuern.'
+      ],
+      richtig: 1,
+      erklaerung: 'Eine Untergruppe soll nur zufällige Streuung enthalten. Was in ihr steckt, wird zur Normalität erklärt und geht in die Berechnung der Grenzen ein. Wer den Schichtunterschied finden will, muss ihn <em>zwischen</em> die Untergruppen legen — sonst hat man ihn per Konstruktion unsichtbar gemacht.'
+    },
+    {
+      frage: 'Der Prozess verschiebt sich um 0,5 σ. Die Karte läuft mit n = 1 und nur Regel 1. Was erwarten Sie?',
+      optionen: [
+        'Ein Signal innerhalb der nächsten zwei bis drei Stichproben.',
+        'Eine mittlere Lauflänge in der Größenordnung mehrerer Dutzend Stichproben — bei Kleinserie also Monate.',
+        'Sofort ein Signal, da 0,5 σ eine deutliche Verschiebung ist.',
+        'Nie ein Signal, da 0,5 σ innerhalb der Grenzen liegt.'
+      ],
+      richtig: 1,
+      erklaerung: 'Kleine Verschiebungen haben eine sehr lange ARL — bei 0,5 σ und reiner 3σ-Regel liegt sie im Bereich von etwa 150 Stichproben. Bei einstelligen Wochenstückzahlen ist die Karte damit kein Frühwarnsystem. Deshalb müssen Prozessveränderungen in der Kleinserie über die Ursachenseite kontrolliert werden: Änderungsmanagement und Vorrichtungsfreigabe.'
+    },
     {
       frage: 'Ein einzelner Punkt liegt bei 2,4σ, keine weitere Regel ist verletzt. Was tun Sie?',
       optionen: [
@@ -731,6 +825,68 @@ window.APP_DATA.module = [
     },
 
     {
+      h: 'Wertstromanalyse: den Abschnitt aufnehmen',
+      p: [
+        'Bevor man einen Wertstrom verbessert, nimmt man ihn auf — und zwar am Ort, nicht am Schreibtisch. Die Wertstromanalyse ist dafür das Standardwerkzeug: Man läuft den Abschnitt entgegen der Flussrichtung ab, notiert je Station die Kennzahlen und erfasst dazwischen die Bestände.'
+      ],
+      grafik: 'wertstromkarte',
+      grafikText: '<strong>Abb. 1 — Wertstromkarte mit Zeitlinie.</strong> Oben die Stationen mit ihren Datenkästen, dazwischen die Bestände als Dreiecke. Unten die Zeitlinie: Der untere Ast ist Bearbeitungszeit, der obere Liegezeit. Das Verhältnis der beiden ist die Flusseffizienz — und sie ist die ernüchterndste Kennzahl der ganzen Analyse.',
+      bullets: [
+        '<strong>Entgegen der Flussrichtung laufen.</strong> Man beginnt beim Kunden und arbeitet sich rückwärts vor, sonst übernimmt man die Sicht der Fertigung statt die des Produkts.',
+        '<strong>Selbst messen, nicht aus dem System ziehen.</strong> Zykluszeiten aus dem ERP sind Plandaten. Die Wertstromanalyse lebt von beobachteten Zeiten inklusive Rüsten, Suchen und Warten auf das Messmittel.',
+        '<strong>Bestände zählen, nicht schätzen.</strong> Jedes Teil zwischen zwei Stationen ist gebundenes Kapital und über Little unmittelbar Durchlaufzeit.',
+        '<strong>Die Zeitlinie ist das Ergebnis.</strong> Sie macht sichtbar, dass die Durchlaufzeit fast vollständig aus Warten besteht — und dass Zykluszeitoptimierung an dieser Bilanz kaum etwas ändert.'
+      ],
+      callout: {
+        typ: 'bad',
+        titel: 'Die Zahl, die Diskussionen beendet',
+        text: 'Flusseffizienz = Bearbeitungszeit geteilt durch Durchlaufzeit. In vielen Montagebereichen liegt sie im einstelligen Prozentbereich. Wer sie kennt, diskutiert nicht mehr darüber, ob eine Station 10 % schneller werden kann — sondern darüber, warum ein Teil 90 % seiner Zeit liegt.'
+      }
+    },
+
+    {
+      h: 'Verschwendung in der Optikmontage',
+      p: [
+        'Die sieben klassischen Verschwendungsarten stammen aus der Automobilfertigung. Übertragen auf eine Kleinserienmontage hochpräziser Optik sehen sie anders aus, als das Lehrbuch nahelegt:'
+      ],
+      tabelle: {
+        kopf: ['Art', 'Erscheinungsform hier', 'Warum sie oft übersehen wird'],
+        zeilen: [
+          ['Nacharbeit', 'Justageschleifen nach nicht bestandener Prüfung', 'Gilt als normal, weil Ausschuss keine Option ist — und wird deshalb nicht gezählt'],
+          ['Warten', 'auf Messmittel, auf Aushärtung, auf Freigabe', 'Wird als technisch bedingt akzeptiert, obwohl die Belegung planbar wäre'],
+          ['Bestand', 'Module zwischen den Stationen', 'Sieht nach Sicherheit aus, ist aber Durchlaufzeit und gebundenes Kapital'],
+          ['Bewegung', 'Suchen von Vorrichtungen, Normalen, Dokumenten', 'Fällt nicht auf, weil sie zur gewohnten Arbeit gehört'],
+          ['Transport', 'Umsetzen zwischen Reinraumbereichen', 'Jeder Transport ist zusätzlich ein Kontaminations- und Beschädigungsrisiko'],
+          ['Überbearbeitung', 'Justieren über die Spezifikation hinaus', 'Wird als Sorgfalt gewertet — bindet aber Kapazität am Engpass ohne Kundennutzen'],
+          ['Überproduktion', 'Vorziehen von Aufträgen zur Auslastung', 'Gilt als Effizienz, erzeugt aber genau den Bestand aus Zeile drei']
+        ],
+        fuss: 'Die achte, oft ergänzte Art ist ungenutztes Wissen der Mitarbeitenden — in einem Bereich mit hohem Anteil manueller Präzisionsarbeit die vermutlich teuerste von allen.'
+      },
+      callout: {
+        typ: 'warn',
+        titel: 'Die unbequemste Zeile',
+        text: 'Überbearbeitung ist in der Justage schwer anzusprechen. Wer ein Modul von 5 mλ auf 3 mλ weiterjustiert, obwohl 8 mλ spezifiziert sind, tut subjektiv das Richtige — verbraucht aber Kapazität an der teuersten Station für einen Nutzen, den niemand bezahlt. Genau solche Fälle sichtbar und diskutierbar zu machen, ohne die fachliche Sorgfalt infrage zu stellen, gehört zu den schwierigeren Teilen dieser Rolle.'
+      }
+    },
+
+    {
+      h: 'Warum hohe Auslastung teuer wird',
+      p: [
+        'Das Belastungsdiagramm weiter unten rechnet deterministisch: feste Zykluszeiten, kein Warten. Die Realität hat Streuung — Teile kommen unregelmäßig an, Bearbeitungszeiten schwanken, Nacharbeit kommt dazwischen. Und sobald Streuung im Spiel ist, gilt ein Zusammenhang, der jeder Intuition widerspricht.',
+        'Die Wartezeit vor einer Station wächst nicht linear mit der Auslastung, sondern explodiert gegen 100 %. Der Grund ist einfach: Eine Station, die zu 95 % belegt ist, hat keine Lücke mehr, um eine Störung aufzuholen. Jede Verzögerung bleibt im System.'
+      ],
+      formel: 'W_q ≈ (c_a² + c_e²)/2 · u/(1−u) · t_e     <span class="fx-note">Kingman-Näherung</span>\n\n<span class="fx-note">u = Auslastung, t_e = Bearbeitungszeit, c = Variationskoeffizient</span>',
+      sim: 'queue',
+      simTitel: 'Simulation: Wartezeit über der Auslastung',
+      simIntro: 'Schieben Sie die Auslastung von 80 % auf 95 % und beobachten Sie den Sprung in der Durchlaufzeit — bei völlig unveränderter Kapazität. Erhöhen Sie danach die Schwankung: Das ist genau der Effekt, den Nacharbeit erzeugt, denn sie macht die Bearbeitungszeiten hochgradig ungleichmäßig.',
+      callout: {
+        typ: 'ok',
+        titel: 'Die Konsequenz für die Planung',
+        text: 'Eine bewusst freigehaltene Reserve am Engpass ist keine Verschwendung, sondern der Preis für kurze und vorhersagbare Durchlaufzeiten. Und der zweite Hebel steht gleichberechtigt daneben: Streuung senken wirkt genauso stark wie Kapazität erhöhen — kostet aber keine Investition. Nacharbeit zu reduzieren senkt beides gleichzeitig.'
+      }
+    },
+
+    {
       h: 'Warum Nacharbeit an der Justage doppelt zählt',
       p: [
         'Ein Modul, das die Endprüfung nicht besteht, geht zurück in die Justage und danach erneut in die Prüfung. Beide Stationen werden also mehrfach belegt. Bei einem First Pass Yield von 80 % steigt die Belastung dieser Stationen um den Faktor 1/0,8 = 1,25 — bei 65 % bereits um 1,54.',
@@ -782,6 +938,39 @@ window.APP_DATA.module = [
   ],
 
   quiz: [
+    {
+      frage: 'Eine Station läuft mit 80 % Auslastung. Sie wird auf 95 % gefahren, um „besser auszulasten". Was passiert mit der Durchlaufzeit?',
+      optionen: [
+        'Sie bleibt gleich, da die Kapazität unverändert ist.',
+        'Sie steigt leicht, etwa proportional zur Auslastung.',
+        'Sie steigt drastisch — die Wartezeit wächst mit u/(1−u), also von Faktor 4 auf Faktor 19.',
+        'Sie sinkt, da weniger Leerlauf entsteht.'
+      ],
+      richtig: 2,
+      erklaerung: 'Nach Kingman wächst die Wartezeit mit u/(1−u). Von 80 % (0,8/0,2 = 4) auf 95 % (0,95/0,05 = 19) verfünffacht sich der Faktor. Eine hoch ausgelastete Station hat keine Lücke mehr, um Störungen aufzuholen — jede Verzögerung bleibt im System. Deshalb ist Reserve am Engpass keine Verschwendung.'
+    },
+    {
+      frage: 'Die Zeitlinie einer Wertstromanalyse ergibt 7 h Bearbeitungszeit bei 41 h Durchlaufzeit. Was ist der wirksamste Hebel?',
+      optionen: [
+        'Die Zykluszeiten der Stationen um 10 % senken.',
+        'Die Bestände zwischen den Stationen reduzieren — 83 % der Durchlaufzeit sind Warten.',
+        'Eine zusätzliche Schicht einführen.',
+        'Die Prüfschritte zusammenlegen.'
+      ],
+      richtig: 1,
+      erklaerung: 'Die Flusseffizienz liegt bei 17 %. Selbst wenn man jede Bearbeitungszeit halbieren könnte, sänke die Durchlaufzeit nur um gut 8 %. Über Little ist die Durchlaufzeit direkt an den Bestand gekoppelt — dort liegt der Hebel, und er kostet keine Investition.'
+    },
+    {
+      frage: 'Ein Werker justiert ein Modul von 5 auf 3 mλ weiter, obwohl 8 mλ spezifiziert sind. Wie ist das zu bewerten?',
+      optionen: [
+        'Vorbildlich — zusätzliche Qualitätsreserve schadet nie.',
+        'Als Überbearbeitung: verbraucht Kapazität am Engpass für einen Nutzen, den der Kunde nicht bezahlt.',
+        'Als Nacharbeit, die in der FPY-Statistik zu erfassen ist.',
+        'Als notwendige Absicherung gegen die Messunsicherheit.'
+      ],
+      richtig: 1,
+      erklaerung: 'Überbearbeitung ist eine der sieben Verschwendungsarten und in der Präzisionsfertigung besonders schwer anzusprechen, weil sie subjektiv wie Sorgfalt wirkt. Ein Sicherheitsabstand zur Spezifikation ist legitim — aber er gehört als bewusst festgelegte interne Grenze in den Arbeitsplan, nicht in das Ermessen des Einzelnen.'
+    },
     {
       frage: 'Nutzbare Schichtzeit 450 min, Kundenbedarf 9 Stück. Wie hoch ist die Taktzeit?',
       optionen: ['9 min', '50 min', '4050 min', 'Ohne Zykluszeiten nicht berechenbar'],
@@ -878,6 +1067,136 @@ window.APP_DATA.module = [
     },
 
     {
+      h: 'Six Sigma und der DMAIC-Zyklus',
+      p: [
+        'Der 8D-Prozess reagiert auf ein aufgetretenes Problem mit bekannter Wirkung. Six Sigma greift dort, wo die Ursache unbekannt ist, viele Einflussgrößen infrage kommen und die Datenlage eine statistische Analyse trägt. Sein Rahmen ist DMAIC — fünf Phasen, deren Reihenfolge nicht verhandelbar ist.'
+      ],
+      grafik: 'dmaic',
+      grafikText: '<strong>Abb. 2 — DMAIC mit den Werkzeugen je Phase.</strong> Die häufigste Projektpathologie ist der Sprung von Define direkt nach Improve: Man hat eine Lösung im Kopf und sucht Daten, die sie stützen. Measure und Analyze sind genau die Phasen, die diesen Sprung verhindern sollen.',
+      tabelle: {
+        kopf: ['Phase', 'Leitfrage', 'Typischer Fehler'],
+        zeilen: [
+          ['Define', 'Welches Problem, welcher Nutzen, welche Grenzen?', 'Projektumfang zu weit — „die Qualität verbessern" statt einer messbaren Zielgröße'],
+          ['Measure', 'Wie gut ist der Prozess heute wirklich?', 'Messsystemanalyse übersprungen und Messrauschen als Prozessstreuung analysiert'],
+          ['Analyze', 'Welche Einflussgrößen wirken nachweisbar?', 'Korrelation aus Beobachtungsdaten als Ursache gewertet'],
+          ['Improve', 'Welche Einstellung ist nachweislich die beste?', 'Faktor für Faktor probiert und dabei Wechselwirkungen übersehen'],
+          ['Control', 'Wie halten wir das Ergebnis dauerhaft?', 'Projekt endet mit der Präsentation, der Prozess fällt in den alten Zustand zurück']
+        ]
+      }
+    },
+
+    {
+      h: 'Define — der Projektauftrag',
+      p: [
+        'Ab hier läuft ein vollständiges Beispiel durch alle fünf Phasen. Ausgangslage: An der Justagestation streut der Rest-Wellenfrontfehler so stark, dass rund jedes fünfte Modul in die Nacharbeit geht — an genau der Station, die laut Modul 4 der Engpass des Abschnitts ist.'
+      ],
+      tabelle: {
+        kopf: ['Feld', 'Inhalt'],
+        zeilen: [
+          ['Problem', 'Der Rest-RMS nach der Justage von OM-320-Modulen streut stark. Module über der internen Schwelle von 6,5 mλ gehen in die Nacharbeitsschleife.'],
+          ['Zielgröße (CTQ)', 'Rest-Wellenfrontfehler RMS nach der Justage, in mλ'],
+          ['Ausgangslage', 'Mittelwert 5,6 mλ, Standardabweichung 1,1 mλ, Nacharbeitsquote rund 20 % (entspricht FPY 80 %), Cpk gegen die Kundengrenze von 8,0 mλ: 0,73'],
+          ['Ziel', 'Nacharbeitsquote unter 5 %, Streuung mindestens halbiert — nachgewiesen über 20 aufeinanderfolgende Module'],
+          ['Nutzen', 'Die Nacharbeit belastet Justage und Prüfung doppelt. Jeder Punkt FPY entlastet den Engpass unmittelbar (siehe Modul 4).'],
+          ['Abgrenzung', 'Nur der Justageprozess. Bauteiltoleranzen und Fassungskonstruktion sind ausdrücklich <em>nicht</em> Gegenstand — das wäre ein eigenes Projekt mit R&D.'],
+          ['Team, Dauer', 'Prozessingenieur, zwei Justagewerker, Messtechniker, Qualitätsingenieur; rund vier Monate']
+        ],
+        fuss: 'Die Abgrenzungszeile ist die wichtigste. Ein Six-Sigma-Projekt ohne klare Grenze wächst, bis es niemand mehr abschließen kann.'
+      },
+      callout: {
+        typ: 'warn',
+        titel: 'Warum die interne Schwelle unter der Kundengrenze liegt',
+        text: 'Der Kunde spezifiziert 8,0 mλ, die Nacharbeit beginnt aber schon bei 6,5. Der Abstand deckt zwei Dinge ab: das Setzverhalten nach dem Verkleben und die Messunsicherheit aus Modul 2. Diese Schwelle ist damit selbst eine Entscheidung — und im Projekt eine legitime Frage, ob sie richtig gewählt ist.'
+      }
+    },
+
+    {
+      h: 'Measure — erst das Messsystem, dann der Prozess',
+      p: [
+        'Vor jeder Analyse steht die Frage, ob die Zahlen überhaupt tragen. Die Messsystemanalyse aus Modul 2 ergibt hier %GRR = 24 % gegen die Toleranz — bedingt fähig. Für die Varianzbetrachtung heißt das:'
+      ],
+      formel: 'σ²_beobachtet = σ²_Prozess + σ²_Messung\n\n1,10² = σ²_Prozess + 0,33²   →   σ_Prozess = 1,05 mλ\n\n<span class="fx-note">Messrauschen erklärt nur etwa 9 % der beobachteten Varianz — die Streuung ist real.</span>',
+      bullets: [
+        '<strong>Erhebungsplan statt vorhandener Daten.</strong> Für 40 Module wird festgehalten: Vorrichtung, Schicht, Werker, Klebstoffcharge, gemessene Aufspannkraft, Einschwingzeit vor der Messung, Justagereihenfolge.',
+        '<strong>Merkmale mitschreiben, die man später vielleicht braucht.</strong> Was in Measure nicht erfasst wurde, lässt sich in Analyze nicht mehr auswerten — und eine zweite Erhebungsrunde kostet in dieser Fertigung Wochen.',
+        '<strong>Ausgangsfähigkeit dokumentieren.</strong> Cpk = 0,73 ist der Referenzwert, an dem das Projektergebnis später gemessen wird.'
+      ],
+      callout: {
+        typ: 'bad',
+        titel: 'Was passiert wäre, hätte man diesen Schritt übersprungen',
+        text: 'Bei einem %GRR von beispielsweise 55 % wären mehr als die Hälfte der beobachteten Varianz Messrauschen gewesen. Jede Analyse hätte dann Zufall interpretiert, und das Projekt hätte nach Monaten mit einer nicht reproduzierbaren „Verbesserung" geendet. Die Messsystemanalyse ist kein Formalismus, sie entscheidet über die Gültigkeit von allem Folgenden.'
+      }
+    },
+
+    {
+      h: 'Analyze — welche Größen wirken nachweisbar?',
+      p: [
+        'Jetzt werden die erfassten Merkmale gegen die Zielgröße geprüft. Zuerst die naheliegenden Verdächtigen, dann die Prozessparameter:'
+      ],
+      tabelle: {
+        kopf: ['Frage', 'Werkzeug', 'Ergebnis', 'Schluss'],
+        zeilen: [
+          ['Unterscheiden sich die Vorrichtungen?', 'Zweistichproben-t-Test', 'V1: 5,5 mλ · V2: 5,7 mλ · p = 0,58', 'kein Unterschied nachweisbar'],
+          ['Wirkt die Schicht?', 't-Test', 'früh 5,4 · spät 5,8 · p = 0,24', 'nicht signifikant'],
+          ['Wirkt der Werker?', 'Varianzanalyse', 'A 5,5 · B 5,7 · C 5,6 · p = 0,79', 'kein Effekt — die Standardarbeit greift'],
+          ['Wirkt die Klebstoffcharge?', 'Varianzanalyse', 'p = 0,63', 'kein Effekt'],
+          ['Wirkt die Aufspannkraft?', 'lineare Regression', 'Steigung +0,09 mλ je N · R² = 0,41 · p &lt; 0,01', '<strong>starker Zusammenhang</strong>']
+        ],
+        fuss: 'Die kategorialen Verdächtigen erklären nichts. Ein kontinuierlicher Prozessparameter erklärt 41 % der Streuung — das ist der Ansatzpunkt.'
+      },
+      callout: {
+        typ: 'warn',
+        titel: 'Der entscheidende Vorbehalt',
+        text: 'In den Beobachtungsdaten hängen Aufspannkraft und Einschwingzeit zusammen: Wo mit hoher Kraft gespannt wurde, war auch die Wartezeit kürzer, weil beides aus derselben Arbeitsweise stammt. Die beiden Einflüsse sind damit <em>vermengt</em> und aus diesen Daten grundsätzlich nicht trennbar — egal wie viele Module man zusätzlich erfasst. Beobachtung findet Zusammenhänge; welcher davon Ursache ist, entscheidet nur der geplante Versuch. Das ist derselbe Gedanke wie der Nachweis in D4: Der Effekt muss sich gezielt ein- und ausschalten lassen.'
+      }
+    },
+
+    {
+      h: 'Improve — der statistische Versuchsplan',
+      p: [
+        'Statt Faktoren nacheinander zu probieren, werden alle Kombinationen systematisch gefahren. Drei Faktoren auf je zwei Stufen ergeben acht Einstellungen — ein vollfaktorieller 2³-Plan. Der entscheidende Vorteil: Er liefert nicht nur die Wirkung jedes einzelnen Faktors, sondern auch die <em>Wechselwirkungen</em> zwischen ihnen.'
+      ],
+      tabelle: {
+        kopf: ['Faktor', 'Stufe −', 'Stufe +', 'Warum im Plan'],
+        zeilen: [
+          ['A  Aufspannkraft', 'niedrig (20 N)', 'hoch (32 N)', 'stärkster Zusammenhang aus der Regression'],
+          ['B  Einschwingzeit', '5 min', '30 min', 'in den Beobachtungsdaten mit A vermengt — nur hier trennbar'],
+          ['C  Justagereihenfolge', 'sequenziell', 'iterativ', 'billig mitzunehmen, solange man ohnehin Versuche fährt']
+        ]
+      },
+      sim: 'doe',
+      simTitel: 'Simulation: 2³-Versuchsplan durchführen',
+      simIntro: 'Fahren Sie den Plan mit zwei Wiederholungen. Lesen Sie im linken Diagramm ab, welche Effekte über der Signifikanzgrenze liegen, und sehen Sie im rechten nach, ob die beiden Linien parallel verlaufen. Stellen Sie dann die Wiederholungen auf 1 — und beobachten Sie, dass die Aussage zusammenbricht. Zum Schluss der wichtigste Knopf: <em>Faktor für Faktor vergleichen</em>.',
+      callout: {
+        typ: 'ok',
+        titel: 'Das Ergebnis des Projekts',
+        text: 'Der Plan zeigt: Die Aufspannkraft wirkt stark, die Einschwingzeit ebenfalls — aber nur bei niedriger Kraft. Bei hoher Kraft dominiert die Fassungsspannung, und Warten hilft nicht mehr. Genau diese Wechselwirkung hätte ein Faktor-für-Faktor-Versuch nie gefunden; er hätte die Einschwingzeit als wirkungslos verworfen. Die beste Einstellung ist niedrige Aufspannkraft mit langer Einschwingzeit und iterativer Reihenfolge. Ein Bestätigungslauf über zehn Module belegt sie, bevor die Arbeitsanweisung geändert wird.'
+      }
+    },
+
+    {
+      h: 'Control — das Ergebnis halten',
+      p: [
+        'Die Improve-Phase liefert eine Einstellung. Ohne Control fällt der Prozess innerhalb weniger Monate zurück, sobald Personal wechselt oder eine Vorrichtung instand gesetzt wird.'
+      ],
+      tabelle: {
+        kopf: ['Maßnahme', 'Konkret', 'Verweis'],
+        zeilen: [
+          ['Regelkarte', 'I-MR-Karte auf den Rest-RMS, weil bei Stückzahlen dieser Größe keine Untergruppen gebildet werden können', 'Modul 3'],
+          ['Standardarbeit', 'Aufspannkraft als geprüfte Vorgabe mit Drehmomentschlüssel; Einschwingzeit im Arbeitsplan verankert', 'Modul 4'],
+          ['Reaktionsplan', 'Wer bei einem Kartensignal was tut — schriftlich, sonst wird beim ersten Signal doch wieder nachgestellt', 'Modul 3'],
+          ['Vorrichtungsfreigabe', 'Spannkraft nach jeder Instandsetzung prüfen und freigeben', 'Modul 5, D7'],
+          ['Nutzen nachhalten', 'FPY und Engpassbelastung über sechs Monate mitschreiben — nicht die Präsentation, sondern diese Kurve schließt das Projekt ab', 'Modul 4']
+        ]
+      },
+      callout: {
+        typ: 'ok',
+        titel: 'Bilanz des Beispielprojekts',
+        text: 'Rest-RMS im Mittel von 5,6 auf 4,7 mλ, Standardabweichung von 1,1 auf 0,8 mλ, Cpk von 0,73 auf 1,38. Nacharbeitsquote von rund 20 % auf unter 2 %, FPY damit von 80 auf 98 %. Über die Rechnung aus Modul 4 sinkt die Belastung der Justagestation von 213 auf 174 Minuten je Stück — rund 18 % mehr Durchsatz am Engpass, ohne eine einzige Investition.'
+      }
+    },
+
+    {
       h: 'Die Ist/Ist-nicht-Abgrenzung',
       p: [
         'Das wirksamste und am seltensten genutzte Werkzeug in D2. Statt nur zu beschreiben, wo das Problem auftritt, wird systematisch festgehalten, wo es <em>nicht</em> auftritt — bei ähnlichen Bedingungen.'
@@ -909,6 +1228,50 @@ window.APP_DATA.module = [
   ],
 
   quiz: [
+    {
+      frage: 'Wann setzen Sie DMAIC statt 8D ein?',
+      optionen: [
+        'Immer wenn der Kunde eine formale Antwort verlangt.',
+        'Wenn die Ursache unbekannt ist, viele Einflussgrößen infrage kommen und genug Daten für eine statistische Analyse vorliegen.',
+        'Wenn das Problem besonders dringend ist.',
+        'Wenn kein Team zur Verfügung steht.'
+      ],
+      richtig: 1,
+      erklaerung: '8D reagiert auf ein aufgetretenes, meist reklamiertes Problem und enthält Containment und formalen Abschluss. DMAIC ist ein Verbesserungsprojekt über Wochen bis Monate für Probleme mit unbekannter Ursache und vielen Kandidaten. Für Dringendes ist DMAIC gerade das falsche Werkzeug.'
+    },
+    {
+      frage: 'In der Analyze-Phase zeigt die Regression einen starken Zusammenhang zwischen Aufspannkraft und Restfehler (R² = 0,41). Was folgt daraus?',
+      optionen: [
+        'Die Aufspannkraft ist die Ursache und kann in Improve direkt optimiert werden.',
+        'Ein Zusammenhang, aber keine Ursache — zumal Aufspannkraft und Einschwingzeit in den Beobachtungsdaten vermengt sind und sich daraus nicht trennen lassen.',
+        'Der Zusammenhang ist zu schwach, um weiterverfolgt zu werden.',
+        'Es müssen mehr Module erfasst werden, dann klärt sich die Ursache.'
+      ],
+      richtig: 1,
+      erklaerung: 'Beobachtungsdaten zeigen Zusammenhänge. Wenn zwei Größen in der gelebten Arbeitsweise gekoppelt auftreten, sind sie vermengt und lassen sich auch mit beliebig vielen zusätzlichen Datenpunkten nicht trennen. Nur der geplante Versuch, in dem die Faktoren unabhängig eingestellt werden, kann das leisten — dasselbe Prinzip wie der Nachweis in D4.'
+    },
+    {
+      frage: 'Warum findet ein Faktor-für-Faktor-Versuch die beste Einstellung in diesem Beispiel nicht?',
+      optionen: [
+        'Weil er zu wenige Versuche umfasst und die Streuung zu groß ist.',
+        'Weil er Wechselwirkungen prinzipiell nicht sichtbar machen kann: Bei hoher Aufspannkraft wirkt die Einschwingzeit kaum, also wird sie fälschlich als wirkungslos verworfen.',
+        'Weil er die Reihenfolge der Faktoren nicht berücksichtigt.',
+        'Er findet sie, braucht aber mehr Versuche als der vollfaktorielle Plan.'
+      ],
+      richtig: 1,
+      erklaerung: 'Wer jeweils nur einen Faktor vom Ausgangspunkt aus verändert, misst dessen Wirkung genau bei den festgehaltenen Stufen der anderen. Hängt die Wirkung von diesen ab, ist das Ergebnis eine korrekte Messung mit falscher Verallgemeinerung. Der vollfaktorielle Plan schätzt jeden Effekt über beide Stufen der übrigen Faktoren und deckt die Wechselwirkung als eigene Größe auf.'
+    },
+    {
+      frage: 'Was gehört zwingend in die Control-Phase?',
+      optionen: [
+        'Die Abschlusspräsentation vor der Leitung.',
+        'Regelkarte, geänderte Standardarbeit, schriftlicher Reaktionsplan und ein Nutzennachweis über mehrere Monate.',
+        'Eine erneute Messsystemanalyse.',
+        'Die Übergabe an ein Folgeprojekt.'
+      ],
+      richtig: 1,
+      erklaerung: 'Control sichert, dass der Prozess nicht zurückfällt, sobald Personal wechselt oder eine Vorrichtung instand gesetzt wird. Ohne verankerte Standardarbeit und ohne schriftlichen Reaktionsplan wird beim ersten Kartensignal doch wieder nachgestellt — und die Verbesserung verschwindet unbemerkt.'
+    },
     {
       frage: 'Welche Formulierung gehört in D2 (Problembeschreibung)?',
       optionen: [
